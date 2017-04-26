@@ -18,15 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fingerprint.FingerPrintActivity" />
-
-        <service
-            android:name=".firebase.MyJobService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />"
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>

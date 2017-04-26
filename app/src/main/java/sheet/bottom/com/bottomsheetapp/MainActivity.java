@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         private final int PAGE_COUNT = 3;
 
-        private final String[] page_title = {"android", "IOT", "IOS", "api.ai"};
+        private final String[] page_title = {"android", "IOT", "IOS"};
 
         public MyPageAdapter(FragmentManager fm) {
             super(fm);
@@ -82,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     return PageFragment.newInstance(page_title[position]);
                 case 2:
                     return PageFragment.newInstance(page_title[position]);
-                case 3:
-                    return ChatFragment.newInstance();
             }
             return null;
         }
