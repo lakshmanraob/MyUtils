@@ -1,4 +1,4 @@
-package sheet.bottom.com.bottomsheetapp;
+package my.util.app.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,18 +12,19 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import my.util.app.R;
 import sheet.bottom.com.networklib.models.stackexchange.StackItem;
 
 /**
  * Created by labattula on 23/09/16.
  */
 
-public class StackOverAdapter extends RecyclerView.Adapter<StackOverAdapter.StackViewHolder> {
+public class BillItemsAdapter extends RecyclerView.Adapter<BillItemsAdapter.StackViewHolder> {
 
     private List<StackItem> stackItemList = null;
     private Context mContext;
 
-    public StackOverAdapter(Context context){
+    public BillItemsAdapter(Context context){
         this.mContext = context;
     }
 

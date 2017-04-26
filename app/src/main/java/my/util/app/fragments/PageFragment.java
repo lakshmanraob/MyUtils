@@ -1,4 +1,4 @@
-package sheet.bottom.com.bottomsheetapp;
+package my.util.app.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import my.util.app.R;
+import my.util.app.adapter.BillItemsAdapter;
 
 import sheet.bottom.com.networklib.models.global.StLoaderResponse;
 import sheet.bottom.com.networklib.models.stackexchange.StackItem;
@@ -39,7 +42,7 @@ public class PageFragment extends Fragment {
 
     private final String TAG = PageFragment.class.getSimpleName();
 
-    private StackOverAdapter mAdapter;
+    private BillItemsAdapter mAdapter;
 
     List<StackItem> stackItemList;
 
@@ -99,7 +102,7 @@ public class PageFragment extends Fragment {
     }
 
     private void setListView() {
-        mAdapter = new StackOverAdapter(getActivity());
+        mAdapter = new BillItemsAdapter(getActivity());
         mAdapter.setStackItemList(stackItemList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         stackRecycler.setLayoutManager(mLayoutManager);

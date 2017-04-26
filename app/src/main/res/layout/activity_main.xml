@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="sheet.bottom.com.bottomsheetapp.MainActivity">
+    tools:context="sheet.bottom.com.bottomsheetapp.my.util.app.activity.MainActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"

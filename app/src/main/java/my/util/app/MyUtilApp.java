@@ -1,4 +1,4 @@
-package sheet.bottom.com.bottomsheetapp;
+package my.util.app;
 
 import android.app.Application;
 
@@ -6,18 +6,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import my.util.app.utils.LruBitmapCache;
+
 /**
  * Created by labattula on 23/09/16.
  */
 
-public class BottomSheetApp extends Application {
-    public static final String TAG = BottomSheetApp.class
+public class MyUtilApp extends Application {
+    public static final String TAG = MyUtilApp.class
             .getSimpleName();
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
-    private static BottomSheetApp mInstance;
+    private static MyUtilApp mInstance;
 
     @Override
     public void onCreate() {
@@ -25,7 +27,7 @@ public class BottomSheetApp extends Application {
         mInstance = this;
     }
 
-    public static synchronized BottomSheetApp getInstance() {
+    public static synchronized MyUtilApp getInstance() {
         return mInstance;
     }
 

@@ -1,4 +1,4 @@
-package sheet.bottom.com.bottomsheetapp;
+package my.util.app.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import my.util.app.R;
+import my.util.app.fragments.PageFragment;
 
 public class MainActivity extends AppCompatActivity {
 

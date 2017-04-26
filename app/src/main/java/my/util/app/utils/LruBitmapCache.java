@@ -1,4 +1,4 @@
-package sheet.bottom.com.bottomsheetapp;
+package my.util.app.utils;
 
 /**
  * Created by labattula on 23/09/16.
