@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "539734199675",
+    "firebase_url": "https://myfirecastapp.firebaseio.com",
+    "project_id": "myfirecastapp",
+    "storage_bucket": "myfirecastapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539734199675:android:11c99cceb12af3cd",
+        "android_client_info": {
+          "package_name": "sheet.bottom.com.bottomsheetapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539734199675-aikr3eu239thu7f2rdaekejtphs5euqq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sheet.bottom.com.bottomsheetapp",
+            "certificate_hash": "1B21E93ECF7DFC66F121CE7C90D37C0A743C992B"
+          }
+        },
+        {
+          "client_id": "539734199675-j0r7n2f0pgm2hbhdrc8lfm3lu4jcl58i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2DkCkfToE1i5k0FCreEuJUNtA62fMBiA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539734199675-j0r7n2f0pgm2hbhdrc8lfm3lu4jcl58i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

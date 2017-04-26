@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BottomSheetApp</string>
+    <string name="touch_sensor">Touch sensor</string>
+</resources>
