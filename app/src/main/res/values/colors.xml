@@ -16,6 +16,7 @@
     <color name="app_bg_start">#273033</color>
     <color name="app_bg_mid">#445056</color>
     <color name="app_bg_end">#47545A</color>
+    <color name="app_highlight">#FFCC00</color>
 
 
 </resources>

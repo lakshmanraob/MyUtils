@@ -22,7 +22,7 @@ import my.util.app.R;
 import my.util.app.fragments.ComplaintsFragment;
 import my.util.app.fragments.PlaceholderFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     TabLayout mTabLayout;
 

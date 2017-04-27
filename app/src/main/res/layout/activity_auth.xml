@@ -7,16 +7,18 @@
     tools:context="my.util.app.activity.MainActivity">
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/authPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
-    
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
-        style="@style/AppTabLayout"
-        android:layout_width="match_parent"
-        android:background="?attr/colorPrimary"
-        android:layout_height="60dp"/>
+        android:layout_weight="1">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/authPagerTabStrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

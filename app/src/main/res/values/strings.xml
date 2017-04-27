@@ -17,6 +17,8 @@
     <string name="hint_password">Password</string>
     <string name="hint_account">Account Number</string>
     <string name="sign_up">Sign Up</string>
+    <string name="util_txt">UTIL</string>
+    <string name="util_help">A Utilities Management Application</string>
 
 
     <string name="login_heading">Login</string>
@@ -27,5 +29,5 @@
 
     <!--Placeholder texts-->
     <string name="submit">submit</string>
-
+    <string name="no_match">No Match</string>
 </resources>

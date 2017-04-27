@@ -25,4 +25,10 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="SpanTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/app_highlight</item>
+        <item name="android:textSize">65sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
 </resources>
