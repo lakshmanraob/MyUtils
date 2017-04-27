@@ -4,10 +4,10 @@ package sheet.bottom.com.networklib.models.global;
  * Created by labattula on 22/09/16.
  */
 
-public class StLoaderResponse<T> {
+public class MyLoaderResponse<T extends MyUtilModel> {
 
     private T mData;
-    private StLoaderException mException;
+    private MyLoaderException mException;
 
     public T getData() {
         return mData;
@@ -17,11 +17,11 @@ public class StLoaderResponse<T> {
         this.mData = data;
     }
 
-    public StLoaderException getException() {
+    public MyLoaderException getException() {
         return mException;
     }
 
-    public void setException(StLoaderException exception) {
+    public void setException(MyLoaderException exception) {
         this.mException = exception;
     }
 }

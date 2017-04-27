@@ -1,18 +1,21 @@
-package sheet.bottom.com.networklib.serviceLayer;
+package sheet.bottom.com.networklib.serviceLayer.loaders;
 
 import android.content.Context;
 
 import retrofit2.Call;
-import sheet.bottom.com.networklib.models.global.StLoaderException;
-import sheet.bottom.com.networklib.models.global.StLoaderResponse;
+import sheet.bottom.com.networklib.models.global.MyLoaderException;
+import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
+import sheet.bottom.com.networklib.models.global.MyUtilModel;
 import sheet.bottom.com.networklib.models.stackexchange.StackResponse;
+import sheet.bottom.com.networklib.serviceLayer.HttpTaskLoader;
+import sheet.bottom.com.networklib.serviceLayer.apicalls.StackOverFlowApi;
 import sheet.bottom.com.networklib.serviceLayer.myRetrofit.MyRetroFitLib;
 
 /**
  * Created by labattula on 22/09/16.
  */
 
-public class StackItemsLoader extends HttpTaskLoader<StLoaderResponse<StackResponse>> {
+public class StackItemsLoader extends HttpTaskLoader<MyLoaderResponse<StackResponse>> {
 
     private String queryParam;
 
@@ -27,7 +30,7 @@ public class StackItemsLoader extends HttpTaskLoader<StLoaderResponse<StackRespo
     }
 
     @Override
-    protected StLoaderResponse<StackResponse> loadDataInBackground() throws StLoaderException {
+    protected MyLoaderResponse<StackResponse> loadDataInBackground() throws MyLoaderException {
 
         Call<StackResponse> stackCall = MyRetroFitLib.getAuthRetrofit(BASE_URL).create(StackOverFlowApi.class).loadQuestions(queryParam);
 
@@ -36,9 +39,9 @@ public class StackItemsLoader extends HttpTaskLoader<StLoaderResponse<StackRespo
     }
 
     @Override
-    protected StLoaderResponse<StackResponse> buildEmptyResult() {
-        StLoaderException.Builder errorBuilder = new StLoaderException.Builder();
-        StLoaderResponse response = new StLoaderResponse();
+    protected MyLoaderResponse<StackResponse> buildEmptyResult() {
+        MyLoaderException.Builder errorBuilder = new MyLoaderException.Builder();
+        MyLoaderResponse response = new MyLoaderResponse();
         response.setData(null);
         errorBuilder.setErrorCode(200);
         errorBuilder.setDetailMessage("EmptyMessage");

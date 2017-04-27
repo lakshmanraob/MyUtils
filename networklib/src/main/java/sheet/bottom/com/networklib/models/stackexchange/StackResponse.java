@@ -1,10 +1,12 @@
 package sheet.bottom.com.networklib.models.stackexchange;
 
+import sheet.bottom.com.networklib.models.global.MyUtilModel;
+
 /**
  * Created by labattula on 22/09/16.
  */
 
-public class StackResponse {
+public class StackResponse extends MyUtilModel {
 
     StackItem[] items;
 

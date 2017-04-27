@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import sheet.bottom.com.networklib.models.global.StLoaderException;
+import sheet.bottom.com.networklib.models.global.MyLoaderException;
 
 /**
  * Created by labattula on 22/09/16.
@@ -47,9 +47,9 @@ public abstract class HttpTaskLoader<T> extends AsyncTaskLoader<T> {
     /**
      * Loading the Data in BackGround
      * @return
-     * @throws StLoaderException
+     * @throws MyLoaderException
      */
-    protected abstract T loadDataInBackground() throws StLoaderException;
+    protected abstract T loadDataInBackground() throws MyLoaderException;
 
     /**
      * Constructing the EmptyResults

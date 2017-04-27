@@ -21,10 +21,11 @@ import java.util.List;
 import my.util.app.R;
 import my.util.app.adapter.BillItemsAdapter;
 
-import sheet.bottom.com.networklib.models.global.StLoaderResponse;
+import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
+import sheet.bottom.com.networklib.models.global.MyUtilModel;
 import sheet.bottom.com.networklib.models.stackexchange.StackItem;
 import sheet.bottom.com.networklib.models.stackexchange.StackResponse;
-import sheet.bottom.com.networklib.serviceLayer.StackItemsLoader;
+import sheet.bottom.com.networklib.serviceLayer.loaders.StackItemsLoader;
 
 /**
  * Created by labattula on 15/09/16.
@@ -71,7 +72,7 @@ public class PageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
         mTextView = (TextView) view.findViewById(R.id.fragment_txt);
-        mTextView.setText("Fragment # " + mPageNo +" loading...");
+        mTextView.setText("Fragment # " + mPageNo + " loading...");
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         stackRecycler = (RecyclerView) view.findViewById(R.id.stackItemsListView);
 
@@ -130,20 +131,20 @@ public class PageFragment extends Fragment {
     /**
      * Loader for getting the StackOverFlow posts
      */
-    private LoaderManager.LoaderCallbacks<StLoaderResponse<StackResponse>> retrieveStackItemsCallback =
-            new LoaderManager.LoaderCallbacks<StLoaderResponse<StackResponse>>() {
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<StackResponse>> retrieveStackItemsCallback =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<StackResponse>>() {
 
                 @Override
-                public Loader<StLoaderResponse<StackResponse>> onCreateLoader(int loaderId, Bundle bundle) {
+                public Loader<MyLoaderResponse<StackResponse>> onCreateLoader(int loaderId, Bundle bundle) {
                     return new StackItemsLoader(getActivity(), bundle.getString(ARG_QUERY));
                 }
 
                 @Override
-                public void onLoadFinished(Loader<StLoaderResponse<StackResponse>> loader, StLoaderResponse<StackResponse> loaderResult) {
+                public void onLoadFinished(Loader<MyLoaderResponse<StackResponse>> loader, MyLoaderResponse<StackResponse> loaderResult) {
                     Log.i(TAG, "onLoadFinished: " + loaderResult.getData());
                     if (loaderResult.getData() != null) {
                         showStatus(ListStatus.LIST);
-                        stackItemList = getListItems(loaderResult.getData().getItems());
+                        stackItemList = getListItems((loaderResult.getData()).getItems());
                         setListView();
                         Toast.makeText(getActivity(), "done", Toast.LENGTH_SHORT).show();
                     } else {
@@ -153,7 +154,7 @@ public class PageFragment extends Fragment {
                 }
 
                 @Override
-                public void onLoaderReset(Loader<StLoaderResponse<StackResponse>> loaderResult) {
+                public void onLoaderReset(Loader<MyLoaderResponse<StackResponse>> loaderResult) {
                 }
             };
 }

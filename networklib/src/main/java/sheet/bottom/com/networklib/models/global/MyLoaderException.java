@@ -4,13 +4,13 @@ package sheet.bottom.com.networklib.models.global;
  * Created by labattula on 22/09/16.
  */
 
-public class StLoaderException extends RuntimeException {
+public class MyLoaderException extends RuntimeException {
 
     private static final int DEFAULT_CODE = 100;
     private int mCode;
     private String detailMessage;
 
-    private StLoaderException(int code, String detailMessage) {
+    private MyLoaderException(int code, String detailMessage) {
         super(detailMessage);
         mCode = code;
     }
@@ -30,8 +30,8 @@ public class StLoaderException extends RuntimeException {
             return this;
         }
 
-        public StLoaderException build() {
-            return new StLoaderException(code == -1 ? DEFAULT_CODE : code, detailMessage);
+        public MyLoaderException build() {
+            return new MyLoaderException(code == -1 ? DEFAULT_CODE : code, detailMessage);
         }
     }
 

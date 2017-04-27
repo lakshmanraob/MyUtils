@@ -9,8 +9,8 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import sheet.bottom.com.networklib.models.global.StLoaderException;
-import sheet.bottom.com.networklib.models.global.StLoaderResponse;
+import sheet.bottom.com.networklib.models.global.MyLoaderException;
+import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
 import sheet.bottom.com.networklib.models.stackexchange.StackResponse;
 
 /**
@@ -30,9 +30,9 @@ public class MyRetroFitLib {
                 .build();
     }
 
-    public static StLoaderResponse<StackResponse> buildReponse(Call<StackResponse> call) {
-        StLoaderResponse<StackResponse> returnValue = new StLoaderResponse<>();
-        StLoaderException.Builder errorBuilder = new StLoaderException.Builder();
+    public static MyLoaderResponse<StackResponse> buildReponse(Call<StackResponse> call) {
+        MyLoaderResponse<StackResponse> returnValue = new MyLoaderResponse<>();
+        MyLoaderException.Builder errorBuilder = new MyLoaderException.Builder();
 
         try {
             Response<StackResponse> response = call.execute();
@@ -45,7 +45,7 @@ public class MyRetroFitLib {
                 returnValue.setException(errorBuilder.build());
 
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             errorBuilder.setErrorCode(101);
             errorBuilder.setDetailMessage("IOException");
         }

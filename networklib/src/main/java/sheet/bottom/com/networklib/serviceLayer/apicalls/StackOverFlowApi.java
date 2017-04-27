@@ -1,4 +1,4 @@
-package sheet.bottom.com.networklib.serviceLayer;
+package sheet.bottom.com.networklib.serviceLayer.apicalls;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
