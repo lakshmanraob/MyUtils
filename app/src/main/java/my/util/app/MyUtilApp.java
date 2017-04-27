@@ -5,7 +5,10 @@ import android.app.Application;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
+import butterknife.ButterKnife;
 import my.util.app.utils.LruBitmapCache;
 
 /**
@@ -25,6 +28,8 @@ public class MyUtilApp extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        //ButterKnife.setDebug(true);
+        Iconify.with(new FontAwesomeModule());
     }
 
     public static synchronized MyUtilApp getInstance() {
