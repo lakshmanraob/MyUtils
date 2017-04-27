@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BottomSheetApp</string>
+    <string name="app_name">MyUtilApp</string>
     <string name="touch_sensor">Touch sensor</string>
 
     <string name="emergency_msg">To report any life threatening conditions, please call 911</string>
@@ -13,4 +13,19 @@
         <item>No power supply available</item>
         <item>Damage to an electric pole</item>
     </array>
+
+    <string name="hint_password">Password</string>
+    <string name="hint_account">Account Number</string>
+    <string name="sign_up">Sign Up</string>
+
+
+    <string name="login_heading">Login</string>
+    <string name="pay_for_other">Pay for another</string>
+
+    <string name="account_help">This is the account number with which you are registered with TECO</string>
+
+
+    <!--Placeholder texts-->
+    <string name="submit">submit</string>
+
 </resources>

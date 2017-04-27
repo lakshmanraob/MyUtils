@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#273033</color>
+    <color name="colorPrimary">#273033</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#FFFFFFFF</color>
@@ -12,5 +12,10 @@
     <color name="dark_grey">#808080</color>
     <color name="light_grey">#80bebebe</color>
     <color name="yellow">#f4d142</color>
+
+    <color name="app_bg_start">#273033</color>
+    <color name="app_bg_mid">#445056</color>
+    <color name="app_bg_end">#47545A</color>
+
 
 </resources>
