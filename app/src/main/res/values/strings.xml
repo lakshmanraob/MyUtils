@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">BottomSheetApp</string>
     <string name="touch_sensor">Touch sensor</string>
+
+    <string name="emergency_msg">To report any life threatening conditions, please call 911</string>
+    <string name="outage_select">Choose outage type</string>
+    <string name="address">Address</string>
+    <string name="complaints">Complaints</string>
+    <string name="add_photos">Add Photos</string>
+
+    <array name="outage_type">
+        <item>@string/outage_select</item>
+        <item>No power supply available</item>
+        <item>Damage to an electric pole</item>
+    </array>
 </resources>

@@ -35,6 +35,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
+    compile 'com.joanzapata.iconify:android-iconify-material:2.2.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

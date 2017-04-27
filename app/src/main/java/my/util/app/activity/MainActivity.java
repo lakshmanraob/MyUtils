@@ -20,6 +20,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import butterknife.ButterKnife;
 import my.util.app.R;
 import my.util.app.fragments.ComplaintsFragment;
+import my.util.app.fragments.PlaceholderFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -81,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
                     return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_list_alt)
                             .colorRes(R.color.white).actionBarSize();
                 case 1:
-                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_list_alt)
+                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_headphones)
                             .colorRes(R.color.white).actionBarSize();
                 case 2:
-                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_headphones)
+                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_user)
                             .colorRes(R.color.white).actionBarSize();
                 default:
                     new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_star_o)
@@ -97,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return ComplaintsFragment.newInstance("Recent Bills", null);
+                    return PlaceholderFragment.newInstance("Recent Bills", null);
                 case 1:
                     return ComplaintsFragment.newInstance("Complaints", null);
                 case 2:
-                    return ComplaintsFragment.newInstance("Account Details", null);
+                    return PlaceholderFragment.newInstance("Account Details", null);
             }
             return null;
         }

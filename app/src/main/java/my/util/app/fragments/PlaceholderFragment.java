@@ -6,37 +6,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.joanzapata.iconify.IconDrawable;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import my.util.app.R;
-import my.util.app.activity.MainActivity;
 
-public class ComplaintsFragment extends Fragment {
+public class PlaceholderFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-    @BindView(R.id.outage_type)
-    protected Spinner outageTypeSpinner;
-    @BindView(R.id.photos_grid)
-    protected GridLayout gridLayout;
+    @BindView(R.id.textHeading)
+    protected TextView textView;
 
-    public ComplaintsFragment() {
+    public PlaceholderFragment() {
     }
 
-    public static ComplaintsFragment newInstance(String param1, String param2) {
-        ComplaintsFragment fragment = new ComplaintsFragment();
+    public static PlaceholderFragment newInstance(String param1, String param2) {
+        PlaceholderFragment fragment = new PlaceholderFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -57,14 +47,9 @@ public class ComplaintsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View content = inflater.inflate(R.layout.fragment_complaints, container, false);
+        View content = inflater.inflate(R.layout.fragment_placeholder, container, false);
         ButterKnife.bind(this, content);
-
-        ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.outage_type));
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        outageTypeSpinner.setAdapter(spinnerAdapter);
+        textView.setText(mParam1);
         return content;
     }
 
