@@ -1,5 +1,6 @@
 package my.util.app.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,19 +13,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+
+import butterknife.ButterKnife;
 import my.util.app.R;
-import my.util.app.fragments.PageFragment;
+import my.util.app.fragments.ComplaintsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     TabLayout mTabLayout;
-
-    private int[] mTabsIcons = {
-            R.drawable.ic_fav_selector,
-            R.drawable.ic_place_selector,
-            R.drawable.ic_recents_selector,
-            R.drawable.ic_chat_selector
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         private final int PAGE_COUNT = 3;
 
-        private final String[] page_title = {"android", "IOT", "IOS"};
+        private final String[] page_title = {"Recent Bills", "Complaints", "Account Details"};
 
         public MyPageAdapter(FragmentManager fm) {
             super(fm);
@@ -72,19 +71,37 @@ public class MainActivity extends AppCompatActivity {
             TextView title = (TextView) view.findViewById(R.id.custom_title);
             title.setText(page_title[position]);
             ImageView icon = (ImageView) view.findViewById(R.id.custom_icon);
-            icon.setImageResource(mTabsIcons[position]);
+            icon.setImageDrawable(getIconDrawable(position));
             return view;
+        }
+
+        private Drawable getIconDrawable(int position){
+            switch (position) {
+                case 0:
+                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_list_alt)
+                            .colorRes(R.color.white).actionBarSize();
+                case 1:
+                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_list_alt)
+                            .colorRes(R.color.white).actionBarSize();
+                case 2:
+                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_headphones)
+                            .colorRes(R.color.white).actionBarSize();
+                default:
+                    new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_star_o)
+                            .colorRes(R.color.white).actionBarSize();
+            }
+            return null;
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return PageFragment.newInstance(page_title[position]);
+                    return ComplaintsFragment.newInstance("Recent Bills", null);
                 case 1:
-                    return PageFragment.newInstance(page_title[position]);
+                    return ComplaintsFragment.newInstance("Complaints", null);
                 case 2:
-                    return PageFragment.newInstance(page_title[position]);
+                    return ComplaintsFragment.newInstance("Account Details", null);
             }
             return null;
         }
