@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import my.util.app.R;
 import my.util.app.utils.UtilsConstants;
 
@@ -24,7 +27,10 @@ public class PayAccountFragment extends Fragment {
     EditText payAccountEdit;
 
     @BindView(R.id.btn_pay)
-    Button payBtn;
+    ImageView payBtn;
+
+    @BindView(R.id.pay_account_help)
+    TextView payAccountHelp;
 
     String title;
     int page;
@@ -35,6 +41,7 @@ public class PayAccountFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString(UtilsConstants.PAGE_TITLE, title);
         bundle.putInt(UtilsConstants.PAGE_NUMBER, pageNumber);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -49,7 +56,20 @@ public class PayAccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_pay_account, container, false);
-        ButterKnife.bind(content);
+        ButterKnife.bind(this, content);
+        payAccountHelp.setVisibility(View.INVISIBLE);
         return content;
+    }
+
+    @OnClick(R.id.pay_info)
+    protected void showPayInfo(View v) {
+        payAccountHelp.setVisibility(View.VISIBLE);
+
+        payAccountHelp.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                payAccountHelp.setVisibility(View.INVISIBLE);
+            }
+        }, UtilsConstants.INFO_DISPLAY_TIME);
     }
 }

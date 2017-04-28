@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import my.util.app.R;
 import my.util.app.utils.UtilsConstants;
 
@@ -53,7 +56,19 @@ public class LoginFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View loginView = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, loginView);
+        accountHelp.setVisibility(View.INVISIBLE);
         return loginView;
     }
 
+    @OnClick(R.id.login_info)
+    protected void loginInfo(View v) {
+        accountHelp.setVisibility(View.VISIBLE);
+
+        accountHelp.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                accountHelp.setVisibility(View.INVISIBLE);
+            }
+        }, UtilsConstants.INFO_DISPLAY_TIME);
+    }
 }

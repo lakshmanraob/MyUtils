@@ -11,6 +11,7 @@ import android.text.style.TextAppearanceSpan;
 import android.widget.TextView;
 
 import my.util.app.R;
+import my.util.app.utils.StringUtils;
 
 /**
  * Created by labattula on 27/04/17.
@@ -27,13 +28,6 @@ public class UtilSplashActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        TextView utilText = (TextView) findViewById(R.id.util);
-        final SpannableStringBuilder sb = new SpannableStringBuilder(getString(R.string.util_txt));
-        sb.setSpan(new TextAppearanceSpan(this, R.style.SpanTextAppearance), 1, 2,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        utilText.setText(sb);
 
     }
 
