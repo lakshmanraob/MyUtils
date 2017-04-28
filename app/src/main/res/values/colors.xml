@@ -11,7 +11,9 @@
     <color name="transparent">#00000000</color>
     <color name="dark_grey">#808080</color>
     <color name="light_grey">#80bebebe</color>
-    <color name="yellow">#f4d142</color>
+    <color name="yellow">#FFD800</color>
+    <color name="pink">#FB3353</color>
+    <color name="pink_overlay">#70FB3353</color>
 
     <color name="app_bg_start">#273033</color>
     <color name="app_bg_mid">#445056</color>

@@ -11,6 +11,10 @@
     <dimen name="font_size_general">16sp</dimen>
     <dimen name="font_icon_size">30sp</dimen>
     <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="grid_image_size">100dp</dimen>
+    <dimen name="images_grid_spacing">5dp</dimen>
+    <dimen name="fifty_spacing">50dp</dimen>
+    <dimen name="hundred_spacing">100dp</dimen>
 
 
 </resources>

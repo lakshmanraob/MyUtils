@@ -1,5 +1,9 @@
 package my.util.app.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +22,13 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import my.util.app.R;
 import my.util.app.fragments.ComplaintsFragment;
 import my.util.app.fragments.PlaceholderFragment;
+import my.util.app.utils.Constants;
 
 public class MainActivity extends BaseActivity {
 
@@ -51,7 +59,8 @@ public class MainActivity extends BaseActivity {
 
             mTabLayout.getTabAt(0).getCustomView().setSelected(true);
         }
-
+        // TODO: temp code -  remove later
+        mViewPager.setCurrentItem(1);
 
     }
 
@@ -76,7 +85,7 @@ public class MainActivity extends BaseActivity {
             return view;
         }
 
-        private Drawable getIconDrawable(int position){
+        private Drawable getIconDrawable(int position) {
             switch (position) {
                 case 0:
                     return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_list_alt)
@@ -115,6 +124,21 @@ public class MainActivity extends BaseActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return page_title[position];
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            List<Fragment> allFragments = getSupportFragmentManager().getFragments();
+            if (allFragments != null && !allFragments.isEmpty()) {
+                for (Fragment fragment : allFragments) {
+                    if (fragment instanceof ComplaintsFragment) {
+                        Drawable image = new BitmapDrawable(getResources(), photo);
+                        ((ComplaintsFragment) fragment).updateImages(image);
+                    }
+                }
+            }
         }
     }
 }
