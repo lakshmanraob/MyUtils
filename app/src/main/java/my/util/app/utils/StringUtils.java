@@ -7,10 +7,6 @@ import android.text.style.TextAppearanceSpan;
 
 import my.util.app.R;
 
-/**
- * Created by labattula on 28/04/17.
- */
-
 public class StringUtils {
 
     public static SpannableStringBuilder getSpannableHeading(Context context) {

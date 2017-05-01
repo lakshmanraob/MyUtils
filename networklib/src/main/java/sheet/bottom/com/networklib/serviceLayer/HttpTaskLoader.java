@@ -6,10 +6,6 @@ import android.util.Log;
 
 import sheet.bottom.com.networklib.models.global.MyLoaderException;
 
-/**
- * Created by labattula on 22/09/16.
- */
-
 public abstract class HttpTaskLoader<T> extends AsyncTaskLoader<T> {
 
     private static final String TAG = HttpTaskLoader.class.getSimpleName();

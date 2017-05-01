@@ -11,10 +11,6 @@ import butterknife.ButterKnife;
 import my.util.app.R;
 import my.util.app.utils.UtilsConstants;
 
-/**
- * Created by labattula on 29/04/17.
- */
-
 public class SignupFragmentOne extends Fragment {
 
     private String title;

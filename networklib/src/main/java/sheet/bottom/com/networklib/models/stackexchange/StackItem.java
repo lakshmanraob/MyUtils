@@ -1,9 +1,5 @@
 package sheet.bottom.com.networklib.models.stackexchange;
 
-/**
- * Created by labattula on 22/09/16.
- */
-
 public class StackItem {
     String[] tags;
     PostOwner owner;

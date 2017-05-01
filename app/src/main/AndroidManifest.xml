@@ -31,7 +31,9 @@
 
         <activity
             android:name=".activity.SignUpActivity"
-            android:theme="@style/AppTheme.ActionBar.FullScreen" />
+            android:theme="@style/AppTheme.ActionBar.FullScreen"
+            android:windowSoftInputMode="stateHidden" />
+
     </application>
 
 </manifest>

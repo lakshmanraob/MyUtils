@@ -27,9 +27,6 @@ import sheet.bottom.com.networklib.models.stackexchange.StackItem;
 import sheet.bottom.com.networklib.models.stackexchange.StackResponse;
 import sheet.bottom.com.networklib.serviceLayer.loaders.StackItemsLoader;
 
-/**
- * Created by labattula on 15/09/16.
- */
 public class PageFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";

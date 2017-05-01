@@ -6,10 +6,6 @@ import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
 
-/*
- * Created by labattula on 23/09/16.
- */
-
 public class MyUtilApp extends Application {
     public static final String TAG = MyUtilApp.class
             .getSimpleName();

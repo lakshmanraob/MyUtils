@@ -1,5 +1,6 @@
 package my.util.app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -19,10 +20,6 @@ import my.util.app.R;
 import my.util.app.fragments.LoginFragment;
 import my.util.app.fragments.PayAccountFragment;
 import my.util.app.utils.StringUtils;
-
-/**
- * Created by labattula on 27/04/17.
- */
 
 public class AuthActivity extends BaseActivity {
 
@@ -129,4 +126,10 @@ public class AuthActivity extends BaseActivity {
             return NUM_ITEMS;
         }
     }
+
+    public void loginUser() {
+        startActivity(new Intent(this, MainActivity.class));
+        this.finish();
+    }
+
 }

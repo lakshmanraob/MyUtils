@@ -11,10 +11,6 @@ import sheet.bottom.com.networklib.serviceLayer.HttpTaskLoader;
 import sheet.bottom.com.networklib.serviceLayer.apicalls.StackOverFlowApi;
 import sheet.bottom.com.networklib.serviceLayer.myRetrofit.MyRetroFitLib;
 
-/**
- * Created by labattula on 22/09/16.
- */
-
 public class StackItemsLoader extends HttpTaskLoader<MyLoaderResponse<StackResponse>> {
 
     private String queryParam;

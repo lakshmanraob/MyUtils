@@ -15,10 +15,6 @@ import java.util.List;
 import my.util.app.R;
 import sheet.bottom.com.networklib.models.stackexchange.StackItem;
 
-/**
- * Created by labattula on 23/09/16.
- */
-
 public class BillItemsAdapter extends RecyclerView.Adapter<BillItemsAdapter.StackViewHolder> {
 
     private List<StackItem> stackItemList = null;

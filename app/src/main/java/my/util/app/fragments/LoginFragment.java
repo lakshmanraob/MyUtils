@@ -18,12 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.R;
+import my.util.app.activity.AuthActivity;
+import my.util.app.activity.MainActivity;
 import my.util.app.activity.SignUpActivity;
 import my.util.app.utils.UtilsConstants;
-
-/**
- * Created by labattula on 27/04/17.
- */
 
 public class LoginFragment extends Fragment {
 
@@ -83,7 +81,9 @@ public class LoginFragment extends Fragment {
 
     @OnClick(R.id.btn_login)
     protected void login(View v) {
-
+        if(getActivity() instanceof AuthActivity) {
+            ((AuthActivity)getActivity()).loginUser();
+        }
     }
 
     @OnClick(R.id.btn_link_signup)

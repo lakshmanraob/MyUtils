@@ -1,9 +1,5 @@
 package my.util.app.utils;
 
-/**
- * Created by labattula on 23/09/16.
- */
-
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 import com.android.volley.toolbox.ImageLoader.ImageCache;

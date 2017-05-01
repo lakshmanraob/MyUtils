@@ -1,9 +1,5 @@
 package sheet.bottom.com.networklib.models.stackexchange;
 
-/**
- * Created by labattula on 22/09/16.
- */
-
 public class PostOwner {
     int reputation;
     int user_id;

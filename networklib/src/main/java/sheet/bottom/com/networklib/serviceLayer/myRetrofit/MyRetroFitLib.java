@@ -13,10 +13,6 @@ import sheet.bottom.com.networklib.models.global.MyLoaderException;
 import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
 import sheet.bottom.com.networklib.models.stackexchange.StackResponse;
 
-/**
- * Created by labattula on 23/09/16.
- */
-
 public class MyRetroFitLib {
 
     public static Retrofit getAuthRetrofit(String baseUrl) {

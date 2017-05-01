@@ -13,10 +13,6 @@ import android.widget.TextView;
 import my.util.app.R;
 import my.util.app.utils.StringUtils;
 
-/**
- * Created by labattula on 27/04/17.
- */
-
 public class UtilSplashActivity extends BaseActivity {
 
     private static final int MESSAGE_ID = 100;

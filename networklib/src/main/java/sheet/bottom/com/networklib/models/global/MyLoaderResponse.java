@@ -1,9 +1,5 @@
 package sheet.bottom.com.networklib.models.global;
 
-/**
- * Created by labattula on 22/09/16.
- */
-
 public class MyLoaderResponse<T extends MyUtilModel> {
 
     private T mData;

@@ -1,9 +1,5 @@
 package sheet.bottom.com.networklib.models.global;
 
-/**
- * Created by labattula on 22/09/16.
- */
-
 public class MyLoaderException extends RuntimeException {
 
     private static final int DEFAULT_CODE = 100;

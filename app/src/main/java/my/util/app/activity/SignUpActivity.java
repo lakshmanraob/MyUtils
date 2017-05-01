@@ -17,10 +17,6 @@ import my.util.app.fragments.SignupFragmentOne;
 import my.util.app.fragments.SignupFragmentThree;
 import my.util.app.fragments.SignupFragmentTwo;
 
-/**
- * Created by labattula on 28/04/17.
- */
-
 public class SignUpActivity extends BaseActivity {
 
     ViewPager signupViewPager;

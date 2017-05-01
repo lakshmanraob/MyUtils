@@ -17,10 +17,6 @@ import butterknife.OnClick;
 import my.util.app.R;
 import my.util.app.utils.UtilsConstants;
 
-/**
- * Created by labattula on 27/04/17.
- */
-
 public class PayAccountFragment extends Fragment {
 
     @BindView(R.id.pay_input_account)
