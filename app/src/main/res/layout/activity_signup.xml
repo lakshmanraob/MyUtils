@@ -5,12 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <FrameLayout
         android:id="@+id/signup_page_heading"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/app_bg_start" />
+        android:layout_gravity="center"
+        android:background="@color/app_bg_start">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/util" />
+    </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/signup_page_footer"
@@ -32,7 +39,7 @@
             android:textSize="15sp" />
 
         <LinearLayout
-            android:id="@+id/viewPagerCountDots"
+            android:id="@+id/signup_pager_indicators"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"

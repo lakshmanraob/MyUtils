@@ -15,13 +15,13 @@ import my.util.app.utils.UtilsConstants;
  * Created by labattula on 29/04/17.
  */
 
-public class SignupFragment extends Fragment {
+public class SignupFragmentTwo extends Fragment {
 
     private String title;
     private int page;
 
-    public static SignupFragment newInstance(String title, int pageNumber) {
-        SignupFragment fragment = new SignupFragment();
+    public static SignupFragmentTwo newInstance(String title, int pageNumber) {
+        SignupFragmentTwo fragment = new SignupFragmentTwo();
         Bundle args = new Bundle();
         args.putString(UtilsConstants.PAGE_TITLE, title);
         args.putInt(UtilsConstants.PAGE_NUMBER, pageNumber);
@@ -40,7 +40,7 @@ public class SignupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View signupView = inflater.inflate(R.layout.fragment_signup_one, container, false);
+        View signupView = inflater.inflate(R.layout.fragment_signup_two, container, false);
         ButterKnife.bind(this, signupView);
         return signupView;
     }
