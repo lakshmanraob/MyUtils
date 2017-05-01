@@ -25,6 +25,10 @@
         <activity
             android:name=".activity.AuthActivity"
             android:theme="@style/AppTheme.ActionBar.FullScreen" />
+
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:theme="@style/AppTheme.ActionBar.FullScreen" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package my.util.app.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.joanzapata.iconify.widget.IconTextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.R;
+import my.util.app.activity.SignUpActivity;
 import my.util.app.utils.UtilsConstants;
 
 /**
@@ -30,6 +34,9 @@ public class LoginFragment extends Fragment {
 
     @BindView(R.id.login_account_help)
     TextView accountHelp;
+
+    @BindView(R.id.login_progress)
+    IconTextView progressView;
 
     private String title;
     private int page;
@@ -63,12 +70,27 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.login_info)
     protected void loginInfo(View v) {
         accountHelp.setVisibility(View.VISIBLE);
+        progressView.setVisibility(View.VISIBLE);
 
         accountHelp.postDelayed(new Runnable() {
             @Override
             public void run() {
                 accountHelp.setVisibility(View.INVISIBLE);
+                progressView.setVisibility(View.INVISIBLE);
             }
         }, UtilsConstants.INFO_DISPLAY_TIME);
     }
+
+    @OnClick(R.id.btn_login)
+    protected void login(View v) {
+
+    }
+
+    @OnClick(R.id.btn_link_signup)
+    protected void signUp(View v) {
+        Intent signupIntent = new Intent();
+        signupIntent.setClass(getActivity(), SignUpActivity.class);
+        startActivity(signupIntent);
+    }
+
 }

@@ -27,6 +27,10 @@
 
     <string name="account_help">This is the account number with which you are registered with TECO</string>
 
+    <!--SignUp-->
+
+    <string name="cancel_str">Cancel</string>
+    <string name="next_str">Next</string>
 
     <!--Placeholder texts-->
     <string name="submit">submit</string>

@@ -41,8 +41,8 @@
             android:id="@+id/login_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:background="@mipmap/info"
             android:padding="5dp" />
@@ -82,9 +82,18 @@
         android:text="@string/sign_up"
         android:textColor="@color/colorAccent" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/login_progress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:shadowColor="#22000000"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="1"
+        android:text="{fa-rotate-right spin}"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/font_icon_size"
+        android:visibility="invisible" />
+
 </LinearLayout>
