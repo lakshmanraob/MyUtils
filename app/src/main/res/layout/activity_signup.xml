@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="center"
-        android:background="@color/app_bg_start">
+        android:background="@color/app_bg_start"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -24,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/app_bg_start"
         android:orientation="horizontal">
 
         <TextView
@@ -35,8 +36,8 @@
             android:layout_margin="10dp"
             android:padding="5dp"
             android:text="@string/cancel_str"
-            android:textColor="@color/app_bg_start"
-            android:textSize="15sp" />
+            android:textColor="@color/white_54"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:id="@+id/signup_pager_indicators"
@@ -54,8 +55,8 @@
             android:layout_margin="10dp"
             android:padding="5dp"
             android:text="@string/next_str"
-            android:textColor="@color/app_bg_start"
-            android:textSize="15sp" />
+            android:textColor="@color/white_54"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

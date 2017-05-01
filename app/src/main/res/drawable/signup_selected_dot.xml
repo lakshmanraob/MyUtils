@@ -8,5 +8,5 @@
         android:width="12dip"
         android:height="12dip" />
 
-    <solid android:color="@color/app_bg_start" />
+    <solid android:color="@color/app_highlight" />
 </shape>
