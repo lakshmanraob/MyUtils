@@ -2,6 +2,13 @@ package my.util.app.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,13 +69,32 @@ public class ImagesAdapter extends BaseAdapter{
         }
         PhotoDetails currentItem = getItem(position);
         holder.item = currentItem;
-        holder.image.setImageDrawable(currentItem.getImage());
+
+        if (holder.item.getImageName().equalsIgnoreCase(Constants.CAPTURE_IMAGE_NAME)) {
+            holder.image.setImageResource(R.drawable.rounded_bg);
+            holder.imageCamera.setVisibility(View.VISIBLE);
+        } else {
+            holder.imageCamera.setVisibility(View.GONE);
+            holder.image.setImageResource(android.R.color.transparent);
+            Bitmap mbitmap = ((BitmapDrawable) currentItem.getImage()).getBitmap();
+            Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
+            Canvas canvas = new Canvas(imageRounded);
+            Paint mpaint = new Paint();
+            mpaint.setAntiAlias(true);
+            mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+            canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())),
+                    Constants.IMAGE_CORNER, Constants.IMAGE_CORNER, mpaint);
+            holder.image.setImageBitmap(imageRounded);
+        }
+
         return convertView;
     }
 
     static class ViewHolder {
         @BindView(R.id.imageView)
         ImageView image;
+        @BindView(R.id.imageViewCamera)
+        ImageView imageCamera;
         @BindView(R.id.imageViewOverlay)
         ImageView imageOverlay;
         @BindView(R.id.imageViewOverlayCross)

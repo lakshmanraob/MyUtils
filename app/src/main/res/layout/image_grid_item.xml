@@ -9,8 +9,15 @@
         android:id="@+id/imageView"
         android:layout_width="@dimen/grid_image_size"
         android:layout_height="@dimen/grid_image_size"
-        android:scaleType="fitXY"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/imageViewCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/camera" />
 
     <ImageView
         android:id="@+id/imageViewOverlay"

@@ -3,21 +3,32 @@ package my.util.app.fragments;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.joanzapata.iconify.widget.IconTextView;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import my.util.app.R;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.utils.Constants;
@@ -35,11 +46,15 @@ public class ComplaintsFragment extends Fragment {
     private ImageCaptureListener mImageCaptureListener;
     private ArrayList<PhotoDetails> images;
     private ImagesAdapter imagesAdapter;
+    private Location currentLocation;
+    private LocationListener mLocationListener;
 
     @BindView(R.id.outage_type)
     protected Spinner mOutageTypeSpinner;
     @BindView(R.id.photos_grid)
     protected GridView mGridView;
+    @BindView(R.id.address)
+    protected EditText mAddressField;
 
     public ComplaintsFragment() {
     }
@@ -62,6 +77,12 @@ public class ComplaintsFragment extends Fragment {
         }
     }
 
+    @OnClick(R.id.call_button)
+    protected void callEmergencyNumber(View v) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
+        startActivity(intent);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +90,8 @@ public class ComplaintsFragment extends Fragment {
         View content = inflater.inflate(R.layout.fragment_complaints, container, false);
         ButterKnife.bind(this, content);
 
-        prepareListener();
+        prepareListeners();
+        Utils.startGPS(getActivity(), mLocationListener);
 
         images = new ArrayList<>();
         addCaptureActionImage();
@@ -86,12 +108,26 @@ public class ComplaintsFragment extends Fragment {
         return content;
     }
 
-    private void addCaptureActionImage(){
+    private void addCaptureActionImage() {
         Resources res = getActivity().getResources();
-        images.add(0, new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, res.getDrawable(R.drawable.take_photo, null)));
+        if (images != null) {
+            boolean hasCameraImage = false;
+            for (PhotoDetails photo : images) {
+                if (photo != null && photo.getImageName().equalsIgnoreCase(Constants.CAPTURE_IMAGE_NAME)) {
+                    hasCameraImage = true;
+                    break;
+                }
+            }
+            if (!hasCameraImage) {
+                images.add(0, new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, res.getDrawable(R.drawable.take_photo, null)));
+            }
+        }
+        if (imagesAdapter != null) {
+            imagesAdapter.notifyDataSetChanged();
+        }
     }
 
-    private void prepareListener() {
+    private void prepareListeners() {
         mImageCaptureListener = new ImageCaptureListener() {
             @Override
             public void onClick(PhotoDetails item) {
@@ -102,17 +138,41 @@ public class ComplaintsFragment extends Fragment {
 
             @Override
             public void onLongClick(PhotoDetails item) {
-                /*if (!item.getImageName().equalsIgnoreCase(Constants.CAPTURE_IMAGE_NAME)) {
-                    deleteCurrentImage(item);
-                    if(images != null){
-                        for (PhotoDetails photoDetails : images){
-                            if (photoDetails != null && photoDetails.getImageName().equalsIgnoreCase(item.getImageName())) {
-                                images.remove(photoDetails);
-                                addCaptureActionImage();
+                if (!item.getImageName().equalsIgnoreCase(Constants.CAPTURE_IMAGE_NAME)) {
+                    if (images != null) {
+                        synchronized (images) {
+                            Iterator<PhotoDetails> imageIterator = images.iterator();
+                            while (imageIterator.hasNext()) {
+                                PhotoDetails photoDetails = imageIterator.next();
+                                if (photoDetails != null && photoDetails.getImageName().equalsIgnoreCase(item.getImageName())) {
+                                    imageIterator.remove();
+                                    addCaptureActionImage();
+                                    break;
+                                }
                             }
                         }
                     }
-                }*/
+                }
+            }
+        };
+
+        mLocationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                currentLocation = location;
+                fillCurrentLocation(null);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
             }
         };
     }
@@ -122,15 +182,30 @@ public class ComplaintsFragment extends Fragment {
         getActivity().startActivityForResult(cameraIntent, Constants.CAMERA_REQUEST_CODE);
     }
 
-    private void deleteCurrentImage(PhotoDetails item) {
-    }
-
     public void updateImages(Drawable imageCaptured) {
         Utils.showShortToast(getActivity(), "Success");
-        images.add(new PhotoDetails("A", imageCaptured));
+        images.add(new PhotoDetails("image_seq_" + images.size() + 1, imageCaptured));
         if (images.size() > Constants.IMAGE_COUNT) {
             images.remove(0);
         }
         imagesAdapter.notifyDataSetChanged();
+    }
+
+
+    @OnClick(R.id.location_detector)
+    protected void fillCurrentLocation(View v) {
+        if (currentLocation != null) {
+            String displayAddress = Utils.getCurrentAddress(getActivity(), currentLocation);
+            if (!TextUtils.isEmpty(displayAddress)) {
+                mAddressField.setText("");
+                mAddressField.setText(displayAddress);
+            } else {
+                Utils.showShortToast(getActivity(), "Current location unavailable.");
+                Utils.startGPS(getActivity(), mLocationListener);
+            }
+        } else {
+            Utils.showShortToast(getActivity(), "Current location unavailable.");
+            Utils.startGPS(getActivity(), mLocationListener);
+        }
     }
 }

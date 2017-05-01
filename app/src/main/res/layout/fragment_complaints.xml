@@ -110,6 +110,19 @@
                 android:focusableInTouchMode="true"
                 app:cardCornerRadius="@dimen/card_corner_radius">
 
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="50dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/address"
+                    android:lines="1"
+                    android:padding="@dimen/widgets_inner_padding"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_size_general" />
+
                 <com.joanzapata.iconify.widget.IconTextView
                     android:id="@+id/location_detector"
                     android:layout_width="50dp"
@@ -123,19 +136,6 @@
                     android:text="{md-my-location}"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/font_icon_size" />
-
-                <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="50dp"
-                    android:background="@color/transparent"
-                    android:hint="@string/address"
-                    android:lines="1"
-                    android:padding="@dimen/widgets_inner_padding"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/font_size_general" />
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
