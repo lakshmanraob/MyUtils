@@ -48,6 +48,10 @@
 
         </activity>
 
+        <service
+            android:name=".service.FetchLocationAddress"
+            android:exported="false" />
+
     </application>
 
 </manifest>

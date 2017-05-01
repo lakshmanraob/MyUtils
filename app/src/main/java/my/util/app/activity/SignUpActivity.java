@@ -115,10 +115,12 @@ public class SignUpActivity extends BaseActivity {
 
         if (selected > 0) {
             cancelText.setText(getString(R.string.back_str));
-            if(selected == 3){
+            if (selected == 3) {
                 nextText.setText(getString(R.string.submit));
+            } else {
+                nextText.setText(getString(R.string.next_str));
             }
-        }  else {
+        } else {
             cancelText.setText(getString(R.string.cancel_str));
         }
     }

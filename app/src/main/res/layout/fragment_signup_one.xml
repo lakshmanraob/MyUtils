@@ -40,6 +40,7 @@
             android:layout_marginLeft="@dimen/widgets_inner_padding"
             android:layout_marginRight="@dimen/widgets_inner_padding">
 
+
             <EditText
                 android:id="@+id/signup_input_account"
                 android:layout_width="match_parent"
@@ -61,6 +62,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/widgets_inner_padding"
             android:layout_marginRight="@dimen/widgets_inner_padding">
+
 
             <EditText
                 android:id="@+id/signup_input_ssn"
@@ -87,6 +89,7 @@
             android:text="@string/signup_help"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_size_general" />
+
 
     </RelativeLayout>
 

@@ -2,8 +2,10 @@ package my.util.app.fragments;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -46,6 +48,7 @@ import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.models.IssueDetails;
 import my.util.app.models.PhotoDetails;
+import my.util.app.service.FetchLocationAddress;
 import my.util.app.utils.Constants;
 import my.util.app.utils.ImageCaptureListener;
 import my.util.app.utils.Utils;
@@ -74,6 +77,8 @@ public class ComplaintsFragment extends Fragment implements
     private Location mCurrentLocation;
     private Resources resources;
 
+    ComplaintReceiver receiver;
+
     public ComplaintsFragment() {
     }
 
@@ -100,6 +105,12 @@ public class ComplaintsFragment extends Fragment implements
             requestPermissions(new String[]{Manifest.permission.CAMERA},
                     Constants.CAMERA_REQUEST_CODE);
         }
+
+        IntentFilter filter = new IntentFilter(ComplaintReceiver.COMPLAINT_LOCATION_ACTION);
+
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        receiver = new ComplaintReceiver();
+        getActivity().registerReceiver(receiver, filter);
 
     }
 
@@ -158,9 +169,21 @@ public class ComplaintsFragment extends Fragment implements
                             Manifest.permission.ACCESS_COARSE_LOCATION},
                     Constants.LOCATION_PERMISSIONS_CODE);
         } else {
+            if (mGoogleApiClient == null) {
+                buildGoogleApiClient();
+            } else {
+                if (ActivityCompat.checkSelfPermission(
+                        getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                }
+            }
             if (mCurrentLocation != null) {
-                String address = Utils.getCurrentAddress(getActivity(), mCurrentLocation);
-                updateAddressField(address);
+//                String address = Utils.getCurrentAddress(getActivity(), mCurrentLocation);
+//                updateAddressField(address);
+                startServiceForAddress(mCurrentLocation);
             }
         }
     }
@@ -197,8 +220,39 @@ public class ComplaintsFragment extends Fragment implements
             Utils.showShortToast(getActivity(), resources.getString(R.string.error_outage_type));
         }
 //        Utils.showSubmitDialog(getActivity());
-        //This is lakshman addition will remove later
+        //lakshman addition will remove later
 //        UtilDialog.showDialog(getActivity(), R.layout.submit_dialog, R.string.submit_message);
+    }
+
+    private void showCallDialog() {
+        final Dialog dialog = new Dialog(getContext());
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.call_dialog, null);
+        view.findViewById(R.id.call_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.call_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    private void startServiceForAddress(Location location) {
+        Intent msgIntent = new Intent(getContext(), FetchLocationAddress.class);
+        msgIntent.putExtra(FetchLocationAddress.FETCH_LOCATION, location);
+        getActivity().startService(msgIntent);
     }
 
     private void updateCaptureActionImage() {
@@ -346,6 +400,11 @@ public class ComplaintsFragment extends Fragment implements
                 String displayAddress = Utils.getCurrentAddress(getContext(), mCurrentLocation);
                 //Utils.showShortToast(getContext(), displayAddress);
                 updateAddressField(displayAddress);
+//                String displayAddress = Utils.getCurrentAddress(getContext(), mCurrentLocation);
+//                Utils.showShortToast(getContext(), displayAddress);
+//                updateAddressField(displayAddress);
+                //Launching the intentService for getting the address
+                startServiceForAddress(mCurrentLocation);
             }
         } else {
             requestPermissions(new String[]{
@@ -405,7 +464,20 @@ public class ComplaintsFragment extends Fragment implements
     }
 
     @OnClick(R.id.close)
-    protected void closeScreen(View v){
-        ((BaseActivity)getActivity()).removeFragment(Constants.FRAGMENTS.BILL_DETAILS);
+    protected void closeScreen(View v) {
+        ((BaseActivity) getActivity()).removeFragment(Constants.FRAGMENTS.BILL_DETAILS);
+    }
+
+    public class ComplaintReceiver extends BroadcastReceiver {
+
+        public static final String COMPLAINT_LOCATION_ACTION =
+                "my.util.app.fragment.ComplaintFragment.ComplaintReceiver";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String address = intent.getStringExtra(FetchLocationAddress.DETECTED_ADDRESS);
+            Utils.showShortToast(context, address);
+            updateAddressField(address);
+        }
     }
 }

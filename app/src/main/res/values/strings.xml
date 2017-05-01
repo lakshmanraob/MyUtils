@@ -116,7 +116,6 @@
         This password will be used to login to your account.</string>
     <string name="account_confirmation">Your TECO Account number is associated with\nthe following service addresses and services:</string>
 
-
     <string name="personal_details">Personal Details</string>
 
     <string name="first_name_hint">First Name</string>
@@ -134,5 +133,4 @@
     <string name="back_str">Back</string>
 
     <string name="reg_submit_message">You have successfully registered your account!</string>
-
 </resources>

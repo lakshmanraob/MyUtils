@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -38,8 +37,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joanzapata.iconify.widget.IconTextView;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -326,6 +323,7 @@ public class Utils {
     }
 
     public static void logoutUser(final Activity act) {
+<<<<<<<HEAD
         showProgressBarWithListener(act, new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -353,4 +351,26 @@ public class Utils {
     }
 
 
+    /**
+     * One Info the layout must contain the OK (R.id.ok) TextView
+     *
+     * @param ctx
+     * @param layoutResource
+     */
+    public static void showSubmitDialog(Context ctx, int layoutResource) {
+        final Dialog dialog = new Dialog(ctx);
+        View view = LayoutInflater.from(ctx).inflate(layoutResource, null);
+        ((TextView) view.findViewById(R.id.ok)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
 }
