@@ -7,8 +7,9 @@
     <string name="address">Address</string>
     <string name="complaints">Complaints</string>
     <string name="add_photos">Add Photos</string>
-    <string name="submit">Submit</string>
 
+    <string name="submit_message">Thank you! Your complaint has \nbeen received. </string>
+    <string name="ok">Ok</string>
     <array name="outage_type">
         <item>@string/outage_select</item>
         <item>No power supply available</item>
@@ -33,6 +34,6 @@
     <string name="next_str">Next</string>
 
     <!--Placeholder texts-->
-    <string name="submit">submit</string>
+    <string name="submit">Submit</string>
     <string name="no_match">No Match</string>
 </resources>

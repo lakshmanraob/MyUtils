@@ -9,19 +9,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.Spinner;
-
-import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -191,7 +186,6 @@ public class ComplaintsFragment extends Fragment {
         imagesAdapter.notifyDataSetChanged();
     }
 
-
     @OnClick(R.id.location_detector)
     protected void fillCurrentLocation(View v) {
         if (currentLocation != null) {
@@ -207,5 +201,10 @@ public class ComplaintsFragment extends Fragment {
             Utils.showShortToast(getActivity(), "Current location unavailable.");
             Utils.startGPS(getActivity(), mLocationListener);
         }
+    }
+
+    @OnClick(R.id.submit_btn)
+    protected void submitComplaint(View v) {
+        Utils.showSubmitDialog(getActivity());
     }
 }
