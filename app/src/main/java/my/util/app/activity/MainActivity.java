@@ -18,20 +18,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.joanzapata.iconify.IconDrawable;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
-
 import java.util.List;
 
 import my.util.app.R;
 import my.util.app.fragments.ComplaintsFragment;
 import my.util.app.fragments.PlaceholderFragment;
 import my.util.app.utils.Constants;
-import my.util.app.utils.Utils;
 
 public class MainActivity extends BaseActivity {
 
     TabLayout mTabLayout;
+
+    private static final int PAGE_COUNT = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +68,20 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private String getTitle(int position) {
+        switch (position) {
+            case 0:
+                return getString(R.string.recent_bills_title);
+            case 1:
+                return getString(R.string.complaints_title);
+            case 2:
+                return getString(R.string.account_details_title);
+            default:
+                return getString(R.string.recent_bills_title);
+        }
+    }
+
     private class MyPageAdapter extends FragmentPagerAdapter {
-
-        private final int PAGE_COUNT = 3;
-
-        private final String[] page_title = {"Recent Bills", "Complaints", "Account Details"};
 
         public MyPageAdapter(FragmentManager fm) {
             super(fm);
@@ -83,53 +90,35 @@ public class MainActivity extends BaseActivity {
 
         public View getTabView(int position) {
             // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
-            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_tab, null);
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_tab_bottom, null);
             TextView title = (TextView) view.findViewById(R.id.custom_title);
-            title.setText(page_title[position]);
+            title.setText(getTitle(position));
             ImageView icon = (ImageView) view.findViewById(R.id.custom_icon);
-            icon.setImageDrawable(getIconDrawable(position));
+            icon.setVisibility(View.GONE);
             return view;
-        }
-
-        private Drawable getIconDrawable(int position) {
-            switch (position) {
-                case 0:
-                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_list_alt)
-                            .colorRes(R.color.white).actionBarSize();
-                case 1:
-                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_headphones)
-                            .colorRes(R.color.white).actionBarSize();
-                case 2:
-                    return new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_user)
-                            .colorRes(R.color.white).actionBarSize();
-                default:
-                    new IconDrawable(MainActivity.this, FontAwesomeIcons.fa_star_o)
-                            .colorRes(R.color.white).actionBarSize();
-            }
-            return null;
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return PlaceholderFragment.newInstance("Recent Bills", null);
+                    return PlaceholderFragment.newInstance(getTitle(position), null);
                 case 1:
-                    return ComplaintsFragment.newInstance("Complaints", null);
+                    return ComplaintsFragment.newInstance(getTitle(position), null);
                 case 2:
-                    return PlaceholderFragment.newInstance("Account Details", null);
+                    return PlaceholderFragment.newInstance(getTitle(position), null);
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return page_title.length;
+            return PAGE_COUNT;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return page_title[position];
+            return getTitle(position);
         }
     }
 

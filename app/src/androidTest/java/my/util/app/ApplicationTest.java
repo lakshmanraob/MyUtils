@@ -1,4 +1,4 @@
-package sheet.bottom.com.bottomsheetapp;
+package my.util.app;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
