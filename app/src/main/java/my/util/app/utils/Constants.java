@@ -42,4 +42,12 @@ public class Constants {
 
         return complaints;
     }
+
+
+    public static ArrayList<RecentBillsItem> getRecentBills() {
+        ArrayList<RecentBillsItem> addressList = new ArrayList<>();
+        addressList.add(new RecentBillsItem("3275 NW 24th Street Rd, Bangalore", null));
+        addressList.add(new RecentBillsItem("3284 NW 26th Street Rd, Bangalore", null));
+        return addressList;
+    }
 }

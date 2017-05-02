@@ -22,6 +22,7 @@ import my.util.app.R;
 import my.util.app.fragments.ComplaintsFragment;
 import my.util.app.fragments.ComplaintsListFragment;
 import my.util.app.fragments.PlaceholderFragment;
+import my.util.app.fragments.RecentBillsFragment;
 import my.util.app.utils.Constants;
 
 public class MainActivity extends BaseActivity {
@@ -55,8 +56,6 @@ public class MainActivity extends BaseActivity {
 
             mTabLayout.getTabAt(0).getCustomView().setSelected(true);
         }
-        // TODO: temp code -  remove later
-        mViewPager.setCurrentItem(1);
 
     }
 
@@ -97,7 +96,7 @@ public class MainActivity extends BaseActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return PlaceholderFragment.newInstance(getTitle(position), null);
+                    return RecentBillsFragment.newInstance(getTitle(position), null);
                 case 1:
                     return ComplaintsListFragment.newInstance(getTitle(position), null);
                 case 2:
