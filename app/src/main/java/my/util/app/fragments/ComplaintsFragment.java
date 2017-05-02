@@ -102,7 +102,7 @@ public class ComplaintsFragment extends Fragment implements
         prepareListeners();
 
         images = new ArrayList<>();
-        addCaptureActionImage();
+        updateCaptureActionImage();
 
         ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item,
@@ -161,21 +161,19 @@ public class ComplaintsFragment extends Fragment implements
         Utils.showSubmitDialog(getActivity());
     }
 
-    private void addCaptureActionImage() {
+    private void updateCaptureActionImage() {
         Resources res = getActivity().getResources();
         if (images != null) {
-            boolean hasCameraImage = false;
             for (PhotoDetails photo : images) {
                 if (photo != null && photo.getImageName().equalsIgnoreCase(Constants.CAPTURE_IMAGE_NAME)) {
-                    hasCameraImage = true;
+                    images.remove(photo);
                     break;
                 }
             }
-            if (!hasCameraImage) {
-                images.add(0, new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, res.getDrawable(R.drawable.take_photo, null)));
-            }
+                images.add(images.size(), new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, res.getDrawable(R.drawable.take_photo, null)));
         }
         if (imagesAdapter != null) {
+            mGridView.setNumColumns(images.size());
             imagesAdapter.notifyDataSetChanged();
         }
     }
@@ -199,7 +197,7 @@ public class ComplaintsFragment extends Fragment implements
                                 PhotoDetails photoDetails = imageIterator.next();
                                 if (photoDetails != null && photoDetails.getImageName().equalsIgnoreCase(item.getImageName())) {
                                     imageIterator.remove();
-                                    addCaptureActionImage();
+                                    updateCaptureActionImage();
                                     break;
                                 }
                             }
@@ -257,9 +255,11 @@ public class ComplaintsFragment extends Fragment implements
     public void updateImages(Drawable imageCaptured) {
         Utils.showShortToast(getActivity(), "Success");
         images.add(new PhotoDetails("image_seq_" + images.size() + 1, imageCaptured));
+        updateCaptureActionImage();
         if (images.size() > Constants.IMAGE_COUNT) {
-            images.remove(0);
+            images.remove(images.size() - 1);
         }
+        mGridView.setNumColumns(images.size());
         imagesAdapter.notifyDataSetChanged();
     }
 
