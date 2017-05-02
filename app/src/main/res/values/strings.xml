@@ -36,4 +36,9 @@
     <!--Placeholder texts-->
     <string name="submit">Submit</string>
     <string name="no_match">No Match</string>
+
+    <!--  -->
+    <string name="recent_bills_title">Recent Bills</string>
+    <string name="complaints_title">@string/complaints</string>
+    <string name="account_details_title">Account Details</string>
 </resources>

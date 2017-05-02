@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#273033</color>
-    <color name="colorPrimary">#273033</color>
+    <color name="colorPrimaryDark">#484e63</color>
+    <color name="colorPrimary">#484e63</color>
     <color name="colorAccent">#fa3252</color>
 
     <color name="white">#FFFFFFFF</color>
@@ -15,9 +15,9 @@
     <color name="pink">#FB3353</color>
     <color name="pink_overlay">#70FB3353</color>
 
-    <color name="app_bg_start">#273033</color>
-    <color name="app_bg_mid">#445056</color>
-    <color name="app_bg_end">#47545A</color>
+    <color name="app_bg_start">#484e63</color>
+    <color name="app_bg_mid">#484e63</color>
+    <color name="app_bg_end">#484e63</color>
     <color name="app_highlight">#FFCC00</color>
 
 

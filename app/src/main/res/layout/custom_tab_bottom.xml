@@ -23,7 +23,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textAllCaps="false"
-        android:textColor="@drawable/tab_color"
+        android:textColor="@drawable/tab_color_bottom"
         android:textSize="14sp"
         tools:text="Recents" />
 

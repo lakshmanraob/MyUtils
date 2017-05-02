@@ -14,7 +14,7 @@
     
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
-        style="@style/AppTabLayout"
+        style="@style/AppTabLayout.main"
         android:layout_width="match_parent"
         android:background="?attr/colorPrimary"
         android:layout_height="60dp"/>
