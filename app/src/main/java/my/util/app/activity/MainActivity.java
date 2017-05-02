@@ -1,9 +1,7 @@
 package my.util.app.activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -59,13 +57,6 @@ public class MainActivity extends BaseActivity {
         // TODO: temp code -  remove later
         mViewPager.setCurrentItem(1);
 
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA,
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION},
-                    Constants.PERMISSIONS_CODE);
-
-        }
     }
 
     private String getTitle(int position) {
@@ -81,6 +72,9 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Adapter to handle the Fragment display
+     */
     private class MyPageAdapter extends FragmentPagerAdapter {
 
         public MyPageAdapter(FragmentManager fm) {

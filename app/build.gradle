@@ -36,6 +36,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
     compile 'com.joanzapata.iconify:android-iconify-material:2.2.2'
+    compile 'com.google.android.gms:play-services-location:9.6.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

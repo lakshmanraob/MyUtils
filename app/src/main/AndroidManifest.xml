@@ -34,6 +34,14 @@
             android:theme="@style/AppTheme.ActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden" />
 
+        <!--
+           API Key from the Google Play service, this is debug key will have limited
+           access to the Google services; ex: 1000 hits a day
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>
