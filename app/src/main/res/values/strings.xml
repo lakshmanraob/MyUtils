@@ -12,8 +12,10 @@
     <string name="ok">Ok</string>
     <array name="outage_type">
         <item>@string/outage_select</item>
-        <item>No power supply available</item>
-        <item>Damage to an electric pole</item>
+        <item>Streetlight Outage</item>
+        <item>Safety Concern</item>
+        <item>Power Outage</item>
+        <item>Others</item>
     </array>
 
     <string name="hint_password">Password</string>
@@ -38,7 +40,7 @@
     <string name="no_match">No Match</string>
 
     <!--  -->
-    <string name="recent_bills_title">Recent Bills</string>
-    <string name="complaints_title">@string/complaints</string>
-    <string name="account_details_title">Account Details</string>
+    <string name="recent_bills_title">RECENT BILLS</string>
+    <string name="complaints_title">REPORT AN ISSUE</string>
+    <string name="account_details_title">ACCOUNT DETAILS</string>
 </resources>
