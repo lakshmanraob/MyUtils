@@ -7,6 +7,7 @@
     <string name="address">Address</string>
     <string name="complaints">Complaints</string>
     <string name="add_photos">Add Photos</string>
+    <string name="report_issue">Report an Issue</string>
 
     <string name="submit_message">Thank you! Your complaint has \nbeen received. </string>
     <string name="ok">Ok</string>
@@ -16,6 +17,7 @@
         <item>Safety Concern</item>
         <item>Power Outage</item>
         <item>Others</item>
+
     </array>
 
     <string name="hint_password">Password</string>
@@ -43,4 +45,5 @@
     <string name="recent_bills_title">RECENT BILLS</string>
     <string name="complaints_title">REPORT AN ISSUE</string>
     <string name="account_details_title">ACCOUNT DETAILS</string>
+
 </resources>
