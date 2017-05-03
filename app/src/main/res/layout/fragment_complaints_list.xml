@@ -1,0 +1,137 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="my.util.app.fragments.ComplaintsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/widgets_inner_padding">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/telemarketer" />
+
+            <TextView
+                android:id="@+id/complaints_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/complaints_title"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_general" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/report_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/screen_outer_padding"
+            android:background="@drawable/rounded_bg"
+            android:paddingLeft="@dimen/fifty_spacing"
+            android:paddingRight="@dimen/fifty_spacing"
+            android:text="@string/report_issue_heading"
+            android:textColor="@color/pink"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/screen_outer_padding"
+            android:layout_marginRight="@dimen/screen_outer_padding"
+            android:layout_marginTop="@dimen/widgets_inner_padding"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:paddingLeft="@dimen/widgets_inner_padding"
+                android:text="@string/issue_history"
+                android:textColor="@color/grey"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:id="@+id/search_open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="{md-search}"
+                    android:textColor="@color/pink"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/search_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/screen_outer_padding"
+            android:layout_marginRight="@dimen/screen_outer_padding"
+            android:layout_marginTop="@dimen/widgets_inner_padding"
+            android:gravity="center_vertical"
+            android:visibility="visible"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search_input"
+                android:lines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/widgets_inner_padding"
+                android:text="@string/enter_ref_no"
+                android:textColor="@color/grey" />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/search_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:text="{md-clear}"
+                android:textColor="@color/pink"
+                android:gravity="right"
+                android:padding="@dimen/five_val"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:gravity="right"
+                android:padding="@dimen/five_val"
+                android:src="@android:drawable/ic_delete"/>
+        </FrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/complaints_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/screen_outer_padding" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -20,6 +20,7 @@ import java.util.List;
 
 import my.util.app.R;
 import my.util.app.fragments.ComplaintsFragment;
+import my.util.app.fragments.ComplaintsListFragment;
 import my.util.app.fragments.PlaceholderFragment;
 import my.util.app.utils.Constants;
 
@@ -86,7 +87,7 @@ public class MainActivity extends BaseActivity {
             // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
             View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_tab_bottom, null);
             TextView title = (TextView) view.findViewById(R.id.custom_title);
-            title.setText(getTitle(position));
+            title.setText(getTitle(position).toUpperCase());
             ImageView icon = (ImageView) view.findViewById(R.id.custom_icon);
             icon.setVisibility(View.GONE);
             return view;
@@ -98,7 +99,7 @@ public class MainActivity extends BaseActivity {
                 case 0:
                     return PlaceholderFragment.newInstance(getTitle(position), null);
                 case 1:
-                    return ComplaintsFragment.newInstance(getTitle(position), null);
+                    return ComplaintsListFragment.newInstance(getTitle(position), null);
                 case 2:
                     return PlaceholderFragment.newInstance(getTitle(position), null);
             }

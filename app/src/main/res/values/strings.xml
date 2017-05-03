@@ -4,20 +4,30 @@
 
     <string name="emergency_msg">To report any life threatening conditions, please call 911</string>
     <string name="outage_select">Choose outage type</string>
+    <string name="streetlight_outage">Streetlight Outage</string>
+    <string name="safety_concern">Safety Concern</string>
+    <string name="power_outage">Power Outage</string>
+    <string name="others">Others</string>
     <string name="address">Address</string>
     <string name="complaints">Complaints</string>
     <string name="add_photos">Add Photos</string>
     <string name="report_issue">Report an Issue</string>
+    <string name="report_issue_heading">Report a new issue</string>
+    <string name="issue_history">Issue History</string>
+    <string name="enter_ref_no">Enter reference number</string>
+    <string name="status">Status</string>
+    <string name="status_reported">Report \nSubmitted</string>
+    <string name="status_review">Under \n Review</string>
+    <string name="status_resolved">Resolved</string>
 
     <string name="submit_message">Thank you! Your Notification has \nbeen received. </string>
     <string name="ok">Ok</string>
     <array name="outage_type">
         <item>@string/outage_select</item>
-        <item>Streetlight Outage</item>
-        <item>Safety Concern</item>
-        <item>Power Outage</item>
-        <item>Others</item>
-
+        <item>@string/streetlight_outage</item>
+        <item>@string/safety_concern</item>
+        <item>@string/power_outage</item>
+        <item>@string/others</item>
     </array>
 
     <string name="hint_password">Password</string>
@@ -45,8 +55,7 @@
     <string name="no_match">No Match</string>
 
     <!--  -->
-    <string name="recent_bills_title">RECENT BILLS</string>
-    <string name="report_issue_title">REPORT AN ISSUE</string>
-    <string name="account_details_title">ACCOUNT DETAILS</string>
-
+    <string name="recent_bills_title">Recent Bills</string>
+    <string name="complaints_title">Report an Issue</string>
+    <string name="account_details_title">Account Details</string>
 </resources>

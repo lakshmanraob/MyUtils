@@ -14,6 +14,8 @@
     <color name="yellow">#FFD800</color>
     <color name="pink">#FB3353</color>
     <color name="pink_overlay">#70FB3353</color>
+    <color name="pink_overlay_light">#50FB3353</color>
+    <color name="grey">#484e63</color>
 
     <color name="app_bg_start">#484e63</color>
     <color name="app_bg_mid">#484e63</color>
