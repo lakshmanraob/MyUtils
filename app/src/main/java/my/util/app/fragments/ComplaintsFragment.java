@@ -1,10 +1,13 @@
 package my.util.app.fragments;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -18,6 +21,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -134,8 +138,8 @@ public class ComplaintsFragment extends Fragment implements
 
     @OnClick(R.id.call_button)
     protected void callEmergencyNumber(View v) {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
-        startActivity(intent);
+
+        showCallDialog();
     }
 
     @OnClick(R.id.location_detector)
@@ -161,6 +165,31 @@ public class ComplaintsFragment extends Fragment implements
         Utils.showSubmitDialog(getActivity());
     }
 
+    private void showCallDialog() {
+
+        final Dialog dialog = new Dialog(getContext());
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.call_dialog, null);
+        view.findViewById(R.id.call_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.call_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
     private void updateCaptureActionImage() {
         Resources res = getActivity().getResources();
         if (images != null) {
@@ -170,7 +199,7 @@ public class ComplaintsFragment extends Fragment implements
                     break;
                 }
             }
-                images.add(images.size(), new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, res.getDrawable(R.drawable.take_photo, null)));
+            images.add(images.size(), new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, res.getDrawable(R.drawable.take_photo, null)));
         }
         if (imagesAdapter != null) {
             mGridView.setNumColumns(images.size());

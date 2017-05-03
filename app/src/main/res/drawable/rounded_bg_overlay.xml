@@ -9,8 +9,8 @@
         android:top="5dp" />
 
     <corners
-        android:bottomLeftRadius="25dp"
-        android:bottomRightRadius="25dp"
-        android:topLeftRadius="25dp"
-        android:topRightRadius="25dp" />
+        android:bottomLeftRadius="@dimen/overlay_rounded_corners"
+        android:bottomRightRadius="@dimen/overlay_rounded_corners"
+        android:topLeftRadius="@dimen/overlay_rounded_corners"
+        android:topRightRadius="@dimen/overlay_rounded_corners" />
 </shape>

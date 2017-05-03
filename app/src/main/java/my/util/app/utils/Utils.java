@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,7 +17,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -32,8 +30,6 @@ import java.util.List;
 import java.util.Locale;
 
 import my.util.app.R;
-import my.util.app.activity.AuthActivity;
-import okhttp3.internal.Util;
 
 public class Utils {
     private static ProgressDialog mProgressDialog;

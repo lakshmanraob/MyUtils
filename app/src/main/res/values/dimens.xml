@@ -16,5 +16,7 @@
     <dimen name="fifty_spacing">50dp</dimen>
     <dimen name="hundred_spacing">100dp</dimen>
 
+    <dimen name="overlay_rounded_corners">20dp</dimen>
+
 
 </resources>

@@ -36,6 +36,9 @@
 
     <string name="cancel_str">Cancel</string>
     <string name="next_str">Next</string>
+    <string name="ok_str">Ok</string>
+
+    <string name="call_911">Call 911?</string>
 
     <!--Placeholder texts-->
     <string name="submit">Submit</string>
