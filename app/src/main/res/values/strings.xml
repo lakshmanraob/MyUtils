@@ -43,7 +43,7 @@
 
     <!--  -->
     <string name="recent_bills_title">RECENT BILLS</string>
-    <string name="complaints_title">REPORT AN ISSUE</string>
+    <string name="report_issue_title">REPORT AN ISSUE</string>
     <string name="account_details_title">ACCOUNT DETAILS</string>
 
 </resources>
