@@ -52,7 +52,7 @@ public class RecentBillsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_recent_bills, container, false);
         ButterKnife.bind(this, content);
-        addressExpandableList.setAdapter(new AddressExpandableListAdapter(getActivity(), Constants.getRecentBills()));
+        addressExpandableList.setAdapter(new AddressExpandableListAdapter(getActivity(), Constants.getBillTitles(), Constants.getRecentBills()));
         addressExpandableList.setGroupIndicator(null);
         return content;
     }

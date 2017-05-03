@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="@dimen/screen_outer_padding">
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/screen_outer_padding"
+    android:background="@drawable/bill_bg">
 
-    <TextView
-        android:id="@+id/text_address_child"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:text="@string/submit_message"
-        android:textColor="@color/grey_text"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

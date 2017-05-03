@@ -1,7 +1,6 @@
 package my.util.app.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,43 +9,45 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import my.util.app.R;
 import my.util.app.utils.BillDetails;
-import my.util.app.utils.Constants;
-import my.util.app.utils.RecentBillsItem;
+import my.util.app.utils.Utils;
 
 public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
 
     Context ctx;
-    ArrayList<RecentBillsItem> allBills;
+    List<String> titles;
+    HashMap<String, List<BillDetails>> allBills;
 
-    public AddressExpandableListAdapter(Context ctx, ArrayList<RecentBillsItem> allBills) {
+    public AddressExpandableListAdapter(Context ctx, List<String> titles, HashMap<String, List<BillDetails>> allBills) {
         this.ctx = ctx;
+        this.titles = titles;
         this.allBills = allBills;
     }
 
     @Override
     public int getGroupCount() {
-        return allBills.size();
+        return titles.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 1;
+        return allBills.get(titles.get(groupPosition)).size();
     }
 
     @Override
-    public RecentBillsItem getGroup(int groupPosition) {
-        return allBills.get(groupPosition);
+    public String getGroup(int groupPosition) {
+        return titles.get(groupPosition);
     }
 
     @Override
-    public String getChild(int groupPosition, int childPosition) {
-        return allBills.get(groupPosition).getAddress();
+    public List<BillDetails> getChild(int groupPosition, int childPosition) {
+        return allBills.get(titles.get(groupPosition));
     }
 
     @Override
@@ -75,9 +76,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
             holder = new GroupViewHolder(convertView);
             convertView.setTag(holder);
         }
-        RecentBillsItem currentItem = getGroup(groupPosition);
-        holder.item = currentItem;
-        holder.addressLabel.setText(currentItem.getAddress());
+        holder.addressLabel.setText(getGroup(groupPosition));
         holder.expandedIndicator.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.collapsedIndicator.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
 
@@ -95,6 +94,10 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
             holder = new ChildViewHolder(convertView);
             convertView.setTag(holder);
         }
+        List<BillDetails> currentItem = getChild(groupPosition, childPosition);
+        holder.bills = currentItem;
+
+        Utils.showShortToast(ctx, "> "+ currentItem.size());
         return convertView;
     }
 
@@ -110,7 +113,6 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
         IconTextView expandedIndicator;
         @BindView(R.id.collapsed_indicator)
         IconTextView collapsedIndicator;
-        RecentBillsItem item;
 
         public GroupViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -118,8 +120,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
     }
 
     static class ChildViewHolder{
-        @BindView(R.id.text_address_child)
-        TextView address;
+        List<BillDetails> bills;
 
         public ChildViewHolder(View view) {
             ButterKnife.bind(this, view);
