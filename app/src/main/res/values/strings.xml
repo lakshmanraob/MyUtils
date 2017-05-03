@@ -9,7 +9,7 @@
     <string name="add_photos">Add Photos</string>
     <string name="report_issue">Report an Issue</string>
 
-    <string name="submit_message">Thank you! Your complaint has \nbeen received. </string>
+    <string name="submit_message">Thank you! Your Notification has \nbeen received. </string>
     <string name="ok">Ok</string>
     <array name="outage_type">
         <item>@string/outage_select</item>
