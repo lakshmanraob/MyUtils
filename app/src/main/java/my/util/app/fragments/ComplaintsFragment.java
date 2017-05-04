@@ -41,7 +41,7 @@ import my.util.app.R;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.utils.Constants;
 import my.util.app.utils.ImageCaptureListener;
-import my.util.app.utils.PhotoDetails;
+import my.util.app.models.PhotoDetails;
 import my.util.app.utils.Utils;
 
 public class ComplaintsFragment extends Fragment implements

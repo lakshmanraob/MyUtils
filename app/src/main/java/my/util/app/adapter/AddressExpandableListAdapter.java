@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import my.util.app.R;
-import my.util.app.utils.BillDetails;
+import my.util.app.models.BillDetails;
 import my.util.app.utils.Utils;
 
 public class AddressExpandableListAdapter extends BaseExpandableListAdapter{

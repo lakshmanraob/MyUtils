@@ -1,7 +1,6 @@
 package my.util.app.adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -26,7 +25,7 @@ import butterknife.OnLongClick;
 import my.util.app.R;
 import my.util.app.utils.Constants;
 import my.util.app.utils.ImageCaptureListener;
-import my.util.app.utils.PhotoDetails;
+import my.util.app.models.PhotoDetails;
 
 
 public class ImagesAdapter extends BaseAdapter{

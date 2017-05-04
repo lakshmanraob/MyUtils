@@ -1,6 +1,4 @@
-package my.util.app.utils;
-
-import android.graphics.drawable.Drawable;
+package my.util.app.models;
 
 public class BillDetails {
 

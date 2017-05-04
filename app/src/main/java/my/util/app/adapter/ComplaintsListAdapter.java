@@ -13,11 +13,9 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import my.util.app.R;
 import my.util.app.utils.Constants;
-import my.util.app.utils.IssueDetails;
-import my.util.app.utils.Utils;
+import my.util.app.models.IssueDetails;
 
 public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAdapter.ViewHolder> {
 

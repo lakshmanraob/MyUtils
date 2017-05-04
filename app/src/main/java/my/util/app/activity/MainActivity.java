@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
             case 0:
                 return getString(R.string.recent_bills_title);
             case 1:
-                return getString(R.string.report_issue_title);
+                return getString(R.string.report_issue);
             case 2:
                 return getString(R.string.account_details_title);
             default:

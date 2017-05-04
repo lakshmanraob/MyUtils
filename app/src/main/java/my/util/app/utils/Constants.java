@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import my.util.app.R;
+import my.util.app.models.BillDetails;
+import my.util.app.models.IssueDetails;
 
 public class Constants {
 

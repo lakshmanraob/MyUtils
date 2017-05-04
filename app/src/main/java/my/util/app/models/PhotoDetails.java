@@ -1,4 +1,4 @@
-package my.util.app.utils;
+package my.util.app.models;
 
 import android.graphics.drawable.Drawable;
 
