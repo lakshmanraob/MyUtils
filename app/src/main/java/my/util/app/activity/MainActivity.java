@@ -6,18 +6,29 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.view.menu.MenuView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import my.util.app.R;
 import my.util.app.fragments.ComplaintsFragment;
 import my.util.app.fragments.ComplaintsListFragment;
@@ -27,39 +38,41 @@ import my.util.app.utils.Constants;
 
 public class MainActivity extends BaseActivity {
 
-    TabLayout mTabLayout;
-
-    private static final int PAGE_COUNT = 3;
+    @BindView(R.id.fragment_container)
+    FrameLayout mFragmentContainer;
+    @BindView(R.id.bottom_tab)
+    BottomNavigationView mBottomNavigationBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        mBottomNavigationBar.getMenu().getItem(1).setChecked(true);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, getFragmentContent(1), getFragmentTitle(1)).commit();
 
-        MyPageAdapter pageAdapter = new MyPageAdapter(getSupportFragmentManager());
-
-        if (mViewPager != null) {
-            mViewPager.setAdapter(pageAdapter);
-        }
-
-        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        if (mTabLayout != null) {
-            mTabLayout.setupWithViewPager(mViewPager);
-
-            for (int i = 0; i < mTabLayout.getTabCount(); i++) {
-                TabLayout.Tab tab = mTabLayout.getTabAt(i);
-                if (tab != null)
-                    tab.setCustomView(pageAdapter.getTabView(i));
-            }
-
-            mTabLayout.getTabAt(0).getCustomView().setSelected(true);
-        }
-
+        mBottomNavigationBar.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.recent_bills:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, getFragmentContent(0), getFragmentTitle(0)).commit();
+                                break;
+                            case R.id.complaints:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, getFragmentContent(1), getFragmentTitle(1)).commit();
+                                break;
+                            case R.id.account_details:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, getFragmentContent(2), getFragmentTitle(2)).commit();
+                                break;
+                        }
+                        return true;
+                    }
+                });
     }
 
-    private String getTitle(int position) {
+    private String getFragmentTitle(int position) {
         switch (position) {
             case 0:
                 return getString(R.string.recent_bills_title);
@@ -72,48 +85,16 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    /**
-     * Adapter to handle the Fragment display
-     */
-    private class MyPageAdapter extends FragmentPagerAdapter {
-
-        public MyPageAdapter(FragmentManager fm) {
-            super(fm);
+    private Fragment getFragmentContent(int position) {
+        switch (position) {
+            case 0:
+                return RecentBillsFragment.newInstance(getFragmentTitle(position), null);
+            case 1:
+                return ComplaintsListFragment.newInstance(getFragmentTitle(position), null);
+            case 2:
+                return PlaceholderFragment.newInstance(getFragmentTitle(position), null);
         }
-
-
-        public View getTabView(int position) {
-            // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
-            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_tab_bottom, null);
-            TextView title = (TextView) view.findViewById(R.id.custom_title);
-            title.setText(getTitle(position).toUpperCase());
-            ImageView icon = (ImageView) view.findViewById(R.id.custom_icon);
-            icon.setVisibility(View.GONE);
-            return view;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return RecentBillsFragment.newInstance(getTitle(position), null);
-                case 1:
-                    return ComplaintsListFragment.newInstance(getTitle(position), null);
-                case 2:
-                    return PlaceholderFragment.newInstance(getTitle(position), null);
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return PAGE_COUNT;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return getTitle(position);
-        }
+        return null;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
