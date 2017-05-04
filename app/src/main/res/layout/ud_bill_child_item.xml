@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/service_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TECO Gas Service"
+        android:textColor="@color/details_heading_content_color"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/bill_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <my.util.app.DetailsView
+            android:id="@+id/avg_day_consumption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            app:content="1.56Gj"
+            app:heading="Average Day-to-Day consumption">
+
+        </my.util.app.DetailsView>
+
+        <my.util.app.DetailsView
+            android:id="@+id/avg_month_consumption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            app:content="$98"
+            app:heading="Average Monthly consumption">
+
+        </my.util.app.DetailsView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

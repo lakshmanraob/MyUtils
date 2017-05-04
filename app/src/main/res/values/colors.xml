@@ -23,5 +23,7 @@
     <color name="app_bg_end">#484e63</color>
     <color name="app_highlight">#FFCC00</color>
 
+    <color name="details_heading_color">#9b9b9b</color>
+    <color name="details_heading_content_color">#484e63</color>
 
 </resources>

@@ -19,6 +19,7 @@
     <string name="status_reported">Report \nSubmitted</string>
     <string name="status_review">Under \n Review</string>
     <string name="status_resolved">Resolved</string>
+    <string name="account_details">Account Details</string>
 
     <string name="submit_message">Thank you! Your Notification has \nbeen received. </string>
     <string name="ok">Ok</string>
@@ -58,4 +59,9 @@
     <string name="recent_bills_title">Recent Bills</string>
     <string name="complaints_title">Report an Issue</string>
     <string name="account_details_title">Account Details</string>
+
+    <!-- Dummy values-->
+    <string name="dm_accountnumber">68979790</string>
+    <string name="account_number">AccountNumber</string>
+
 </resources>

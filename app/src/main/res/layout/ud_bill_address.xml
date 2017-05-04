@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="@dimen/screen_outer_padding">
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/details_heading"
+            style="@style/DetailsHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="FirstName" />
+
+        <TextView
+            android:id="@+id/deatils_content"
+            style="@style/DetailsHeading.Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Name" />
+    </LinearLayout>
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/expanded_indicator"
@@ -29,18 +50,5 @@
         android:text="{md-add-circle-outline}"
         android:textColor="@color/pink"
         android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/text_address_parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/expanded_indicator"
-        android:gravity="center_vertical"
-        android:text="@string/account_details_title"
-        android:textColor="@color/grey"
-        android:textStyle="bold" />
-
 
 </RelativeLayout>
