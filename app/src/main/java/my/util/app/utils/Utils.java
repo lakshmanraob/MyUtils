@@ -18,6 +18,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -27,11 +28,15 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
+import my.util.app.models.IssueDetails;
 
 public class Utils {
     private static ProgressDialog mProgressDialog;
@@ -140,7 +145,7 @@ public class Utils {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                ((BaseActivity)ctx).updateFragment(Constants.FRAGMENTS.COMPLAINTS);
+                ((BaseActivity) ctx).updateFragment(Constants.FRAGMENTS.COMPLAINTS);
             }
         });
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -151,4 +156,59 @@ public class Utils {
         dialog.show();
     }
 
+    public static int getComplaintTiming(Calendar dateToCompare) {
+        int complaintTiming = 0;
+        Calendar currentCalForWeek = Calendar.getInstance();
+        if ((currentCalForWeek.get(Calendar.WEEK_OF_YEAR) == dateToCompare.get(Calendar.WEEK_OF_YEAR)) &&
+                (currentCalForWeek.get(Calendar.YEAR) == dateToCompare.get(Calendar.YEAR))) {
+            complaintTiming = Constants.COMPLAINTS_TIMINGS.THIS_WEEK;
+            return complaintTiming;
+        } else {
+            Calendar currentCalForMonth = Calendar.getInstance();
+            if ((currentCalForMonth.get(Calendar.MONTH) == dateToCompare.get(Calendar.MONTH)) &&
+                    (currentCalForWeek.get(Calendar.YEAR) == dateToCompare.get(Calendar.YEAR))) {
+                complaintTiming = Constants.COMPLAINTS_TIMINGS.THIS_MONTH;
+                return complaintTiming;
+            } else {
+                complaintTiming = Constants.COMPLAINTS_TIMINGS.PREVIOUS;
+                return complaintTiming;
+            }
+        }
+    }
+
+    public static int getRandom() {
+        return Constants.REF_NO_LEN < 1 ? 0 :
+                new Random().nextInt((9 * (int) Math.pow(10, Constants.REF_NO_LEN - 1)) - 1) +
+                        (int) Math.pow(10, Constants.REF_NO_LEN - 1);
+    }
+
+    public static ArrayList<IssueDetails> sortComplaintsList(ArrayList<IssueDetails> rawList) {
+        ArrayList<IssueDetails> sortedList = new ArrayList<>();
+        for (IssueDetails issue:rawList){
+            if (Constants.COMPLAINTS_TIMINGS.THIS_WEEK == issue.getComplaintTiming()) {
+                sortedList.add(issue);
+            }
+        }
+        for (IssueDetails issue:rawList){
+            if (Constants.COMPLAINTS_TIMINGS.THIS_MONTH == issue.getComplaintTiming()) {
+                sortedList.add(issue);
+            }
+        }
+        for (IssueDetails issue:rawList){
+            if (Constants.COMPLAINTS_TIMINGS.PREVIOUS == issue.getComplaintTiming()) {
+                sortedList.add(issue);
+            }
+        }
+        return sortedList;
+    }
+
+    public static ArrayList<IssueDetails> filterComplaintsList(ArrayList<IssueDetails> rawList, String filter) {
+        ArrayList<IssueDetails> filteredList = new ArrayList<>();
+        for (IssueDetails issue:rawList){
+            if (issue.getReferenceNo().contains(filter)) {
+                filteredList.add(issue);
+            }
+        }
+        return sortComplaintsList(filteredList);
+    }
 }

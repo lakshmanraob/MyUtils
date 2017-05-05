@@ -5,6 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +17,17 @@ import android.widget.FrameLayout;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ComplaintsListAdapter;
+import my.util.app.models.IssueDetails;
 import my.util.app.utils.Constants;
+import my.util.app.utils.Utils;
 
 public class ComplaintsListFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +37,7 @@ public class ComplaintsListFragment extends Fragment {
     private String mParam2;
 
     private ComplaintsListAdapter mComplaintsListAdapter;
+    private ArrayList<IssueDetails> complaintsList;
 
     @BindView(R.id.complaints_list)
     protected RecyclerView mComplaintsListView;
@@ -40,10 +49,15 @@ public class ComplaintsListFragment extends Fragment {
     protected FrameLayout mSearchInputLayout;
     @BindView(R.id.search_input)
     protected EditText mSearchInput;
-    
+
     @OnClick(R.id.report_btn)
     protected void reportNewIssue(View v) {
         ((BaseActivity)getActivity()).updateFragment(Constants.FRAGMENTS.NEW_COMPLAINT);
+    }
+
+    @OnClick(R.id.open_map_view)
+    protected void openMapView(View v) {
+        Utils.showShortToast(getActivity(), "In Progress...");
     }
 
     @OnClick(R.id.search_close)
@@ -85,8 +99,27 @@ public class ComplaintsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_complaints_list, container, false);
         ButterKnife.bind(this, content);
+        complaintsList = Constants.getComplaintsList(getActivity());
 
-        mComplaintsListAdapter = new ComplaintsListAdapter(getActivity(), Constants.getComplaintsList(getActivity()));
+        mSearchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.size() > 0){
+                    complaintsList = Utils.filterComplaintsList(complaintsList, s.toString());
+                    mComplaintsListAdapter.updateList(complaintsList);
+                } else {
+                    mComplaintsListAdapter.updateList(Constants.getComplaintsList(getActivity()));
+                }
+            }
+        });
+
+        mComplaintsListAdapter = new ComplaintsListAdapter(complaintsList);
         LinearLayoutManager mngr = new LinearLayoutManager(getActivity());
         mComplaintsListView.setAdapter(mComplaintsListAdapter);
         mComplaintsListView.setLayoutManager(mngr);

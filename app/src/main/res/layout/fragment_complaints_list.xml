@@ -1,8 +1,9 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="my.util.app.fragments.ComplaintsFragment">
 
     <LinearLayout
@@ -11,28 +12,47 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/yellow"
-            android:gravity="center"
-            android:orientation="vertical"
             android:padding="@dimen/widgets_inner_padding">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:src="@drawable/telemarketer" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/complaints_label"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:src="@drawable/telemarketer" />
+
+                <TextView
+                    android:id="@+id/complaints_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complaints_title"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_size_general" />
+            </LinearLayout>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/open_map_view"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/complaints_title"
+                android:gravity="right"
+                android:padding="@dimen/widgets_inner_padding"
+                android:text="{md-location-searching}"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/font_size_general" />
-        </LinearLayout>
+                android:textSize="20sp" />
+
+        </RelativeLayout>
 
         <Button
             android:id="@+id/report_btn"
@@ -91,16 +111,17 @@
             android:layout_marginRight="@dimen/screen_outer_padding"
             android:layout_marginTop="@dimen/widgets_inner_padding"
             android:gravity="center_vertical"
-            android:visibility="gone"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/search_input"
-                android:lines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:lines="1"
+                android:inputType="number"
                 android:paddingLeft="@dimen/widgets_inner_padding"
-                android:text="@string/enter_ref_no"
+                android:hint="@string/enter_ref_no"
                 android:textColor="@color/grey" />
 
             <com.joanzapata.iconify.widget.IconTextView
@@ -108,22 +129,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
-                android:text="{md-clear}"
-                android:textColor="@color/pink"
                 android:gravity="right"
                 android:padding="@dimen/five_val"
+                android:text="{md-clear}"
+                android:textColor="@color/pink"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:visibility="gone"
                 android:id="@+id/q"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
                 android:gravity="right"
                 android:padding="@dimen/five_val"
-                android:src="@android:drawable/ic_delete"/>
+                android:src="@android:drawable/ic_delete"
+                android:visibility="gone" />
         </FrameLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -134,4 +155,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

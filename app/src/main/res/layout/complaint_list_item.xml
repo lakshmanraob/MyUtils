@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="@dimen/five_val">
+
+    <TextView
+        android:id="@+id/week_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/widgets_inner_padding"
+        android:paddingLeft="@dimen/widgets_inner_padding"
+        android:paddingRight="@dimen/five_val"
+        android:paddingTop="@dimen/widgets_inner_padding"
+        android:text="@string/this_week"
+        android:textColor="@color/grey"
+        android:textStyle="italic"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/month_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/widgets_inner_padding"
+        android:paddingLeft="@dimen/widgets_inner_padding"
+        android:paddingRight="@dimen/five_val"
+        android:paddingTop="@dimen/widgets_inner_padding"
+        android:text="@string/this_month"
+        android:textColor="@color/grey"
+        android:textStyle="italic"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/previous_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/widgets_inner_padding"
+        android:paddingLeft="@dimen/widgets_inner_padding"
+        android:paddingRight="@dimen/five_val"
+        android:paddingTop="@dimen/widgets_inner_padding"
+        android:text="@string/previous"
+        android:textColor="@color/grey"
+        android:textStyle="italic"
+        android:visibility="gone" />
+
+    <include layout="@layout/complaint_list_item_card" />
+
+</LinearLayout>
