@@ -19,7 +19,6 @@ import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -35,7 +34,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
@@ -190,17 +188,17 @@ public class Utils {
 
     public static ArrayList<IssueDetails> sortComplaintsList(ArrayList<IssueDetails> rawList) {
         ArrayList<IssueDetails> sortedList = new ArrayList<>();
-        for (IssueDetails issue:rawList){
+        for (IssueDetails issue : rawList) {
             if (Constants.COMPLAINTS_TIMINGS.THIS_WEEK == issue.getComplaintTiming()) {
                 sortedList.add(issue);
             }
         }
-        for (IssueDetails issue:rawList){
+        for (IssueDetails issue : rawList) {
             if (Constants.COMPLAINTS_TIMINGS.THIS_MONTH == issue.getComplaintTiming()) {
                 sortedList.add(issue);
             }
         }
-        for (IssueDetails issue:rawList){
+        for (IssueDetails issue : rawList) {
             if (Constants.COMPLAINTS_TIMINGS.PREVIOUS == issue.getComplaintTiming()) {
                 sortedList.add(issue);
             }
@@ -210,11 +208,35 @@ public class Utils {
 
     public static ArrayList<IssueDetails> filterComplaintsList(ArrayList<IssueDetails> rawList, String filter) {
         ArrayList<IssueDetails> filteredList = new ArrayList<>();
-        for (IssueDetails issue:rawList){
+        for (IssueDetails issue : rawList) {
             if (issue.getReferenceNo().contains(filter)) {
                 filteredList.add(issue);
             }
         }
         return sortComplaintsList(filteredList);
     }
+
+    /**
+     * One Info the layout must contain the OK (R.id.ok) TextView
+     *
+     * @param ctx
+     * @param layoutResource
+     */
+    public static void showSubmitDialog(Context ctx, int layoutResource) {
+        final Dialog dialog = new Dialog(ctx);
+        View view = LayoutInflater.from(ctx).inflate(layoutResource, null);
+        ((TextView) view.findViewById(R.id.ok)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
 }

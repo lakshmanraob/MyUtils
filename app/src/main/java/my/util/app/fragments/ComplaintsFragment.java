@@ -197,6 +197,9 @@ public class ComplaintsFragment extends Fragment implements
         } else {
             Utils.showShortToast(getActivity(), resources.getString(R.string.error_outage_type));
         }
+//        Utils.showSubmitDialog(getActivity());
+        //This is lakshman addition will remove later
+//        Utils.showSubmitDialog(getActivity(),R.layout.submit_dialog);
     }
 
     private void showCallDialog() {
