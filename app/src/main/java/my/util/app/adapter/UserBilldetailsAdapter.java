@@ -103,9 +103,9 @@ public class UserBilldetailsAdapter extends BaseExpandableListAdapter {
         }
         List<BillDetails> currentItem = getChild(groupPosition, childPosition);
         holder.bills = currentItem;
-        holder.serviceHeading.setText(currentItem.get(childPosition).getProvider());
-        holder.avgDayConsumption.setContent(currentItem.get(childPosition).getConsumption());
-        holder.avgMonthConsumption.setContent(currentItem.get(childPosition).getConsumptionAverage());
+        holder.serviceHeading.setText(holder.bills.get(childPosition).getProvider());
+        holder.avgDayConsumption.setContent(holder.bills.get(childPosition).getConsumption());
+        holder.avgMonthConsumption.setContent(holder.bills.get(childPosition).getConsumptionAverage());
 
         return convertView;
     }
