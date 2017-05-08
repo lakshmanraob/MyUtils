@@ -28,8 +28,6 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.fragment_container)
     FrameLayout mFragmentContainer;
-    @BindView(R.id.bottom_tab)
-    BottomNavigationView mBottomNavigationBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +35,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mBottomNavigationBar.getMenu().getItem(1).setChecked(true);
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, getFragmentContent(1), getFragmentTitle(1)).commit();
+        addFragment(Constants.FRAGMENTS.COMPLAINTS);
 
         mBottomNavigationBar.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,43 +43,19 @@ public class MainActivity extends BaseActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.recent_bills:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, getFragmentContent(0), getFragmentTitle(0)).commit();
+                                updateFragment(Constants.FRAGMENTS.BILLS);
                                 break;
                             case R.id.complaints:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, getFragmentContent(1), getFragmentTitle(1)).commit();
+                            default:
+                                updateFragment(Constants.FRAGMENTS.COMPLAINTS);
                                 break;
                             case R.id.account_details:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, getFragmentContent(2), getFragmentTitle(2)).commit();
+                                updateFragment(Constants.FRAGMENTS.ACCOUNT);
                                 break;
                         }
                         return true;
                     }
                 });
-    }
-
-    private String getFragmentTitle(int position) {
-        switch (position) {
-            case 0:
-                return getString(R.string.recent_bills_title);
-            case 1:
-                return getString(R.string.report_issue);
-            case 2:
-                return getString(R.string.account_details_title);
-            default:
-                return getString(R.string.recent_bills_title);
-        }
-    }
-
-    private Fragment getFragmentContent(int position) {
-        switch (position) {
-            case 0:
-                return RecentBillsFragment.newInstance(getFragmentTitle(position), null);
-            case 1:
-                return ComplaintsListFragment.newInstance(getFragmentTitle(position), null);
-            case 2:
-                return AccountDetailsFragment.newInstance(getFragmentTitle(position), null);
-        }
-        return null;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

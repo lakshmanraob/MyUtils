@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.R;
+import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ComplaintsListAdapter;
 import my.util.app.utils.Constants;
 
@@ -39,14 +40,17 @@ public class ComplaintsListFragment extends Fragment {
     protected FrameLayout mSearchInputLayout;
     @BindView(R.id.search_input)
     protected EditText mSearchInput;
-
+    
+    @OnClick(R.id.report_btn)
+    protected void reportNewIssue(View v) {
+        ((BaseActivity)getActivity()).updateFragment(Constants.FRAGMENTS.NEW_COMPLAINT);
+    }
 
     @OnClick(R.id.search_close)
     protected void closeSearchLayout(View v) {
         mSearchOpen.setVisibility(View.VISIBLE);
         mSearchInputLayout.setVisibility(View.GONE);
     }
-
 
     @OnClick(R.id.search_open)
     protected void openSearchLayout(View v) {

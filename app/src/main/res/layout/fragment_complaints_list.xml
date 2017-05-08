@@ -91,7 +91,7 @@
             android:layout_marginRight="@dimen/screen_outer_padding"
             android:layout_marginTop="@dimen/widgets_inner_padding"
             android:gravity="center_vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <EditText

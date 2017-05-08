@@ -1,6 +1,7 @@
 package my.util.app.utils;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 
 import my.util.app.R;
+import my.util.app.activity.BaseActivity;
 
 public class Utils {
     private static ProgressDialog mProgressDialog;
@@ -131,13 +133,14 @@ public class Utils {
         return detected;
     }
 
-    public static void showSubmitDialog(Context ctx) {
+    public static void showSubmitDialog(final Activity ctx) {
         final Dialog dialog = new Dialog(ctx);
         View view = LayoutInflater.from(ctx).inflate(R.layout.submit_dialog, null);
         ((TextView) view.findViewById(R.id.ok)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                ((BaseActivity)ctx).updateFragment(Constants.FRAGMENTS.COMPLAINTS);
             }
         });
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -64,4 +64,5 @@
     <string name="dm_accountnumber">68979790</string>
     <string name="account_number">AccountNumber</string>
 
+    <string name="new_complaint_title">New Complaint</string>
 </resources>

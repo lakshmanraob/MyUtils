@@ -25,6 +25,13 @@ public class Constants {
     public static final String GAS_SERVICE = "Gas Services";
     public static final String TECO = "TECO";
 
+    public final class FRAGMENTS {
+        public static final int BILLS = 0;
+        public static final int COMPLAINTS = 1;
+        public static final int ACCOUNT = 2;
+        public static final int NEW_COMPLAINT = 3;
+    }
+
     public final class COMPLAINT_STATUS {
         public static final int SUBMITTED = 1;
         public static final int UNDER_REVIEW = 2;
