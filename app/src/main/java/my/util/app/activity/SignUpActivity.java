@@ -56,7 +56,12 @@ public class SignUpActivity extends BaseActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signup_cancel:
-                    finish();
+                    if (signupViewPager.getCurrentItem() == 0) {
+                        finish();
+                    } else {
+                        signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() <
+                                0 ? DOT_COOUNT : signupViewPager.getCurrentItem() - 1);
+                    }
                     break;
                 case R.id.signup_next:
                     signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() >
@@ -90,6 +95,12 @@ public class SignUpActivity extends BaseActivity {
             } else {
                 dots[i].setImageDrawable(getResources().getDrawable(R.drawable.signup_un_selected_dot, null));
             }
+        }
+
+        if (selected > 0) {
+            cancelText.setText(getString(R.string.back_str));
+        } else {
+            cancelText.setText(getString(R.string.cancel_str));
         }
     }
 

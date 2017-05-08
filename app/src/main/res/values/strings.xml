@@ -126,6 +126,7 @@
     <string name="address_hint">@string/address</string>
     <string name="pincode_hint">Pincode</string>
     <string name="city_hint">City</string>
+    <string name="back_str">Back</string>
 
 
 </resources>
