@@ -75,4 +75,25 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="SignUpLayoutStyle">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+    </style>
+
+    <style name="SignUpLayoutStyle.help">
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="SignUpLayoutStyle.heading">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">40dp</item>
+        <item name="android:textColor">@color/app_bg_mid</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

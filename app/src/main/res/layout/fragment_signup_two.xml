@@ -9,9 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="4"
+        android:layout_weight="2"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -19,63 +20,72 @@
             android:layout_gravity="center"
             android:src="@mipmap/elec" />
 
-        <TextView
-            android:id="@+id/txt_pwd_help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:text="@string/pwd_help"
-            android:textSize="16sp"
-            android:textStyle="italic" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/personal_details_help"
+        style="@style/SignUpLayoutStyle.heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/personal_details" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
-        android:padding="20dp">
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/signup_input_layout_pwd"
+            android:id="@+id/signup_input_layout_first"
+            style="@style/SignUpLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:layout_centerHorizontal="true">
 
             <EditText
-                android:id="@+id/signup_input_pwd"
+                android:id="@+id/signup_input_first"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/hint_password"
-                android:inputType="textEmailAddress" />
+                android:hint="@string/first_name_hint"
+                android:inputType="text" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/signup_input_layout_pwd_confirm"
+            android:id="@+id/signup_input_layout_last"
+            style="@style/SignUpLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/signup_input_layout_pwd"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:layout_below="@id/signup_input_layout_first"
+            android:layout_centerHorizontal="true">
 
             <EditText
-                android:id="@+id/signup_input_pwd_confirm"
+                android:id="@+id/signup_input_last"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/hint_confirm_pwd"
-                android:inputType="number"
-                android:visibility="visible" />
+                android:hint="@string/last_name_hint"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_dob"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_last"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/dob_hint"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
     </RelativeLayout>
