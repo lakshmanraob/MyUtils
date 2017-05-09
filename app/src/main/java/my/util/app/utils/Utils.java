@@ -216,27 +216,5 @@ public class Utils {
         return sortComplaintsList(filteredList);
     }
 
-    /**
-     * One Info the layout must contain the OK (R.id.ok) TextView
-     *
-     * @param ctx
-     * @param layoutResource
-     */
-    public static void showSubmitDialog(Context ctx, int layoutResource) {
-        final Dialog dialog = new Dialog(ctx);
-        View view = LayoutInflater.from(ctx).inflate(layoutResource, null);
-        ((TextView) view.findViewById(R.id.ok)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setContentView(view);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-    }
 
 }

@@ -16,6 +16,7 @@ import my.util.app.fragments.SignupFragmentFour;
 import my.util.app.fragments.SignupFragmentOne;
 import my.util.app.fragments.SignupFragmentThree;
 import my.util.app.fragments.SignupFragmentTwo;
+import my.util.app.utils.UtilDialog;
 
 public class SignUpActivity extends BaseActivity {
 
@@ -64,8 +65,18 @@ public class SignUpActivity extends BaseActivity {
                     }
                     break;
                 case R.id.signup_next:
-                    signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() >
-                            DOT_COOUNT ? 0 : signupViewPager.getCurrentItem() + 1);
+                    if (signupViewPager.getCurrentItem() == 3) {
+                        UtilDialog.showSubmitDialog(SignUpActivity.this,
+                                R.layout.reg_submit_dialog, R.string.reg_submit_message, false, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        finish();
+                                    }
+                                });
+                    } else {
+                        signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() >
+                                DOT_COOUNT ? 0 : signupViewPager.getCurrentItem() + 1);
+                    }
                     break;
             }
         }
@@ -99,7 +110,10 @@ public class SignUpActivity extends BaseActivity {
 
         if (selected > 0) {
             cancelText.setText(getString(R.string.back_str));
-        } else {
+            if(selected == 3){
+                nextText.setText(getString(R.string.submit));
+            }
+        }  else {
             cancelText.setText(getString(R.string.cancel_str));
         }
     }

@@ -128,5 +128,6 @@
     <string name="city_hint">City</string>
     <string name="back_str">Back</string>
 
+    <string name="reg_submit_message">You have successfully registered your account!</string>
 
 </resources>
