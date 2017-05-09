@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.util.app.MyUtilApp;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ComplaintsListAdapter;
@@ -52,7 +53,7 @@ public class ComplaintsListFragment extends Fragment {
 
     @OnClick(R.id.report_btn)
     protected void reportNewIssue(View v) {
-        ((BaseActivity)getActivity()).updateFragment(Constants.FRAGMENTS.NEW_COMPLAINT);
+        ((BaseActivity) getActivity()).updateFragment(Constants.FRAGMENTS.NEW_COMPLAINT);
     }
 
     @OnClick(R.id.open_map_view)
@@ -93,29 +94,39 @@ public class ComplaintsListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mComplaintsListAdapter.updateList(MyUtilApp.getDbHelper().getAllComplaints());
+        mComplaintsListView.invalidate();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_complaints_list, container, false);
         ButterKnife.bind(this, content);
-        complaintsList = Constants.getComplaintsList(getActivity());
+        complaintsList = MyUtilApp.getDbHelper().getAllComplaints();
 
         mSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.size() > 0){
+                if (!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.size() > 0) {
                     complaintsList = Utils.filterComplaintsList(complaintsList, s.toString());
                     mComplaintsListAdapter.updateList(complaintsList);
                 } else {
-                    mComplaintsListAdapter.updateList(Constants.getComplaintsList(getActivity()));
+                    mComplaintsListAdapter.updateList(MyUtilApp.getDbHelper().getAllComplaints());
                 }
+                mComplaintsListView.invalidate();
             }
         });
 
@@ -123,6 +134,7 @@ public class ComplaintsListFragment extends Fragment {
         LinearLayoutManager mngr = new LinearLayoutManager(getActivity());
         mComplaintsListView.setAdapter(mComplaintsListAdapter);
         mComplaintsListView.setLayoutManager(mngr);
+        mComplaintsListView.invalidate();
 
         return content;
     }

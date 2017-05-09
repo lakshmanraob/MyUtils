@@ -18,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +33,19 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.util.app.MyUtilApp;
 import my.util.app.R;
+import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
+import my.util.app.models.IssueDetails;
 import my.util.app.utils.Constants;
+import my.util.app.utils.DbHelper;
 import my.util.app.utils.ImageCaptureListener;
 import my.util.app.models.PhotoDetails;
 import my.util.app.utils.Utils;
@@ -66,6 +72,7 @@ public class ComplaintsFragment extends Fragment implements
     protected EditText mAddressField;
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
+    private Resources resources;
 
     public ComplaintsFragment() {
     }
@@ -86,6 +93,7 @@ public class ComplaintsFragment extends Fragment implements
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        resources = getResources();
 
         //Checking the CameraPermission
         if (isCameraPermissionsGiven(getContext())) {
@@ -94,7 +102,6 @@ public class ComplaintsFragment extends Fragment implements
         }
 
     }
-
 
     @Nullable
     @Override
@@ -110,7 +117,7 @@ public class ComplaintsFragment extends Fragment implements
 
         ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.outage_type));
+                resources.getStringArray(R.array.outage_type));
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mOutageTypeSpinner.setAdapter(spinnerAdapter);
 
@@ -157,16 +164,41 @@ public class ComplaintsFragment extends Fragment implements
                 updateAddressField(address);
             }
         }
-
     }
 
     @OnClick(R.id.submit_btn)
     protected void submitComplaint(View v) {
-        Utils.showSubmitDialog(getActivity());
+        String outageType = mOutageTypeSpinner.getSelectedItem().toString();
+        if (!TextUtils.isEmpty(outageType) && !outageType.equalsIgnoreCase(resources.getString(R.string.outage_select))) {
+            String address = mAddressField.getText().toString();
+            if (!TextUtils.isEmpty(address) && address.length() > Constants.ADD_MIN_LENGTH) {
+                if (mCurrentLocation != null) {
+                    int referenceNumber = Utils.getRandom();
+                    long dbStatus = MyUtilApp.getDbHelper().addNewComplaint(new IssueDetails(
+                            outageType,
+                            Calendar.getInstance(),
+                            address,
+                            Constants.COMPLAINT_STATUS.SUBMITTED,
+                            mCurrentLocation.getLatitude(),
+                            mCurrentLocation.getLongitude(),
+                            referenceNumber));
+                    if (dbStatus == -1) {
+                        Utils.showShortToast(getActivity(), resources.getString(R.string.error_database));
+                    } else {
+                        Utils.showSubmitDialog(getActivity(), referenceNumber);
+                    }
+                } else {
+                    Utils.showShortToast(getActivity(), resources.getString(R.string.error_location));
+                }
+            } else {
+                Utils.showShortToast(getActivity(), resources.getString(R.string.error_address));
+            }
+        } else {
+            Utils.showShortToast(getActivity(), resources.getString(R.string.error_outage_type));
+        }
     }
 
     private void showCallDialog() {
-
         final Dialog dialog = new Dialog(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.call_dialog, null);
         view.findViewById(R.id.call_ok).setOnClickListener(new View.OnClickListener() {
@@ -191,7 +223,6 @@ public class ComplaintsFragment extends Fragment implements
     }
 
     private void updateCaptureActionImage() {
-        Resources res = getActivity().getResources();
         if (images != null) {
             for (PhotoDetails photo : images) {
                 if (photo != null && photo.getImageName().equalsIgnoreCase(Constants.CAPTURE_IMAGE_NAME)) {
@@ -199,7 +230,7 @@ public class ComplaintsFragment extends Fragment implements
                     break;
                 }
             }
-            images.add(images.size(), new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, res.getDrawable(R.drawable.take_photo, null)));
+            images.add(images.size(), new PhotoDetails(Constants.CAPTURE_IMAGE_NAME, resources.getDrawable(R.drawable.take_photo, null)));
         }
         if (imagesAdapter != null) {
             mGridView.setNumColumns(images.size());
@@ -377,19 +408,16 @@ public class ComplaintsFragment extends Fragment implements
                             buildGoogleApiClient();
                         }
                     }
-
                 } else {
                     Utils.showShortToast(getContext(), "Location permission denied");
                 }
                 break;
             case Constants.CAMERA_PERMISSIONS_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
                             == PackageManager.PERMISSION_GRANTED) {
 
                     }
-
                 } else {
                     Utils.showShortToast(getContext(), "Camera permission denied");
                 }

@@ -3,6 +3,7 @@ package my.util.app.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         IssueDetails issue = complaints.get(position);
+        Log.d("DEBUG_LOG", "onBindViewHolder : " + issue.getAddress());
 
         Calendar complaintDate = issue.getComplaintDate();
         holder.outageType.setText(issue.getOutageType());

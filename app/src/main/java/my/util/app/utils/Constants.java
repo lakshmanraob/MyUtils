@@ -26,6 +26,7 @@ public class Constants {
     public static final String ELECTRICITY_SERVICE = "Electricity Services";
     public static final String GAS_SERVICE = "Gas Services";
     public static final String TECO = "TECO";
+    public static final int ADD_MIN_LENGTH = 10;
 
     public static final double LAT_ECITY = 12.84598;
     public static final double LONG_ECITY = 77.66394;
@@ -67,7 +68,7 @@ public class Constants {
         public static final String PEENYA = "Peenya Metro Station, Peenya, Bangalore";
     }
 
-    public static ArrayList<IssueDetails> getComplaintsList(Context ctx) {
+    public static ArrayList<IssueDetails> getDummyComplaintsList(Context ctx) {
         ArrayList<IssueDetails> complaints = new ArrayList<>();
         Resources res = ctx.getResources();
         Calendar cal = Calendar.getInstance();

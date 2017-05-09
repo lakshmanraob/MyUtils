@@ -23,7 +23,7 @@
     <string name="status_resolved">Resolved</string>
     <string name="account_details">Account Details</string>
 
-    <string name="submit_message">Thank you! Your Notification has \nbeen received. </string>
+    <string name="submit_message_start">Thank you! Your notification has been \nreceived. Your reference number is \n</string>
     <string name="ok">Ok</string>
     <array name="outage_type">
         <item>@string/outage_select</item>
@@ -71,4 +71,10 @@
     <string name="this_week">This Week</string>
     <string name="this_month">This Month</string>
     <string name="previous">Previous</string>
+
+    <!-- Dummy values-->
+    <string name="error_outage_type">Please select an outage type.</string>
+    <string name="error_address">Please enter a proper address.</string>
+    <string name="error_location">Please enable location services.</string>
+    <string name="error_database">Something went wrong. Please try again.</string>
 </resources>

@@ -15,6 +15,9 @@ public class IssueDetails {
     private int complaintTiming;
     private int referenceNo;
 
+    public IssueDetails() {
+    }
+
     public IssueDetails(String outageType, Calendar complaintDate, String address, int status, double latitude, double longitude, int referenceNo) {
         this.outageType = outageType;
         this.complaintDate = complaintDate;

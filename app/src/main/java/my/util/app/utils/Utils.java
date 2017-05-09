@@ -17,6 +17,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,8 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -138,9 +141,12 @@ public class Utils {
         return detected;
     }
 
-    public static void showSubmitDialog(final Activity ctx) {
+    public static void showSubmitDialog(final Activity ctx, int referenceNumber) {
         final Dialog dialog = new Dialog(ctx);
         View view = LayoutInflater.from(ctx).inflate(R.layout.submit_dialog, null);
+        TextView messageTv = (TextView) view.findViewById(R.id.message);
+        String message = ctx.getResources().getString(R.string.submit_message_start) + "<b>" + referenceNumber + "</b";
+        messageTv.setText(Html.fromHtml(message));
         ((TextView) view.findViewById(R.id.ok)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
