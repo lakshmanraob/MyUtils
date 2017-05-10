@@ -7,8 +7,11 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.models.BillDetails;
 import my.util.app.models.IssueDetails;
@@ -69,8 +72,8 @@ public class Constants {
     }
 
     public static ArrayList<IssueDetails> getDummyComplaintsList(Context ctx) {
-        ArrayList<IssueDetails> complaints = new ArrayList<>();
         Resources res = ctx.getResources();
+        ArrayList<IssueDetails> complaints = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, 7);
         cal.set(Calendar.MONTH, 4);
@@ -139,31 +142,35 @@ public class Constants {
         return Utils.sortComplaintsList(complaints);
     }
 
-    private static ArrayList<BillDetails> prepareBill() {
+    public static ArrayList<BillDetails> getDummyBillsList() {
         ArrayList<BillDetails> addressList = new ArrayList<>();
         addressList.add(new BillDetails(USER_ADDRESSES.MRTHLI, BILL_TYPES.ELECTRICITY,
-                TECO, "100Kwh", null, "$12", "April 2017", null, null, null, null, null, null));
+                TECO, "100", null, 12, "April 2017", null, null, null, null, null, 0));
         addressList.add(new BillDetails(USER_ADDRESSES.OFC, BILL_TYPES.ELECTRICITY,
-                TECO, "643Kwh", null, "$63", "May 2017", null, null, null, null, null, null));
+                TECO, "643", null, 63, "May 2017", null, null, null, null, null, 0));
         addressList.add(new BillDetails(USER_ADDRESSES.ECITY, BILL_TYPES.GAS,
-                TECO, "1.576 Thm", null, "$107", "May 2017", null, null, null, null, null, null));
+                TECO, "157", null, 107, "May 2017", null, null, null, null, null, 0));
         return addressList;
     }
 
-    public static HashMap<String, List<BillDetails>> getRecentBills() {
+    public static HashMap<String, List<BillDetails>> getRecentBills(Context ctx) {
         HashMap<String, List<BillDetails>> hashMap = new HashMap<String, List<BillDetails>>();
-        ArrayList<BillDetails> bills = prepareBill();
+        ArrayList<BillDetails> bills = DataManager.getInstance(ctx).fetchAllSavedBills();
         for (BillDetails bill : bills) {
             String key = bill.getAddress();
+            Log.d("DEBUG_LOG", "checking for : " + key);
             if (hashMap.containsKey(key)) {
+                Log.d("DEBUG_LOG", "contains");
                 List<BillDetails> list = hashMap.get(key);
                 list.add(bill);
             } else {
+                Log.d("DEBUG_LOG", "add new");
                 List<BillDetails> list = new ArrayList<BillDetails>();
                 list.add(bill);
                 hashMap.put(key, list);
             }
         }
+        Log.d("DEBUG_LOG", "final no of items " + hashMap.size());
         return hashMap;
     }
 
@@ -171,6 +178,15 @@ public class Constants {
         List<String> titles = new ArrayList<>();
         titles.add(USER_ADDRESSES.MRTHLI);
         titles.add(USER_ADDRESSES.OFC);
+        return titles;
+    }
+
+    public static List<String> getBillTitles(HashMap<String, List<BillDetails>> hashmap){
+        List<String> titles = new ArrayList<>();
+        Iterator<Map.Entry<String, List<BillDetails>>> itr=  hashmap.entrySet().iterator();
+        while(itr.hasNext()) {
+            titles.add(itr.next().getKey());
+        }
         return titles;
     }
 

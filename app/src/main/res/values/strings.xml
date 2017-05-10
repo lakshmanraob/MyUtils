@@ -77,4 +77,10 @@
     <string name="error_address">Please enter a proper address.</string>
     <string name="error_location">Please enable location services.</string>
     <string name="error_database">Something went wrong. Please try again.</string>
+
+    <!--Bill Labels-->
+    <string name="teco">Teco</string>
+    <string name="total_consumption">Total Consumption</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="view_details">View Details</string>
 </resources>

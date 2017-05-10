@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        addFragment(Constants.FRAGMENTS.COMPLAINTS);
+        addFragment(Constants.FRAGMENTS.BILLS);
 
         mBottomNavigationBar.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {

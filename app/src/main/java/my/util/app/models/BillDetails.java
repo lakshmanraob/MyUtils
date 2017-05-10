@@ -7,16 +7,19 @@ public class BillDetails {
     private String provider;
     private String consumption;
     private String consumptionAverage;
-    private String amount;
+    private int amount;
     private String billingDate;
     private String billingCycle;
     private String payByDate;
     private String meterNumber;
     private String planName;
     private String planCost;
-    private String total;
+    private int total;
 
-    public BillDetails(String address, int billType, String provider, String consumption, String consumptionAverage, String amount, String billingDate, String billingCycle, String payByDate, String meterNumber, String planName, String planCost, String total) {
+    public BillDetails() {
+    }
+
+    public BillDetails(String address, int billType, String provider, String consumption, String consumptionAverage, int amount, String billingDate, String billingCycle, String payByDate, String meterNumber, String planName, String planCost, int total) {
         this.address = address;
         this.billType = billType;
         this.provider = provider;
@@ -72,11 +75,11 @@ public class BillDetails {
         this.consumptionAverage = consumptionAverage;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -128,11 +131,11 @@ public class BillDetails {
         this.planCost = planCost;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 }

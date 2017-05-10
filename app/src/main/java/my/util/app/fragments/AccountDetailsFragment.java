@@ -106,7 +106,7 @@ public class AccountDetailsFragment extends Fragment {
         mAccountList.addHeaderView(headerView);
 
         //Setting up the adapter for the spinner
-        UserBilldetailsAdapter adapter = new UserBilldetailsAdapter(getContext(), Constants.getBillTitles(), Constants.getRecentBills());
+        UserBilldetailsAdapter adapter = new UserBilldetailsAdapter(getContext(), Constants.getBillTitles(), Constants.getRecentBills(getContext()));
         mAccountList.setAdapter(adapter);
 
     }
@@ -115,7 +115,7 @@ public class AccountDetailsFragment extends Fragment {
 
         UserDetails userDetails =
                 new UserDetails("9876543212", "First", "Last", "10/3/1997", "123456789",
-                        "labattula@deloitte.com", "Marathahalli, Bangalore", Constants.getRecentBills());
+                        "labattula@deloitte.com", "Marathahalli, Bangalore", Constants.getRecentBills(getContext()));
 
         return userDetails;
 
