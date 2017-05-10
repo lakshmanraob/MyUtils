@@ -3,10 +3,6 @@ package my.util.app.models;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by labattula on 04/05/17.
- */
-
 public class UserDetails {
 
     private String accountNumber;

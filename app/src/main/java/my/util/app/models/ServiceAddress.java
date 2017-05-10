@@ -1,9 +1,5 @@
 package my.util.app.models;
 
-/**
- * Created by labattula on 04/05/17.
- */
-
 public class ServiceAddress {
 
     private String addressName;

@@ -18,7 +18,6 @@ public class MyUtilApp extends Application {
             .getSimpleName();
 
     private static MyUtilApp mInstance;
-    private static DbHelper mDbHelper;
 
     @Override
     public void onCreate() {
@@ -26,28 +25,10 @@ public class MyUtilApp extends Application {
         mInstance = this;
         //ButterKnife.setDebug(true);
         Iconify.with(new FontAwesomeModule()).with(new MaterialModule());
-        mDbHelper = new DbHelper(this);
-        checkAndEnterDummyData();
+        DataManager.getInstance(this).init();
     }
 
     public static synchronized MyUtilApp getInstance() {
         return mInstance;
     }
-
-    public static synchronized DbHelper getDbHelper() {
-        return mDbHelper;
-    }
-
-    private void checkAndEnterDummyData(){
-        Log.d("DEBUG_LOG", "checkAndEnterDummyData");
-        ArrayList<IssueDetails> allComplaints = mDbHelper.getAllComplaints();
-        if (allComplaints == null || allComplaints.size() <= 0) {
-            Log.d("DEBUG_LOG", "no data exists");
-            ArrayList<IssueDetails> dummyList = Constants.getDummyComplaintsList(this);
-            for(IssueDetails issue: dummyList){
-                mDbHelper.addNewComplaint(issue);
-            }
-        }
-    }
-
 }

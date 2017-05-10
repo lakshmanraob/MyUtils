@@ -19,10 +19,6 @@ import my.util.app.adapter.UserBilldetailsAdapter;
 import my.util.app.models.UserDetails;
 import my.util.app.utils.Constants;
 
-/**
- * Created by labattula on 03/05/17.
- */
-
 public class AccountDetailsFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";

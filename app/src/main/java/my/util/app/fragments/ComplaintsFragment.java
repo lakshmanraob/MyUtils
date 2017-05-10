@@ -39,6 +39,7 @@ import java.util.Iterator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.util.app.DataManager;
 import my.util.app.MyUtilApp;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
@@ -174,7 +175,7 @@ public class ComplaintsFragment extends Fragment implements
             if (!TextUtils.isEmpty(address) && address.length() > Constants.ADD_MIN_LENGTH) {
                 if (mCurrentLocation != null) {
                     int referenceNumber = Utils.getRandom();
-                    long dbStatus = MyUtilApp.getDbHelper().addNewComplaint(new IssueDetails(
+                    long dbStatus = DataManager.getInstance(getActivity()).getDbHelper().addNewComplaint(new IssueDetails(
                             outageType,
                             Calendar.getInstance(),
                             address,

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.util.app.DataManager;
 import my.util.app.MyUtilApp;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
@@ -97,7 +98,7 @@ public class ComplaintsListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mComplaintsListAdapter.updateList(MyUtilApp.getDbHelper().getAllComplaints());
+        mComplaintsListAdapter.updateList(DataManager.getInstance(getActivity()).fetchAllSavedComplaints());
         mComplaintsListView.invalidate();
     }
 
@@ -107,7 +108,7 @@ public class ComplaintsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_complaints_list, container, false);
         ButterKnife.bind(this, content);
-        complaintsList = MyUtilApp.getDbHelper().getAllComplaints();
+        complaintsList = DataManager.getInstance(getActivity()).fetchAllSavedComplaints();
 
         mSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -124,7 +125,7 @@ public class ComplaintsListFragment extends Fragment {
                     complaintsList = Utils.filterComplaintsList(complaintsList, s.toString());
                     mComplaintsListAdapter.updateList(complaintsList);
                 } else {
-                    mComplaintsListAdapter.updateList(MyUtilApp.getDbHelper().getAllComplaints());
+                    mComplaintsListAdapter.updateList(DataManager.getInstance(getActivity()).fetchAllSavedComplaints());
                 }
                 mComplaintsListView.invalidate();
             }

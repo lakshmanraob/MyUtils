@@ -9,10 +9,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by labattula on 04/05/17.
- */
-
 public class DetailsView extends LinearLayout {
 
 

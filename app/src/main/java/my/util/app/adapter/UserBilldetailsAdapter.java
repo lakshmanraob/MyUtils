@@ -18,10 +18,6 @@ import my.util.app.DetailsView;
 import my.util.app.R;
 import my.util.app.models.BillDetails;
 
-/**
- * Created by labattula on 05/05/17.
- */
-
 public class UserBilldetailsAdapter extends BaseExpandableListAdapter {
 
     Context mContext;
