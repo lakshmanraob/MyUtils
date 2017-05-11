@@ -67,6 +67,7 @@
     <string name="account_number">AccountNumber</string>
 
     <string name="new_complaint_title">New Complaint</string>
+    <string name="bill_details_title">Bill Details</string>
 
     <string name="this_week">This Week</string>
     <string name="this_month">This Month</string>
@@ -82,5 +83,19 @@
     <string name="teco">Teco</string>
     <string name="total_consumption">Total Consumption</string>
     <string name="total_amount">Total Amount</string>
+    <string name="total">Total</string>
     <string name="view_details">View Details</string>
+    <string name="billing_address">Billing Address</string>
+    <string name="billing_date">Billing Date</string>
+    <string name="meter_number">Meter Number</string>
+    <string name="consumption">Consumption</string>
+    <string name="avg_consumption">Average Day-to-day consumption</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="plan_details">Plan Details</string>
+    <string name="cost_per_unit">Cost per Unit</string>
+    <string name="cost_per_kwh">Cost per Kwh</string>
+    <string name="cost_per_thm">Cost per Thm</string>
+    <string name="pay_by_date">Pay by date</string>
+    <string name="pay">Pay</string>
+    <string name="no_data">Sorry, no data available.\nPlease try again later.</string>
 </resources>

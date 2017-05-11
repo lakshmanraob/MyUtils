@@ -19,7 +19,9 @@ public class BillDetails {
     public BillDetails() {
     }
 
-    public BillDetails(String address, int billType, String provider, String consumption, String consumptionAverage, int amount, String billingDate, String billingCycle, String payByDate, String meterNumber, String planName, String planCost, int total) {
+    public BillDetails(String address, int billType, String provider, String consumption,
+                       String consumptionAverage, int amount, String billingDate, String billingCycle,
+                       String payByDate, String meterNumber, String planName, String planCost, int total) {
         this.address = address;
         this.billType = billType;
         this.provider = provider;

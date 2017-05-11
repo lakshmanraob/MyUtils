@@ -11,7 +11,7 @@
 
     <com.joanzapata.iconify.widget.IconTextView
         android:layout_margin="30dp"
-        android:text="I {fa-heart-o} to {fa-code} on {fa-android}"
+        android:text="{fa-android}"
         android:shadowColor="#22000000"
         android:shadowDx="3"
         android:shadowDy="3"

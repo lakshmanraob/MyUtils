@@ -53,6 +53,7 @@ public class Constants {
         public static final int COMPLAINTS = 1;
         public static final int ACCOUNT = 2;
         public static final int NEW_COMPLAINT = 3;
+        public static final int BILL_DETAILS = 4;
     }
 
     public final class COMPLAINT_STATUS {
@@ -145,11 +146,11 @@ public class Constants {
     public static ArrayList<BillDetails> getDummyBillsList() {
         ArrayList<BillDetails> addressList = new ArrayList<>();
         addressList.add(new BillDetails(USER_ADDRESSES.MRTHLI, BILL_TYPES.ELECTRICITY,
-                TECO, "100", null, 12, "April 2017", null, null, null, null, null, 0));
+                TECO, "100", "1.4", 12, "April 2017", "05/03/2017 - 04/04/2017", "20/04/2017", "345627", "Economy 100 Plan", "0.12$/Kwh", 12));
         addressList.add(new BillDetails(USER_ADDRESSES.OFC, BILL_TYPES.ELECTRICITY,
-                TECO, "643", null, 63, "May 2017", null, null, null, null, null, 0));
+                TECO, "643", "2.6", 63, "May 2017", "05/04/2017 - 04/05/2017", "20/05/2017", "398645", "Economy 100 Plan", "0.12$/Kwh", 63));
         addressList.add(new BillDetails(USER_ADDRESSES.ECITY, BILL_TYPES.GAS,
-                TECO, "157", null, 107, "May 2017", null, null, null, null, null, 0));
+                TECO, "157", "0.7", 107, "May 2017", "05/04/2017 - 04/05/2017", "20/05/2017", "10098346", "Economy House Rural Plan", "0.9$/Thm", 107));
         return addressList;
     }
 

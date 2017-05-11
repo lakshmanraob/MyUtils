@@ -19,8 +19,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.util.app.DataManager;
 import my.util.app.R;
+import my.util.app.activity.BaseActivity;
 import my.util.app.models.BillDetails;
+import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
 public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
@@ -102,15 +105,14 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
             convertView.setTag(holder);
         }
         List<BillDetails> currentItem = getChild(groupPosition, childPosition);
-        holder.bills = currentItem.get(currentItem.size() - 1); // RE-CHECK
+        holder.currentBill = currentItem.get(currentItem.size() - 1); // RE-CHECK
 
-        int type = holder.bills.getBillType();
+        int type = holder.currentBill.getBillType();
         holder.billTypeIcon.setImageResource(type == 1 ? R.drawable.bulb_icon : R.drawable.gas_icon);
         holder.billType.setText(type == 1 ? "Elctricity Services" : "Gas Services");
-        holder.complaintDate.setText(holder.bills.getBillingDate());
-        holder.consumption.setText(holder.bills.getConsumption() + (type == 1 ? " Kwh" : " Thm"));
-        holder.amount.setText("$" + holder.bills.getAmount());
-
+        holder.complaintDate.setText(holder.currentBill.getBillingDate());
+        holder.consumption.setText(holder.currentBill.getConsumption() + (type == 1 ? " Kwh" : " Thm"));
+        holder.amount.setText("$" + holder.currentBill.getAmount());
 
         return convertView;
     }
@@ -134,7 +136,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
     }
 
     static class ChildViewHolder{
-        BillDetails bills;
+        BillDetails currentBill;
 
         @BindView(R.id.bill_type_icon)
         ImageView billTypeIcon;
@@ -153,7 +155,8 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
 
         @OnClick(R.id.bill_details)
         protected void showBillDetails(View v){
-            Utils.showShortToast(ctx, "In Progress...");
+            DataManager.getInstance(ctx).setmCurrentBill(currentBill);
+            ((BaseActivity)ctx).updateFragment(Constants.FRAGMENTS.BILL_DETAILS);
         }
     }
 }

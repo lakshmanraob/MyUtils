@@ -24,6 +24,10 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name="my.util.app.activity.UtilSplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.AuthActivity"
@@ -38,10 +42,6 @@
             android:name="my.util.app.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 

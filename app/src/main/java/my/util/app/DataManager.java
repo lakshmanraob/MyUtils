@@ -18,6 +18,7 @@ public class DataManager {
 
     private static ArrayList<IssueDetails> mComplaintsList;
     private static ArrayList<BillDetails> mBillList;
+    private static BillDetails mCurrentBill;
 
     private DataManager(Context ctx) {
         mContext = ctx;
@@ -65,5 +66,13 @@ public class DataManager {
             mBillList = allBills;
         }
         return mBillList;
+    }
+
+    public BillDetails getmCurrentBill() {
+        return mCurrentBill;
+    }
+
+    public void setmCurrentBill(BillDetails mCurrentBill) {
+        DataManager.mCurrentBill = mCurrentBill;
     }
 }

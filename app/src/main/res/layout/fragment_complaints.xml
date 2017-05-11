@@ -11,28 +11,44 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/yellow"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="@dimen/widgets_inner_padding">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/yellow"
                 android:gravity="center"
-                android:src="@drawable/telemarketer" />
+                android:orientation="vertical"
+                android:padding="@dimen/widgets_inner_padding">
 
-            <TextView
-                android:id="@+id/complaints_label"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:src="@drawable/telemarketer" />
+
+                <TextView
+                    android:id="@+id/complaints_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complaints"
+                    android:textColor="@color/app_bg_end"
+                    android:textSize="@dimen/font_size_general" />
+            </LinearLayout>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/complaints"
-                android:textColor="@color/app_bg_end"
-                android:textSize="@dimen/font_size_general" />
-        </LinearLayout>
+                android:layout_gravity="right|center_vertical"
+                android:layout_margin="@dimen/widgets_inner_padding"
+                android:text="{md-clear}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -180,6 +196,7 @@
             android:background="@drawable/rounded_bg_filled"
             android:paddingLeft="@dimen/fifty_spacing"
             android:paddingRight="@dimen/fifty_spacing"
+            android:textSize="@dimen/font_size_large"
             android:text="@string/submit"
             android:textColor="@color/white"
             android:textStyle="bold" />

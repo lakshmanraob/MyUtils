@@ -425,4 +425,9 @@ public class ComplaintsFragment extends Fragment implements
                 break;
         }
     }
+
+    @OnClick(R.id.close)
+    protected void closeScreen(View v){
+        ((BaseActivity)getActivity()).removeFragment(Constants.FRAGMENTS.BILL_DETAILS);
+    }
 }

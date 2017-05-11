@@ -7,6 +7,7 @@ import android.util.Log;
 
 import butterknife.BindView;
 import my.util.app.R;
+import my.util.app.fragments.BillDetailsFragment;
 import my.util.app.fragments.ComplaintsFragment;
 import my.util.app.fragments.ComplaintsListFragment;
 import my.util.app.fragments.PlaceholderFragment;
@@ -66,6 +67,8 @@ public class BaseActivity extends AppCompatActivity {
                 return getString(R.string.account_details_title);
             case Constants.FRAGMENTS.NEW_COMPLAINT:
                 return getString(R.string.new_complaint_title);
+            case Constants.FRAGMENTS.BILL_DETAILS:
+                return getString(R.string.bill_details_title);
         }
     }
 
@@ -80,6 +83,8 @@ public class BaseActivity extends AppCompatActivity {
                 return PlaceholderFragment.newInstance(getFragmentTitle(position), null);
             case Constants.FRAGMENTS.NEW_COMPLAINT:
                 return ComplaintsFragment.newInstance(getFragmentTitle(position), null);
+            case Constants.FRAGMENTS.BILL_DETAILS:
+                return BillDetailsFragment.newInstance(getFragmentTitle(position), null);
         }
     }
 
