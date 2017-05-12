@@ -41,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.DataManager;
 import my.util.app.R;
+import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.models.IssueDetails;
 import my.util.app.models.PhotoDetails;
