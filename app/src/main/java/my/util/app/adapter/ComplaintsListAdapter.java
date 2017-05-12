@@ -45,7 +45,6 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         IssueDetails issue = complaints.get(position);
-        Log.d("DEBUG_LOG", "onBindViewHolder : " + issue.getAddress());
 
         Calendar complaintDate = issue.getComplaintDate();
         holder.outageType.setText(issue.getOutageType());

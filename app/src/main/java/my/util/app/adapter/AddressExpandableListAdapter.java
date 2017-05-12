@@ -1,8 +1,6 @@
 package my.util.app.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.ClipDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +24,7 @@ import my.util.app.models.BillDetails;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
-public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
+public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
 
     static Context ctx;
     List<String> titles;
@@ -36,8 +34,6 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
         this.ctx = ctx;
         this.titles = titles;
         this.allBills = allBills;
-        Log.d("DEBUG_LOG", "add titles " + titles.size());
-        Log.d("DEBUG_LOG", "add allBills " + allBills.size());
     }
 
     @Override
@@ -56,8 +52,17 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
     }
 
     @Override
-    public List<BillDetails> getChild(int groupPosition, int childPosition) {
-        return allBills.get(titles.get(groupPosition));
+    public BillDetails getChild(int groupPosition, int childPosition) {
+        return allBills.get(titles.get(groupPosition)).get(childPosition);
+    }
+
+    private int getBillTotal(int groupPosition) {
+        List<BillDetails> allItems = allBills.get(titles.get(groupPosition));
+        int total = 0;
+        for (BillDetails item : allItems) {
+            total = total + item.getTotal();
+        }
+        return total;
     }
 
     @Override
@@ -81,7 +86,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
         if (convertView != null) {
             holder = (GroupViewHolder) convertView.getTag();
         } else {
-            convertView = ((LayoutInflater)ctx.getSystemService
+            convertView = ((LayoutInflater) ctx.getSystemService
                     (Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.address_list_parent_item, parent, false);
             holder = new GroupViewHolder(convertView);
             convertView.setTag(holder);
@@ -99,21 +104,27 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
         if (convertView != null) {
             holder = (ChildViewHolder) convertView.getTag();
         } else {
-            convertView = ((LayoutInflater)ctx.getSystemService
+            convertView = ((LayoutInflater) ctx.getSystemService
                     (Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.address_list_child_item, parent, false);
             holder = new ChildViewHolder(convertView);
             convertView.setTag(holder);
         }
-        List<BillDetails> currentItem = getChild(groupPosition, childPosition);
-        holder.currentBill = currentItem.get(currentItem.size() - 1); // RE-CHECK
+        BillDetails currentItem = getChild(groupPosition, childPosition);
+        holder.currentBill = currentItem; // RE-CHECK
 
         int type = holder.currentBill.getBillType();
         holder.billTypeIcon.setImageResource(type == 1 ? R.drawable.bulb_icon : R.drawable.gas_icon);
         holder.billType.setText(type == 1 ? "Elctricity Services" : "Gas Services");
         holder.complaintDate.setText(holder.currentBill.getBillingDate());
         holder.consumption.setText(holder.currentBill.getConsumption() + (type == 1 ? " Kwh" : " Thm"));
-        holder.amount.setText("$" + holder.currentBill.getAmount());
-
+        holder.amount.setText("$" + holder.currentBill.getTotal());
+        int total = getBillTotal(groupPosition);
+        if (total > 0 && getChildrenCount(groupPosition) == (childPosition + 1)) {
+            holder.totalView.setVisibility(View.VISIBLE);
+            holder.totalBill.setText("$" + total);
+        } else {
+            holder.totalView.setVisibility(View.GONE);
+        }
         return convertView;
     }
 
@@ -135,7 +146,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
         }
     }
 
-    static class ChildViewHolder{
+    static class ChildViewHolder {
         BillDetails currentBill;
 
         @BindView(R.id.bill_type_icon)
@@ -149,14 +160,24 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter{
         @BindView(R.id.amount)
         TextView amount;
 
+        @BindView(R.id.total_view)
+        LinearLayout totalView;
+        @BindView(R.id.total_bill)
+        TextView totalBill;
+
         public ChildViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
 
         @OnClick(R.id.bill_details)
-        protected void showBillDetails(View v){
+        protected void showBillDetails(View v) {
             DataManager.getInstance(ctx).setmCurrentBill(currentBill);
-            ((BaseActivity)ctx).updateFragment(Constants.FRAGMENTS.BILL_DETAILS);
+            ((BaseActivity) ctx).updateFragment(Constants.FRAGMENTS.BILL_DETAILS);
+        }
+
+        @OnClick(R.id.pay_btn)
+        protected void payBill(View v) {
+            Utils.showShortToast(ctx, "In Progress...");
         }
     }
 }

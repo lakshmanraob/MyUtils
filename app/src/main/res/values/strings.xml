@@ -81,6 +81,8 @@
 
     <!--Bill Labels-->
     <string name="teco">Teco</string>
+    <string name="teco_electricity">Teco Electricty Services</string>
+    <string name="teco_gas">Teco Gas Services</string>
     <string name="total_consumption">Total Consumption</string>
     <string name="total_amount">Total Amount</string>
     <string name="total">Total</string>
@@ -95,6 +97,8 @@
     <string name="cost_per_unit">Cost per Unit</string>
     <string name="cost_per_kwh">Cost per Kwh</string>
     <string name="cost_per_thm">Cost per Thm</string>
+    <string name="kwh">Kwh</string>
+    <string name="thm">Thm</string>
     <string name="pay_by_date">Pay by date</string>
     <string name="pay">Pay</string>
     <string name="no_data">Sorry, no data available.\nPlease try again later.</string>

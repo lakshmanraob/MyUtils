@@ -12,22 +12,22 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <RelativeLayout
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/yellow"
-            android:padding="@dimen/widgets_inner_padding">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/yellow"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/widgets_inner_padding">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:gravity="center"
                     android:src="@drawable/telemarketer" />
 
@@ -35,24 +35,21 @@
                     android:id="@+id/complaints_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/complaints_title"
-                    android:textColor="@android:color/black"
+                    android:text="@string/report_issue"
+                    android:textColor="@color/app_bg_end"
                     android:textSize="@dimen/font_size_general" />
             </LinearLayout>
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:id="@+id/open_map_view"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:padding="@dimen/widgets_inner_padding"
+                android:layout_gravity="right|center_vertical"
+                android:layout_margin="@dimen/widgets_inner_padding"
                 android:text="{md-location-searching}"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
-
-        </RelativeLayout>
+        </FrameLayout>
 
         <Button
             android:id="@+id/report_btn"
@@ -118,10 +115,10 @@
                 android:id="@+id/search_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="1"
-                android:inputType="number"
-                android:paddingLeft="@dimen/widgets_inner_padding"
                 android:hint="@string/enter_ref_no"
+                android:inputType="number"
+                android:lines="1"
+                android:paddingLeft="@dimen/widgets_inner_padding"
                 android:textColor="@color/grey" />
 
             <com.joanzapata.iconify.widget.IconTextView

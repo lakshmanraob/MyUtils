@@ -1,5 +1,6 @@
 package my.util.app.fragments;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,10 @@ public class BillDetailsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    @BindView(R.id.bill_type_icon)
+    protected ImageView mServiceTypeIcon;
+    @BindView(R.id.bill_type)
+    protected TextView mServiceType;
     @BindView(R.id.close)
     protected IconTextView mClose;
     @BindView(R.id.no_data)
@@ -57,6 +62,8 @@ public class BillDetailsFragment extends Fragment {
     protected ImageView mConsumptionGraph;
     @BindView(R.id.plan_details)
     protected TextView mPlanDetails;
+    @BindView(R.id.cost_per_unit_label)
+    protected TextView mCostPerUnitLabel;
     @BindView(R.id.cost_per_unit)
     protected TextView mCostPerUnit;
     @BindView(R.id.pay_by_date)
@@ -117,23 +124,23 @@ public class BillDetailsFragment extends Fragment {
             mContent.setVisibility(View.VISIBLE);
             mNoData.setVisibility(View.GONE);
 
+            String unit = getContext().getResources().getString((bill.getBillType() == Constants.BILL_TYPES.GAS) ? R.string.thm : R.string.kwh);
+
+            mServiceTypeIcon.setImageResource((bill.getBillType() == Constants.BILL_TYPES.GAS) ? R.drawable.gas_icon_black : R.drawable.bulb_icon_black);
+            mServiceType.setText((bill.getBillType() == Constants.BILL_TYPES.GAS) ? R.string.teco_gas : R.string.teco_electricity);
+
             mDate.setText(bill.getBillingDate());
             mBillingAddress.setText(bill.getAddress());
             mMeterNumber.setText(bill.getMeterNumber());
             mBillingDate.setText(bill.getBillingCycle());
-            mTotalConsumption.setText(bill.getConsumption());
-            mAverageConsumption.setText(bill.getConsumptionAverage());
+            mTotalConsumption.setText(bill.getConsumption() + unit);
+            mAverageConsumption.setText(bill.getConsumptionAverage() + unit);
             mPlanDetails.setText(bill.getPlanName());
-            mCostPerUnit.setText(bill.getPlanCost());
+            mCostPerUnitLabel.setText((bill.getBillType() == Constants.BILL_TYPES.GAS) ? R.string.cost_per_thm : R.string.cost_per_kwh);
+            mCostPerUnit.setText(bill.getPlanCost() + "/" + unit);
             mPayByDate.setText(bill.getPayByDate());
             mTotal.setText("$"+bill.getTotal());
-            setGraph();
         }
     }
-
-    private void setGraph() {
-        mConsumptionGraph.setImageResource(R.drawable.camera);
-    }
-
 
 }

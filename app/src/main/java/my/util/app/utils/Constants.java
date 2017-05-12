@@ -2,7 +2,6 @@ package my.util.app.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -145,12 +144,54 @@ public class Constants {
 
     public static ArrayList<BillDetails> getDummyBillsList() {
         ArrayList<BillDetails> addressList = new ArrayList<>();
-        addressList.add(new BillDetails(USER_ADDRESSES.MRTHLI, BILL_TYPES.ELECTRICITY,
-                TECO, "100", "1.4", 12, "April 2017", "05/03/2017 - 04/04/2017", "20/04/2017", "345627", "Economy 100 Plan", "0.12$/Kwh", 12));
-        addressList.add(new BillDetails(USER_ADDRESSES.OFC, BILL_TYPES.ELECTRICITY,
-                TECO, "643", "2.6", 63, "May 2017", "05/04/2017 - 04/05/2017", "20/05/2017", "398645", "Economy 100 Plan", "0.12$/Kwh", 63));
-        addressList.add(new BillDetails(USER_ADDRESSES.ECITY, BILL_TYPES.GAS,
-                TECO, "157", "0.7", 107, "May 2017", "05/04/2017 - 04/05/2017", "20/05/2017", "10098346", "Economy House Rural Plan", "0.9$/Thm", 107));
+        addressList.add(new BillDetails(USER_ADDRESSES.MRTHLI,
+                BILL_TYPES.ELECTRICITY, TECO,
+                "100",
+                "1.4",
+                12,
+                "April 2017",
+                "05/03/2017 - 04/04/2017",
+                "20/04/2017",
+                "345627",
+                "Economy 100 Plan",
+                "0.12$",
+                190));
+        addressList.add(new BillDetails(USER_ADDRESSES.MRTHLI,
+                BILL_TYPES.GAS, TECO,
+                "70",
+                "0.8",
+                14,
+                "April 2017",
+                "05/03/2017 - 04/04/2017",
+                "20/04/2017",
+                "345628",
+                "Economy House Rural Plan",
+                "0.15$",
+                210));
+        addressList.add(new BillDetails(USER_ADDRESSES.OFC,
+                BILL_TYPES.ELECTRICITY, TECO,
+                "110",
+                "1.4",
+                12,
+                "March 2017",
+                "05/02/2017 - 04/03/2017",
+                "20/03/2017",
+                "333896",
+                "Economy 100 Plan",
+                "0.12$",
+                240));
+        addressList.add(new BillDetails(USER_ADDRESSES.HSR,
+                BILL_TYPES.ELECTRICITY, TECO,
+                "63",
+                "1.4",
+                11,
+                "March 2017",
+                "05/02/2017 - 04/03/2017",
+                "20/03/2017",
+                "3289002",
+                "Economy 100 Plan",
+                "0.12$",
+                155));
         return addressList;
     }
 
@@ -159,19 +200,15 @@ public class Constants {
         ArrayList<BillDetails> bills = DataManager.getInstance(ctx).fetchAllSavedBills();
         for (BillDetails bill : bills) {
             String key = bill.getAddress();
-            Log.d("DEBUG_LOG", "checking for : " + key);
             if (hashMap.containsKey(key)) {
-                Log.d("DEBUG_LOG", "contains");
                 List<BillDetails> list = hashMap.get(key);
                 list.add(bill);
             } else {
-                Log.d("DEBUG_LOG", "add new");
                 List<BillDetails> list = new ArrayList<BillDetails>();
                 list.add(bill);
                 hashMap.put(key, list);
             }
         }
-        Log.d("DEBUG_LOG", "final no of items " + hashMap.size());
         return hashMap;
     }
 
@@ -182,10 +219,10 @@ public class Constants {
         return titles;
     }
 
-    public static List<String> getBillTitles(HashMap<String, List<BillDetails>> hashmap){
+    public static List<String> getBillTitles(HashMap<String, List<BillDetails>> hashmap) {
         List<String> titles = new ArrayList<>();
-        Iterator<Map.Entry<String, List<BillDetails>>> itr=  hashmap.entrySet().iterator();
-        while(itr.hasNext()) {
+        Iterator<Map.Entry<String, List<BillDetails>>> itr = hashmap.entrySet().iterator();
+        while (itr.hasNext()) {
             titles.add(itr.next().getKey());
         }
         return titles;

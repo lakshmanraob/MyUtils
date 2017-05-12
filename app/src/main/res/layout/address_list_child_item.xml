@@ -4,6 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:orientation="vertical"
     android:padding="@dimen/screen_outer_padding">
 
     <LinearLayout
@@ -70,7 +71,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:gravity="center_vertical"
-                android:text="May 2017"
+                android:text=""
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/font_size_general"
                 android:textStyle="bold" />
@@ -130,7 +131,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:gravity="center_vertical"
-                android:text="643Kwh"
+                android:text=""
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/font_size_general"
                 android:textStyle="bold" />
@@ -165,7 +166,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:gravity="center_vertical"
-                android:text="$63"
+                android:text=""
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/font_size_large"
                 android:textStyle="bold" />
@@ -200,6 +201,56 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/total_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/screen_outer_padding"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/five_val"
+            android:layout_marginTop="@dimen/widgets_inner_padding"
+            android:layout_weight="1.2"
+            android:text="@string/total"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_size_general" />
+
+        <TextView
+            android:id="@+id/total_bill"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/five_val"
+            android:layout_weight="1.2"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="74$"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_size_extra_large"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pay_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/widgets_spacing"
+            android:background="@drawable/rounded_bg_filled"
+            android:paddingLeft="@dimen/fifty_spacing"
+            android:paddingRight="@dimen/fifty_spacing"
+            android:text="@string/pay"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

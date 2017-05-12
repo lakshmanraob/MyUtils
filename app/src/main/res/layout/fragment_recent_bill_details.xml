@@ -19,16 +19,17 @@
             android:padding="@dimen/widgets_inner_padding">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/bill_type_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:gravity="center"
-                android:src="@drawable/telemarketer" />
+                android:src="@drawable/recent_bills" />
 
             <TextView
-                android:id="@+id/complaints_label"
+                android:id="@+id/bill_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/complaints"
+                android:text="@string/bill_details_title"
                 android:textColor="@color/app_bg_end"
                 android:textSize="@dimen/font_size_general" />
         </LinearLayout>
@@ -43,6 +44,7 @@
             android:textColor="@android:color/black"
             android:textSize="20sp" />
     </FrameLayout>
+
 
     <TextView
         android:id="@+id/no_data"
@@ -326,8 +328,10 @@
                         android:id="@+id/avg_consumption_graph"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_margin="@dimen/screen_outer_padding"
-                        android:background="@drawable/bill_bg" />
+                        android:layout_marginLeft="@dimen/screen_outer_padding"
+                        android:layout_marginRight="@dimen/screen_outer_padding"
+                        android:layout_marginBottom="@dimen/screen_outer_padding"
+                        android:background="@drawable/graph" />
 
 
                     <LinearLayout
@@ -369,6 +373,7 @@
                             android:textSize="@dimen/font_size_general" />
 
                         <TextView
+                            android:id="@+id/cost_per_unit_label"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/five_val"
