@@ -23,6 +23,7 @@
     <dimen name="five_val">5dp</dimen>
     <dimen name="six_val">6dp</dimen>
     <dimen name="thirty_val">30dp</dimen>
+    <dimen name="twenty_val">20dp</dimen>
 
     <dimen name="design_bottom_navigation_text_size" tools:override="true">15sp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">15sp</dimen>
