@@ -40,15 +40,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.DataManager;
-import my.util.app.MyUtilApp;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.models.IssueDetails;
-import my.util.app.utils.Constants;
-import my.util.app.utils.DbHelper;
-import my.util.app.utils.ImageCaptureListener;
 import my.util.app.models.PhotoDetails;
+import my.util.app.utils.Constants;
+import my.util.app.utils.ImageCaptureListener;
 import my.util.app.utils.Utils;
 
 public class ComplaintsFragment extends Fragment implements
@@ -197,6 +195,9 @@ public class ComplaintsFragment extends Fragment implements
         } else {
             Utils.showShortToast(getActivity(), resources.getString(R.string.error_outage_type));
         }
+//        Utils.showSubmitDialog(getActivity());
+        //This is lakshman addition will remove later
+//        UtilDialog.showDialog(getActivity(), R.layout.submit_dialog, R.string.submit_message);
     }
 
     private void showCallDialog() {
@@ -205,6 +206,7 @@ public class ComplaintsFragment extends Fragment implements
         view.findViewById(R.id.call_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
                 startActivity(intent);
             }

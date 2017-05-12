@@ -39,7 +39,6 @@
     <string name="util_txt">UTIL</string>
     <string name="util_help">A Utilities Management Application</string>
 
-
     <string name="login_heading">Login</string>
     <string name="pay_for_other">Pay for another</string>
 
@@ -102,4 +101,33 @@
     <string name="pay_by_date">Pay by date</string>
     <string name="pay">Pay</string>
     <string name="no_data">Sorry, no data available.\nPlease try again later.</string>
+
+    <!-- Sign up text messages-->
+    <string name="hint_ssn">Last four digits of your SSN</string>
+    <string name="signup_help">Please provide the Account Number with which you are registered to TECO.
+        Please enter the last 4 digits of your SSN to verify account</string>
+
+    <string name="hint_confirm_pwd">Confirm Password</string>
+    <string name="pwd_help">Please provide a password to secure your account.
+        This password will be used to login to your account.</string>
+
+
+    <string name="personal_details">Personal Details</string>
+
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="dob_hint">Date of Birth</string>
+
+    <string name="contact_details">Contact Details</string>
+    <string name="phone_hint">Phone Number</string>
+    <string name="email_hint">Email Address</string>
+
+    <string name="residential_address">Residential Address</string>
+    <string name="address_hint">@string/address</string>
+    <string name="pincode_hint">Pincode</string>
+    <string name="city_hint">City</string>
+    <string name="back_str">Back</string>
+
+    <string name="reg_submit_message">You have successfully registered your account!</string>
+
 </resources>

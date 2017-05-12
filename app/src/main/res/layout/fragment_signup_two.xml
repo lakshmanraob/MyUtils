@@ -1,18 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark"
+    android:background="@mipmap/bg"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/img_pager_item"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/elec" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/personal_details_help"
+        style="@style/SignUpLayoutStyle.heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/personal_details" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:clickable="false"
-        android:scaleType="center"
-        tools:src="@mipmap/finger_print" />
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_first"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/first_name_hint"
+                android:inputType="text" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_last"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_first"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_last"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/last_name_hint"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_dob"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_last"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/dob_hint"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

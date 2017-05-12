@@ -16,6 +16,7 @@ import my.util.app.fragments.SignupFragmentFour;
 import my.util.app.fragments.SignupFragmentOne;
 import my.util.app.fragments.SignupFragmentThree;
 import my.util.app.fragments.SignupFragmentTwo;
+import my.util.app.utils.UtilDialog;
 
 public class SignUpActivity extends BaseActivity {
 
@@ -56,11 +57,26 @@ public class SignUpActivity extends BaseActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signup_cancel:
-                    finish();
+                    if (signupViewPager.getCurrentItem() == 0) {
+                        finish();
+                    } else {
+                        signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() <
+                                0 ? DOT_COOUNT : signupViewPager.getCurrentItem() - 1);
+                    }
                     break;
                 case R.id.signup_next:
-                    signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() >
-                            DOT_COOUNT ? 0 : signupViewPager.getCurrentItem() + 1);
+                    if (signupViewPager.getCurrentItem() == 3) {
+                        UtilDialog.showSubmitDialog(SignUpActivity.this,
+                                R.layout.reg_submit_dialog, R.string.reg_submit_message, false, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        finish();
+                                    }
+                                });
+                    } else {
+                        signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() >
+                                DOT_COOUNT ? 0 : signupViewPager.getCurrentItem() + 1);
+                    }
                     break;
             }
         }
@@ -90,6 +106,15 @@ public class SignUpActivity extends BaseActivity {
             } else {
                 dots[i].setImageDrawable(getResources().getDrawable(R.drawable.signup_un_selected_dot, null));
             }
+        }
+
+        if (selected > 0) {
+            cancelText.setText(getString(R.string.back_str));
+            if(selected == 3){
+                nextText.setText(getString(R.string.submit));
+            }
+        }  else {
+            cancelText.setText(getString(R.string.cancel_str));
         }
     }
 
