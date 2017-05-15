@@ -49,6 +49,8 @@ public class ComplaintsListFragment extends Fragment {
     protected IconTextView mSearchClose;
     @BindView(R.id.search_input_layout)
     protected FrameLayout mSearchInputLayout;
+    @BindView(R.id.search_divider)
+    protected View mSearchDivider;
     @BindView(R.id.search_input)
     protected EditText mSearchInput;
 
@@ -66,12 +68,14 @@ public class ComplaintsListFragment extends Fragment {
     protected void closeSearchLayout(View v) {
         mSearchOpen.setVisibility(View.VISIBLE);
         mSearchInputLayout.setVisibility(View.GONE);
+        mSearchDivider.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.search_open)
     protected void openSearchLayout(View v) {
         mSearchOpen.setVisibility(View.GONE);
         mSearchInputLayout.setVisibility(View.VISIBLE);
+        mSearchDivider.setVisibility(View.GONE);
     }
 
     public ComplaintsListFragment() {
