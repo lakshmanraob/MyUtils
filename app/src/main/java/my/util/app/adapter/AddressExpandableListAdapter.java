@@ -2,6 +2,9 @@ package my.util.app.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,7 +115,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setTag(holder);
         }
         BillDetails currentItem = getChild(groupPosition, childPosition);
-        holder.currentBill = currentItem;
+        holder.currentBill = currentItem; // RE-CHECK
 
         int type = holder.currentBill.getBillType();
         holder.billTypeIcon.setImageResource(type == 1 ? R.drawable.bulb_icon : R.drawable.gas_icon);

@@ -192,7 +192,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/widgets_spacing"
+            android:layout_margin="@dimen/widgets_inner_padding"
             android:background="@drawable/rounded_bg_filled"
             android:paddingLeft="@dimen/fifty_spacing"
             android:paddingRight="@dimen/fifty_spacing"

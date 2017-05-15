@@ -68,7 +68,7 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.login_info)
     protected void loginInfo(View v) {
         accountHelp.setVisibility(View.VISIBLE);
-        progressView.setVisibility(View.VISIBLE);
+        //progressView.setVisibility(View.VISIBLE);
 
         accountHelp.postDelayed(new Runnable() {
             @Override

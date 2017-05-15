@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,6 +183,7 @@ public class ComplaintsFragment extends Fragment implements
                             mCurrentLocation.getLongitude(),
                             referenceNumber));
                     if (dbStatus == -1) {
+                        Log.d("DEBUG_LOG", "error " + resources.getString(R.string.error_database));
                         Utils.showShortToast(getActivity(), resources.getString(R.string.error_database));
                     } else {
                         Utils.showSubmitDialog(getActivity(), referenceNumber);
@@ -316,7 +318,7 @@ public class ComplaintsFragment extends Fragment implements
     }
 
     public void updateImages(Drawable imageCaptured) {
-        Utils.showShortToast(getActivity(), "Success");
+        //Utils.showShortToast(getActivity(), "Success");
         images.add(new PhotoDetails("image_seq_" + images.size() + 1, imageCaptured));
         updateCaptureActionImage();
         if (images.size() > Constants.IMAGE_COUNT) {
@@ -368,7 +370,7 @@ public class ComplaintsFragment extends Fragment implements
             mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (mCurrentLocation != null) {
                 String displayAddress = Utils.getCurrentAddress(getContext(), mCurrentLocation);
-                Utils.showShortToast(getContext(), displayAddress);
+                //Utils.showShortToast(getContext(), displayAddress);
                 updateAddressField(displayAddress);
             }
         } else {

@@ -72,13 +72,13 @@ public class Constants {
     }
 
     public final class USER_ADDRESSES {
-        public static final String ECITY = "Infosys Drieway, Electronic City Phase 1, Bangalore";
-        public static final String HOSAROAD = "12/34, Hosa Road Junction, Bangalore";
-        public static final String BOSH = "Bosh, Plot No. 4, Konapana Agrahara, Bangalore";
-        public static final String HSR = "15 Main Road, 22 Cross Road, Sector 3, HSR Layout, Bangalore";
-        public static final String OFC = "Deloitte, Divyashree Tech Park, Yamalur, HAL Rd, Bangalore";
-        public static final String MRTHLI = "705, Varthur Mn Rd, Marathahalli, Bangalore";
-        public static final String PEENYA = "Peenya Metro Station, Peenya, Bangalore";
+        public static final String ECITY = "Infosys Drieway, Electronic City \nPhase 1, Bangalore";
+        public static final String HOSAROAD = "12/34, Hosa Road Junction, \nBangalore";
+        public static final String BOSH = "Bosh, Plot No. 4, Konapana Agrahara, \nBangalore";
+        public static final String HSR = "15 Main Road, 22 Cross Road, Sector 3, \nHSR Layout, Bangalore";
+        public static final String OFC = "Deloitte, Divyashree Tech Park, Yamalur, \nHAL Rd, Bangalore";
+        public static final String MRTHLI = "705, Varthur Mn Rd, Marathahalli, \nBangalore";
+        public static final String PEENYA = "Peenya Metro Station, Peenya, \nBangalore";
     }
 
     public static ArrayList<IssueDetails> getDummyComplaintsList(Context ctx) {

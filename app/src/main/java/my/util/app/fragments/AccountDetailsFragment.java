@@ -114,8 +114,8 @@ public class AccountDetailsFragment extends Fragment {
     private UserDetails getUserDetails() {
 
         UserDetails userDetails =
-                new UserDetails("9876543212", "First", "Last", "10/3/1997", "123456789",
-                        "labattula@deloitte.com", "Marathahalli, Bangalore", Constants.getRecentBills(getContext()));
+                new UserDetails("9876543212", "Edward", "Hogan", "10/3/1984", "123456789",
+                        "test@deloitte.com", "Marathahalli, Bangalore", Constants.getRecentBills(getContext()));
 
         return userDetails;
 
