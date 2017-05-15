@@ -72,7 +72,7 @@ public class AuthActivity extends BaseActivity {
 
         @Override
         public void onPageSelected(int position) {
-            Toast.makeText(AuthActivity.this, getAuthPageTitle(position), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(AuthActivity.this, getAuthPageTitle(position), Toast.LENGTH_SHORT).show();
         }
 
         @Override

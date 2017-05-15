@@ -45,7 +45,16 @@ public class Constants {
     public static final double LAT_PEENYA = 13.03533;
     public static final double LONG_PEENYA = 77.52691;
 
+    public static final int ACC_NO_LEN = 6;
     public static final int REF_NO_LEN = 6;
+
+    public static final String PAGE_TITLE = "pageTitle";
+    public static final String PAGE_NUMBER = "pageNumber";
+
+    //For displaying the Information display
+    public static final long INFO_DISPLAY_TIME = 5000L;
+
+    public static final long PROGRESS_TIME = 1000;
 
     public final class FRAGMENTS {
         public static final int BILLS = 0;
@@ -53,6 +62,7 @@ public class Constants {
         public static final int ACCOUNT = 2;
         public static final int NEW_COMPLAINT = 3;
         public static final int BILL_DETAILS = 4;
+        public static final int PAY_ACCOUNT_DETAILS = 5;
     }
 
     public final class COMPLAINT_STATUS {
@@ -193,6 +203,22 @@ public class Constants {
                 "0.12$",
                 155));
         return addressList;
+    }
+
+
+    public static BillDetails getFriendsBill() {
+        return new BillDetails(USER_ADDRESSES.MRTHLI,
+                BILL_TYPES.ELECTRICITY, TECO,
+                "120",
+                "1.4",
+                12,
+                "April 2017",
+                "05/03/2017 - 04/04/2017",
+                "20/04/2017",
+                "345627",
+                "Economy 100 Plan",
+                "0.12$",
+                144);
     }
 
     public static HashMap<String, List<BillDetails>> getRecentBills(Context ctx) {
