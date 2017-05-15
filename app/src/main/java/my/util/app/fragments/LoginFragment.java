@@ -21,7 +21,7 @@ import my.util.app.R;
 import my.util.app.activity.AuthActivity;
 import my.util.app.activity.MainActivity;
 import my.util.app.activity.SignUpActivity;
-import my.util.app.utils.UtilsConstants;
+import my.util.app.utils.Constants;
 
 public class LoginFragment extends Fragment {
 
@@ -42,8 +42,8 @@ public class LoginFragment extends Fragment {
     public static LoginFragment newInstance(String title, int pageNumber) {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
-        args.putString(UtilsConstants.PAGE_TITLE, title);
-        args.putInt(UtilsConstants.PAGE_NUMBER, pageNumber);
+        args.putString(Constants.PAGE_TITLE, title);
+        args.putInt(Constants.PAGE_NUMBER, pageNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,8 +51,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getArguments().getString(UtilsConstants.PAGE_TITLE);
-        page = getArguments().getInt(UtilsConstants.PAGE_NUMBER);
+        title = getArguments().getString(Constants.PAGE_TITLE);
+        page = getArguments().getInt(Constants.PAGE_NUMBER);
     }
 
     @Nullable
@@ -76,7 +76,7 @@ public class LoginFragment extends Fragment {
                 accountHelp.setVisibility(View.INVISIBLE);
                 progressView.setVisibility(View.INVISIBLE);
             }
-        }, UtilsConstants.INFO_DISPLAY_TIME);
+        }, Constants.INFO_DISPLAY_TIME);
     }
 
     @OnClick(R.id.btn_login)

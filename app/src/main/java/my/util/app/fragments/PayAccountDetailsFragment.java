@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,10 +15,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.R;
+import my.util.app.activity.BaseActivity;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
-public class PayAccountFragment extends Fragment {
+public class PayAccountDetailsFragment extends Fragment {
 
     @BindView(R.id.pay_input_account)
     EditText payAccountEdit;
@@ -37,8 +37,8 @@ public class PayAccountFragment extends Fragment {
     int page;
 
 
-    public static PayAccountFragment newInstance(String title, int pageNumber) {
-        PayAccountFragment fragment = new PayAccountFragment();
+    public static PayAccountDetailsFragment newInstance(String title, int pageNumber) {
+        PayAccountDetailsFragment fragment = new PayAccountDetailsFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.PAGE_TITLE, title);
         bundle.putInt(Constants.PAGE_NUMBER, pageNumber);
@@ -56,7 +56,7 @@ public class PayAccountFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View content = inflater.inflate(R.layout.fragment_pay_account, container, false);
+        View content = inflater.inflate(R.layout.fragment_pay_account_details, container, false);
         ButterKnife.bind(this, content);
         payAccountHelp.setVisibility(View.INVISIBLE);
         return content;
@@ -83,7 +83,7 @@ public class PayAccountFragment extends Fragment {
                 @Override
                 public void run() {
                     progressBar.setVisibility(View.GONE);
-                    Utils.showShortToast(getContext(), "OK");
+                    ((BaseActivity)getActivity()).updateFragment(Constants.FRAGMENTS.ACCOUNT);
                 }
             }, Constants.PROGRESS_TIME);
         } else {

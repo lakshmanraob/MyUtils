@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import my.util.app.R;
-import my.util.app.utils.UtilsConstants;
+import my.util.app.utils.Constants;
 
 public class SignupFragmentTwo extends Fragment {
 
@@ -19,8 +19,8 @@ public class SignupFragmentTwo extends Fragment {
     public static SignupFragmentTwo newInstance(String title, int pageNumber) {
         SignupFragmentTwo fragment = new SignupFragmentTwo();
         Bundle args = new Bundle();
-        args.putString(UtilsConstants.PAGE_TITLE, title);
-        args.putInt(UtilsConstants.PAGE_NUMBER, pageNumber);
+        args.putString(Constants.PAGE_TITLE, title);
+        args.putInt(Constants.PAGE_NUMBER, pageNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -28,8 +28,8 @@ public class SignupFragmentTwo extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getArguments().getString(UtilsConstants.PAGE_TITLE);
-        page = getArguments().getInt(UtilsConstants.PAGE_NUMBER);
+        title = getArguments().getString(Constants.PAGE_TITLE);
+        page = getArguments().getInt(Constants.PAGE_NUMBER);
     }
 
     @Nullable
