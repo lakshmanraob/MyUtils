@@ -2,9 +2,6 @@ package my.util.app.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,7 +112,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setTag(holder);
         }
         BillDetails currentItem = getChild(groupPosition, childPosition);
-        holder.currentBill = currentItem; // RE-CHECK
+        holder.currentBill = currentItem;
 
         int type = holder.currentBill.getBillType();
         holder.billTypeIcon.setImageResource(type == 1 ? R.drawable.bulb_icon : R.drawable.gas_icon);
@@ -179,7 +176,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
             ButterKnife.bind(this, view);
 
             Drawable circle = ctx.getResources().getDrawable(R.drawable.white_circle_filled);
-            Bitmap circleBitmap = drawableToBitmap(circle);
+            Bitmap circleBitmap = Utils.drawableToBitmap(circle);
             if (circleBitmap != null) {
                 int width = circleBitmap.getWidth();
                 int height = circleBitmap.getHeight();
@@ -202,15 +199,5 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
             Utils.showShortToast(ctx, "In Progress...");
         }
 
-        private Bitmap drawableToBitmap(Drawable drawable) {
-            if (drawable instanceof BitmapDrawable) {
-                return ((BitmapDrawable) drawable).getBitmap();
-            }
-            Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            drawable.draw(canvas);
-            return bitmap;
-        }
     }
 }

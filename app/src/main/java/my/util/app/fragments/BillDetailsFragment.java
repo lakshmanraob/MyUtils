@@ -113,7 +113,7 @@ public class BillDetailsFragment extends Fragment {
 
     @OnClick(R.id.pay_btn)
     protected void payBill(View v) {
-        Utils.showShortToast(getContext(), "Pay Bill In Progress...");
+        Utils.showShortToast(getContext(), "In Progress...");
     }
 
     private void fillData() {

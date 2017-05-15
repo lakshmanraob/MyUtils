@@ -24,9 +24,6 @@ public class PayAccountDetailsFragment extends Fragment {
     @BindView(R.id.pay_input_account)
     EditText payAccountEdit;
 
-    @BindView(R.id.btn_pay)
-    ImageView payBtn;
-
     @BindView(R.id.progressBar)
     TextView progressBar;
 
@@ -74,7 +71,7 @@ public class PayAccountDetailsFragment extends Fragment {
         }, Constants.INFO_DISPLAY_TIME);
     }
 
-    @OnClick(R.id.btn_pay)
+    @OnClick(R.id.enter)
     protected void pay(View v) {
         String accountNo = payAccountEdit.getText().toString();
         if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN) {
