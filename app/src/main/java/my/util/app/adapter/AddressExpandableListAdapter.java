@@ -1,6 +1,11 @@
 package my.util.app.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -149,6 +154,11 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
     static class ChildViewHolder {
         BillDetails currentBill;
 
+        @BindView(R.id.left_circle)
+        ImageView leftCircle;
+        @BindView(R.id.right_circle)
+        ImageView rightCircle;
+
         @BindView(R.id.bill_type_icon)
         ImageView billTypeIcon;
         @BindView(R.id.bill_type)
@@ -167,6 +177,18 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
 
         public ChildViewHolder(View view) {
             ButterKnife.bind(this, view);
+
+            Drawable circle = ctx.getResources().getDrawable(R.drawable.white_circle_filled);
+            Bitmap circleBitmap = drawableToBitmap(circle);
+            if (circleBitmap != null) {
+                int width = circleBitmap.getWidth();
+                int height = circleBitmap.getHeight();
+                int x = width / 2;
+                Bitmap leftBitmap = Bitmap.createBitmap(circleBitmap, x, 0, x, height, null, false);
+                leftCircle.setImageBitmap(leftBitmap);
+                Bitmap rightBitmap = Bitmap.createBitmap(circleBitmap, 0, 0, x, height, null, false);
+                rightCircle.setImageBitmap(rightBitmap);
+            }
         }
 
         @OnClick(R.id.bill_details)
@@ -178,6 +200,17 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
         @OnClick(R.id.pay_btn)
         protected void payBill(View v) {
             Utils.showShortToast(ctx, "In Progress...");
+        }
+
+        private Bitmap drawableToBitmap(Drawable drawable) {
+            if (drawable instanceof BitmapDrawable) {
+                return ((BitmapDrawable) drawable).getBitmap();
+            }
+            Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            return bitmap;
         }
     }
 }

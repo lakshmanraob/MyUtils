@@ -86,15 +86,13 @@
                 android:id="@+id/left_circle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/white_circle_left" />
+                android:layout_alignParentLeft="true" />
 
             <ImageView
                 android:id="@+id/right_circle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/white_circle_right" />
+                android:layout_alignParentRight="true" />
 
             <View
                 android:layout_width="match_parent"
