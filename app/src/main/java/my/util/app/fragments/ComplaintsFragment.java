@@ -145,8 +145,7 @@ public class ComplaintsFragment extends Fragment implements
 
     @OnClick(R.id.call_button)
     protected void callEmergencyNumber(View v) {
-
-        showCallDialog();
+        Utils.showEmergencyCallDialog(getContext());
     }
 
     @OnClick(R.id.location_detector)
@@ -200,31 +199,6 @@ public class ComplaintsFragment extends Fragment implements
 //        Utils.showSubmitDialog(getActivity());
         //This is lakshman addition will remove later
 //        UtilDialog.showDialog(getActivity(), R.layout.submit_dialog, R.string.submit_message);
-    }
-
-    private void showCallDialog() {
-        final Dialog dialog = new Dialog(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.call_dialog, null);
-        view.findViewById(R.id.call_ok).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
-                startActivity(intent);
-            }
-        });
-        view.findViewById(R.id.call_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setContentView(view);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
     }
 
     private void updateCaptureActionImage() {

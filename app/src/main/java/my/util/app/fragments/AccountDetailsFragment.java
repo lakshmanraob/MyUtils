@@ -40,6 +40,7 @@ public class AccountDetailsFragment extends Fragment {
     ExpandableListView mAccountList;
 
     LinearLayout headerView;
+    private static int prev = -1;
 
     public AccountDetailsFragment() {
     }
@@ -84,7 +85,7 @@ public class AccountDetailsFragment extends Fragment {
         mFirstName.setContent(userDetails.getFirstName());
 
         mLastName = (DetailsView) headerView.findViewById(R.id.ud_lastName);
-        mFirstName.setContent(userDetails.getFirstName());
+        mLastName.setContent(userDetails.getLastName());
 
         mDob = (DetailsView) headerView.findViewById(R.id.ud_dob);
         mDob.setContent(userDetails.getDob());
@@ -108,6 +109,16 @@ public class AccountDetailsFragment extends Fragment {
         //Setting up the adapter for the spinner
         UserBilldetailsAdapter adapter = new UserBilldetailsAdapter(getContext(), Constants.getBillTitles(), Constants.getRecentBills(getContext()));
         mAccountList.setAdapter(adapter);
+        mAccountList.setGroupIndicator(null);
+        mAccountList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (prev != -1 && prev != groupPosition) {
+                    mAccountList.collapseGroup(prev);
+                }
+                prev = groupPosition;
+            }
+        });
 
     }
 

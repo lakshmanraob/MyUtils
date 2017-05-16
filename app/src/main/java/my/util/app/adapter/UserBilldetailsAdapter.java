@@ -39,7 +39,7 @@ public class UserBilldetailsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return allBillDetails.get(mGroupTitles.get(groupPosition)).size();
+        return 1;
     }
 
     @Override
@@ -97,11 +97,6 @@ public class UserBilldetailsAdapter extends BaseExpandableListAdapter {
             holder = new UserBilldetailsAdapter.ChildViewHolder(convertView);
             convertView.setTag(holder);
         }
-        List<BillDetails> currentItem = getChild(groupPosition, childPosition);
-        holder.bills = currentItem;
-        holder.serviceHeading.setText(holder.bills.get(childPosition).getProvider());
-        holder.avgDayConsumption.setContent(holder.bills.get(childPosition).getConsumption());
-        holder.avgMonthConsumption.setContent(holder.bills.get(childPosition).getConsumptionAverage());
 
         return convertView;
     }
@@ -128,17 +123,6 @@ public class UserBilldetailsAdapter extends BaseExpandableListAdapter {
     }
 
     static class ChildViewHolder {
-        List<BillDetails> bills;
-
-        @BindView(R.id.service_heading)
-        TextView serviceHeading;
-
-        @BindView(R.id.avg_day_consumption)
-        DetailsView avgDayConsumption;
-
-        @BindView(R.id.avg_month_consumption)
-        DetailsView avgMonthConsumption;
-
 
         public ChildViewHolder(View view) {
             ButterKnife.bind(this, view);

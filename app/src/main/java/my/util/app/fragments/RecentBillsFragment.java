@@ -68,7 +68,6 @@ public class RecentBillsFragment extends Fragment {
                 prev = groupPosition;
             }
         });
-        addressExpandableList.expandGroup(0);
         return content;
     }
 

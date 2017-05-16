@@ -22,6 +22,7 @@
     <string name="status_review">Under \n Review</string>
     <string name="status_resolved">Resolved</string>
     <string name="account_details">Account Details</string>
+    <string name="confirm_call">Call <b>911</b> ?</string>
 
     <string name="submit_message_start">Thank you! Your notification has been \nreceived. Your reference number is \n</string>
     <string name="ok">Ok</string>
@@ -90,7 +91,9 @@
     <string name="billing_date">Billing Date</string>
     <string name="meter_number">Meter Number</string>
     <string name="consumption">Consumption</string>
+    <string name="consumption_details">Consumption Details</string>
     <string name="avg_consumption">Average Day-to-day consumption</string>
+    <string name="avg_spending">Average monthly Spending</string>
     <string name="payment_details">Payment Details</string>
     <string name="plan_details">Plan Details</string>
     <string name="cost_per_unit">Cost per Unit</string>

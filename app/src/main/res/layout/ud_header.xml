@@ -8,36 +8,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="@color/yellow"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/telemarketer" />
-
-        <TextView
-            android:id="@+id/complaints_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/account_details"
-            android:textAllCaps="false"
-            android:textColor="@color/app_bg_end"
-            android:textSize="@dimen/font_size_general" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
         android:background="@color/app_bg_end"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="@dimen/screen_outer_padding">
 
         <TextView
             android:layout_width="0dp"
@@ -64,7 +38,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:paddingBottom="@dimen/widgets_inner_padding"
+        android:paddingLeft="@dimen/screen_outer_padding"
+        android:paddingRight="@dimen/screen_outer_padding"
+        android:paddingTop="@dimen/widgets_inner_padding">
 
         <my.util.app.DetailsView
             android:id="@+id/ud_firstName"
@@ -87,14 +64,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
         <my.util.app.DetailsView
             android:id="@+id/ud_dob"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/widgets_inner_padding"
+            android:paddingLeft="@dimen/screen_outer_padding"
+            android:paddingRight="@dimen/screen_outer_padding"
+            android:paddingTop="@dimen/widgets_inner_padding"
             custom:content="May 28, 1997"
             custom:heading="Date of birth" />
 
@@ -102,7 +81,10 @@
             android:id="@+id/ud_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/widgets_inner_padding"
+            android:paddingLeft="@dimen/screen_outer_padding"
+            android:paddingRight="@dimen/screen_outer_padding"
+            android:paddingTop="@dimen/widgets_inner_padding"
             custom:content="58725186868"
             custom:heading="Phone Number" />
 
@@ -110,7 +92,10 @@
             android:id="@+id/ud_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/widgets_inner_padding"
+            android:paddingLeft="@dimen/screen_outer_padding"
+            android:paddingRight="@dimen/screen_outer_padding"
+            android:paddingTop="@dimen/widgets_inner_padding"
             custom:content="labattula@deloitte.com"
             custom:heading="Email address" />
 
@@ -118,7 +103,10 @@
             android:id="@+id/ud_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/widgets_inner_padding"
+            android:paddingLeft="@dimen/screen_outer_padding"
+            android:paddingRight="@dimen/screen_outer_padding"
+            android:paddingTop="@dimen/widgets_inner_padding"
             custom:content="016, dgj"
             custom:heading="Address" />
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import my.util.app.activity.AuthActivity;
 import my.util.app.activity.MainActivity;
 import my.util.app.activity.SignUpActivity;
 import my.util.app.utils.Constants;
+import my.util.app.utils.Utils;
 
 public class LoginFragment extends Fragment {
 
@@ -29,6 +31,10 @@ public class LoginFragment extends Fragment {
     EditText accountEdit;
     @BindView(R.id.login_input_password)
     EditText passwordEdit;
+    @BindView(R.id.progress)
+    IconTextView progress;
+    @BindView(R.id.btn_login)
+    ImageView loginBtn;
 
     @BindView(R.id.login_account_help)
     TextView accountHelp;
@@ -81,8 +87,25 @@ public class LoginFragment extends Fragment {
 
     @OnClick(R.id.btn_login)
     protected void login(View v) {
-        if(getActivity() instanceof AuthActivity) {
-            ((AuthActivity)getActivity()).loginUser();
+        String accountNo = accountEdit.getText().toString();
+        if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN) {
+            String password = passwordEdit.getText().toString();
+            if (!TextUtils.isEmpty(password) && password.length() >= Constants.ACC_NO_LEN) {
+                if(getActivity() instanceof AuthActivity) {
+                    loginBtn.setVisibility(View.GONE);
+                    progress.setVisibility(View.VISIBLE);
+                    progress.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((AuthActivity)getActivity()).loginUser();
+                        }
+                    }, Constants.PROGRESS_TIME);
+                }
+            } else {
+                Utils.showShortToast(getContext(), "Please enter your password.");
+            }
+        } else {
+            Utils.showShortToast(getContext(), "Please enter a valid account no.");
         }
     }
 

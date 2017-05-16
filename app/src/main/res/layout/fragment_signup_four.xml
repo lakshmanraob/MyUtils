@@ -17,7 +17,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:src="@mipmap/elec" />
 
         <TextView
@@ -25,8 +24,13 @@
             style="@style/SignUpLayoutStyle.help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widgets_inner_padding"
+            android:layout_marginRight="@dimen/widgets_inner_padding"
             android:gravity="center"
-            android:text="@string/pwd_help" />
+            android:padding="@dimen/screen_outer_padding"
+            android:text="@string/pwd_help"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_size_general" />
 
     </LinearLayout>
 
@@ -47,9 +51,13 @@
                 android:id="@+id/signup_input_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widgets_inner_padding"
+                android:layout_marginRight="@dimen/widgets_inner_padding"
                 android:ems="10"
                 android:hint="@string/hint_password"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -59,7 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/signup_input_layout_pwd"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/widgets_inner_padding"
+            android:layout_marginRight="@dimen/widgets_inner_padding">
 
             <EditText
                 android:id="@+id/signup_input_pwd_confirm"
@@ -68,6 +78,8 @@
                 android:ems="10"
                 android:hint="@string/hint_confirm_pwd"
                 android:inputType="number"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general"
                 android:visibility="visible" />
         </android.support.design.widget.TextInputLayout>
 

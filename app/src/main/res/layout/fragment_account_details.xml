@@ -6,6 +6,32 @@
     android:orientation="vertical"
     tools:context="my.util.app.fragments.AccountDetailsFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/yellow"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/telemarketer" />
+
+        <TextView
+            android:id="@+id/complaints_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_details"
+            android:textAllCaps="false"
+            android:textColor="@color/app_bg_end"
+            android:textSize="@dimen/font_size_general" />
+
+    </LinearLayout>
+
     <ExpandableListView
         android:id="@+id/ud_account_list"
         android:layout_width="match_parent"

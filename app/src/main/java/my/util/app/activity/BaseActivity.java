@@ -1,6 +1,6 @@
 package my.util.app.activity;
 
-import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,8 +17,26 @@ import my.util.app.utils.Constants;
 public class BaseActivity extends AppCompatActivity {
 
     private static int FRAGMENT_COUNT = 0;
-    @BindView(R.id.bottom_tab)
-    BottomNavigationView mBottomNavigationBar;
+    @BindView(R.id.tabs)
+    TabLayout mBottomNavigationBar;
+
+    public void setupBottomBar() {
+        mBottomNavigationBar.addTab(mBottomNavigationBar.newTab().setText(getFragmentTitle(Constants.FRAGMENTS.BILLS)),true);
+        mBottomNavigationBar.addTab(mBottomNavigationBar.newTab().setText(getFragmentTitle(Constants.FRAGMENTS.COMPLAINTS)));
+        mBottomNavigationBar.addTab(mBottomNavigationBar.newTab().setText(getFragmentTitle(Constants.FRAGMENTS.ACCOUNT)));
+        mBottomNavigationBar.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                updateFragment(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+    }
 
     public void addFragment(int fragment) {
         Log.d("DEBUG_LOG", "addFragment " + fragment);
@@ -45,14 +63,14 @@ public class BaseActivity extends AppCompatActivity {
 
     public void updateBottomBar(int fragment) {
         Log.d("DEBUG_LOG", "updateBottomBar " + fragment);
-        if (mBottomNavigationBar != null) {
+        /*if (mBottomNavigationBar != null) {
             if (fragment == Constants.FRAGMENTS.BILLS ||
                     fragment == Constants.FRAGMENTS.COMPLAINTS || fragment == Constants.FRAGMENTS.ACCOUNT) {
                 mBottomNavigationBar.getMenu().getItem(fragment).setChecked(true);
             } else {
                 mBottomNavigationBar.getMenu().getItem(Constants.FRAGMENTS.COMPLAINTS).setChecked(true);
             }
-        }
+        }*/
     }
 
     public String getFragmentTitle(int position) {
@@ -86,5 +104,4 @@ public class BaseActivity extends AppCompatActivity {
                 return BillDetailsFragment.newInstance(getFragmentTitle(position), null);
         }
     }
-
 }

@@ -66,9 +66,11 @@ public class ComplaintsListFragment extends Fragment {
 
     @OnClick(R.id.search_close)
     protected void closeSearchLayout(View v) {
-        mSearchOpen.setVisibility(View.VISIBLE);
+        mSearchInput.setText("");
         mSearchInputLayout.setVisibility(View.GONE);
+        mSearchOpen.setVisibility(View.VISIBLE);
         mSearchDivider.setVisibility(View.VISIBLE);
+        refreshList();
     }
 
     @OnClick(R.id.search_open)
@@ -102,6 +104,10 @@ public class ComplaintsListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refreshList();
+    }
+
+    private void refreshList(){
         mComplaintsListAdapter.updateList(DataManager.getInstance(getActivity()).fetchAllSavedComplaints());
         mComplaintsListView.invalidate();
     }
@@ -128,10 +134,10 @@ public class ComplaintsListFragment extends Fragment {
                 if (!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.size() > 0) {
                     complaintsList = Utils.filterComplaintsList(complaintsList, s.toString());
                     mComplaintsListAdapter.updateList(complaintsList);
+                    mComplaintsListView.invalidate();
                 } else {
-                    mComplaintsListAdapter.updateList(DataManager.getInstance(getActivity()).fetchAllSavedComplaints());
+                    refreshList();
                 }
-                mComplaintsListView.invalidate();
             }
         });
 

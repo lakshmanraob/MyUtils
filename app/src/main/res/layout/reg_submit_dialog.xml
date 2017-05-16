@@ -27,7 +27,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="@dimen/screen_outer_padding"
-            android:text="@string/reg_submit_message" />
+            android:text="@string/reg_submit_message"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_size_general"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/ok"

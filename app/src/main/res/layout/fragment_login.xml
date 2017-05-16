@@ -70,12 +70,34 @@
             android:visibility="visible" />
     </android.support.design.widget.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/btn_login"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@mipmap/cta" />
+        android:layout_marginTop="@dimen/seventy_spacing"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/forty_spacing"
+            android:background="@mipmap/cta" />
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/forty_spacing"
+            android:shadowColor="#22000000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="{fa-refresh spin}"
+            android:textColor="@color/grey"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/btn_link_signup"
