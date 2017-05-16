@@ -66,6 +66,7 @@ public class Constants {
         public static final int NEW_COMPLAINT = 3;
         public static final int BILL_DETAILS = 4;
         public static final int PAY_ACCOUNT_DETAILS = 5;
+        public static final int ISSUES_MAP_VIEW = 6;
     }
 
     public final class COMPLAINT_STATUS {

@@ -11,6 +11,7 @@ import my.util.app.fragments.AccountDetailsFragment;
 import my.util.app.fragments.BillDetailsFragment;
 import my.util.app.fragments.ComplaintsFragment;
 import my.util.app.fragments.ComplaintsListFragment;
+import my.util.app.fragments.IssuesMapFragment;
 import my.util.app.fragments.RecentBillsFragment;
 import my.util.app.utils.Constants;
 
@@ -86,6 +87,8 @@ public class BaseActivity extends AppCompatActivity {
                 return getString(R.string.new_complaint_title);
             case Constants.FRAGMENTS.BILL_DETAILS:
                 return getString(R.string.bill_details_title);
+            case Constants.FRAGMENTS.ISSUES_MAP_VIEW:
+                return getString(R.string.issue_history);
         }
     }
 
@@ -102,6 +105,8 @@ public class BaseActivity extends AppCompatActivity {
                 return ComplaintsFragment.newInstance(getFragmentTitle(position), null);
             case Constants.FRAGMENTS.BILL_DETAILS:
                 return BillDetailsFragment.newInstance(getFragmentTitle(position), null);
+            case Constants.FRAGMENTS.ISSUES_MAP_VIEW:
+                return IssuesMapFragment.newInstance(getFragmentTitle(position), null);
         }
     }
 }

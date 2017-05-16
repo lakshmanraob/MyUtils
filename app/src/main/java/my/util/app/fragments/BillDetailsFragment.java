@@ -1,22 +1,16 @@
 package my.util.app.fragments;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
-
-import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +18,6 @@ import butterknife.OnClick;
 import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
-import my.util.app.adapter.AddressExpandableListAdapter;
 import my.util.app.models.BillDetails;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;

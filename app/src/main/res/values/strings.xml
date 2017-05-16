@@ -133,4 +133,6 @@
     <string name="back_str">Back</string>
 
     <string name="reg_submit_message">You have successfully registered your account!</string>
+
+    <string name="issues_around_you">Issues around you</string>
 </resources>

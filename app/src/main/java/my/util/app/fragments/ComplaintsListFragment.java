@@ -61,7 +61,7 @@ public class ComplaintsListFragment extends Fragment {
 
     @OnClick(R.id.open_map_view)
     protected void openMapView(View v) {
-        Utils.showShortToast(getActivity(), "In Progress...");
+        ((BaseActivity) getActivity()).updateFragment(Constants.FRAGMENTS.ISSUES_MAP_VIEW);
     }
 
     @OnClick(R.id.search_close)
