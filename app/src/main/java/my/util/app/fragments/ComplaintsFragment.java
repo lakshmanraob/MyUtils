@@ -33,6 +33,10 @@ import android.widget.Spinner;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
@@ -78,6 +82,8 @@ public class ComplaintsFragment extends Fragment implements
     private Resources resources;
 
     ComplaintReceiver receiver;
+
+    LocationRequest mLocationRequest;
 
     public ComplaintsFragment() {
     }
@@ -181,9 +187,12 @@ public class ComplaintsFragment extends Fragment implements
                 }
             }
             if (mCurrentLocation != null) {
-//                String address = Utils.getCurrentAddress(getActivity(), mCurrentLocation);
-//                updateAddressField(address);
                 startServiceForAddress(mCurrentLocation);
+            } else {
+                initLocationRequest();
+                if (mGoogleApiClient.isConnected()) {
+                    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, mLocationCallback, null);
+                }
             }
         }
     }
@@ -397,14 +406,9 @@ public class ComplaintsFragment extends Fragment implements
                 == PackageManager.PERMISSION_GRANTED) {
             mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (mCurrentLocation != null) {
-                String displayAddress = Utils.getCurrentAddress(getContext(), mCurrentLocation);
-                //Utils.showShortToast(getContext(), displayAddress);
-                updateAddressField(displayAddress);
-//                String displayAddress = Utils.getCurrentAddress(getContext(), mCurrentLocation);
-//                Utils.showShortToast(getContext(), displayAddress);
-//                updateAddressField(displayAddress);
-                //Launching the intentService for getting the address
-                startServiceForAddress(mCurrentLocation);
+                getAddressFromLocation();
+            } else {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, mLocationCallback, null);
             }
         } else {
             requestPermissions(new String[]{
@@ -412,6 +416,29 @@ public class ComplaintsFragment extends Fragment implements
                             Manifest.permission.ACCESS_COARSE_LOCATION},
                     Constants.LOCATION_PERMISSIONS_CODE);
         }
+    }
+
+    private LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult result) {
+            super.onLocationResult(result);
+            mCurrentLocation = result.getLastLocation();
+            getAddressFromLocation();
+        }
+
+        @Override
+        public void onLocationAvailability(LocationAvailability locationAvailability) {
+            super.onLocationAvailability(locationAvailability);
+            if (!locationAvailability.isLocationAvailable() && mCurrentLocation == null) {
+                Utils.showShortToast(getContext(), getString(R.string.error_location));
+            }
+        }
+    };
+
+    private void getAddressFromLocation() {
+        String displayAddress = Utils.getCurrentAddress(getContext(), mCurrentLocation);
+        updateAddressField(displayAddress);
+        startServiceForAddress(mCurrentLocation);
     }
 
     @Override
@@ -426,6 +453,18 @@ public class ComplaintsFragment extends Fragment implements
                 .addApi(LocationServices.API)
                 .build();
         mGoogleApiClient.connect();
+
+        initLocationRequest();
+
+    }
+
+    private void initLocationRequest() {
+        if (mLocationRequest == null) {
+            //Location request creation
+            mLocationRequest = LocationRequest.create();
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+            mLocationRequest.setSmallestDisplacement(Constants.LOCATION_UPDATE_REQUEST_IN_METERS);
+        }
     }
 
     @Override

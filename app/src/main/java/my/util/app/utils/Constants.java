@@ -57,6 +57,8 @@ public class Constants {
     public static final long PROGRESS_TIME = 1000;
     public static final long PROCESS_TIME = 500;
 
+    public static final int LOCATION_UPDATE_REQUEST_IN_METERS = 1600; // 1 mile = 1.6 km
+
     public final class FRAGMENTS {
         public static final int BILLS = 0;
         public static final int COMPLAINTS = 1;
@@ -265,4 +267,5 @@ public class Constants {
         public static final int THIS_MONTH = 2;
         public static final int PREVIOUS = 3;
     }
+
 }

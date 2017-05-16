@@ -237,7 +237,7 @@ public class Utils {
     public static void showSubmitDialog(final Activity ctx, int referenceNumber) {
         final Dialog dialog = new Dialog(ctx);
         View view = LayoutInflater.from(ctx).inflate(R.layout.submit_dialog, null);
-        TextView messageTv = (TextView) view.findViewById(R.id.message);
+        TextView messageTv = (TextView) view.findViewById(R.id.submit_text);
         String message = ctx.getResources().getString(R.string.submit_message_start) + "<b>" + referenceNumber + "</b";
         messageTv.setText(Html.fromHtml(message));
         ((TextView) view.findViewById(R.id.ok)).setOnClickListener(new View.OnClickListener() {
