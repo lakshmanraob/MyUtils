@@ -62,6 +62,16 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="OutageTextStyel" parent="@style/DetailsHeading.Content">
+        <item name="android:textColor">@color/details_heading_content_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="OutageTextStyel.select" parent="@style/DetailsHeading.Content">
+        <item name="android:textColor">@color/outageHeading_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="SpanTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/app_highlight</item>
         <item name="android:textSize">50sp</item>

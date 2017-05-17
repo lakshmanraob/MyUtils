@@ -1,12 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/issues_map_heading"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/yellow"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/widgets_inner_padding"
+        app:paddingStart="10dp">
+
+        <TextView
+            android:id="@+id/issues_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="7"
+            android:text="@string/issues_around_you"
+            android:textColor="@color/app_bg_end"
+            android:textSize="@dimen/font_size_general" />
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/issues_map_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="{md-clear}"
+            android:textColor="@color/outageHeading_color"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/issues_map_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/filter_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:src="@mipmap/filter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tap_to_view_filters" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/filter_options_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <my.util.app.OutageView
+                android:id="@+id/power_outage_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                app:outageString="@string/power_outage"
+                app:select="true"
+                app:selectedStateDrawable="@drawable/power_selector"
+                app:selectedStateTextColor="@color/outageHeading_color">
+
+            </my.util.app.OutageView>
+
+            <my.util.app.OutageView
+                android:id="@+id/street_outage_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                app:outageString="@string/streetlight_outage"
+                app:select="true"
+                app:selectedStateDrawable="@drawable/street_selector"
+                app:selectedStateTextColor="@color/outageHeading_color">
+
+            </my.util.app.OutageView>
+
+            <my.util.app.OutageView
+                android:id="@+id/safety_outage_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                app:outageString="@string/safety_concern"
+                app:select="true"
+                app:selectedStateDrawable="@drawable/safety_selector"
+                app:selectedStateTextColor="@color/outageHeading_color">
+
+            </my.util.app.OutageView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <FrameLayout
         android:id="@+id/store_locator_map_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/issues_map_bottom"
+        android:layout_below="@id/issues_map_heading" />
 
-</LinearLayout>
+
+</RelativeLayout>

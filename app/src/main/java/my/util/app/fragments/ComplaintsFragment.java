@@ -233,30 +233,30 @@ public class ComplaintsFragment extends Fragment implements
 //        UtilDialog.showDialog(getActivity(), R.layout.submit_dialog, R.string.submit_message);
     }
 
-    private void showCallDialog() {
-        final Dialog dialog = new Dialog(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.call_dialog, null);
-        view.findViewById(R.id.call_ok).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
-                startActivity(intent);
-            }
-        });
-        view.findViewById(R.id.call_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setContentView(view);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-    }
+//    private void showCallDialog() {
+//        final Dialog dialog = new Dialog(getContext());
+//        View view = LayoutInflater.from(getContext()).inflate(R.layout.call_dialog, null);
+//        view.findViewById(R.id.call_ok).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.EMERGENCY_NUMBER));
+//                startActivity(intent);
+//            }
+//        });
+//        view.findViewById(R.id.call_cancel).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.setContentView(view);
+//        dialog.setCancelable(false);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.show();
+//    }
 
     private void startServiceForAddress(Location location) {
         Intent msgIntent = new Intent(getContext(), FetchLocationAddress.class);

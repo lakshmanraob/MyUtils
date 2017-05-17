@@ -34,7 +34,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import my.util.app.OutageView;
 import my.util.app.R;
+import my.util.app.activity.BaseActivity;
 import my.util.app.models.MarkerData;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
@@ -60,6 +65,13 @@ public class IssuesMapFragment extends SupportMapFragment
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
 
+    @BindView(R.id.power_outage_select)
+    OutageView powerOutageView;
+    @BindView(R.id.street_outage_select)
+    OutageView streetOutageView;
+    @BindView(R.id.safety_outage_select)
+    OutageView safetyOutageView;
+
     private ArrayList<MarkerData> myOutageListData = new ArrayList<>();
 
     public static IssuesMapFragment newInstance(String param1, String param2) {
@@ -82,6 +94,7 @@ public class IssuesMapFragment extends SupportMapFragment
 
         View view = inflater.inflate(R.layout.fragment_issues_map,
                 container, false);
+        ButterKnife.bind(this, view);
 
         //building the Google Apiclient
         buildGoogleApiClient();
@@ -97,10 +110,37 @@ public class IssuesMapFragment extends SupportMapFragment
         return view;
     }
 
+    @OnClick(R.id.power_outage_select)
+    protected void powerOutageSelect(View v) {
+        powerOutageView.setSelected(!powerOutageView.isSelected());
+        mMap.clear();
+        showLocationInMap();
+    }
+
+    @OnClick(R.id.street_outage_select)
+    protected void streetOutageSelect(View v) {
+        streetOutageView.setSelected(!streetOutageView.isSelected());
+        mMap.clear();
+        showLocationInMap();
+    }
+
+    @OnClick(R.id.safety_outage_select)
+    protected void safetyOutageSelect(View v) {
+        safetyOutageView.setSelected(!safetyOutageView.isSelected());
+        mMap.clear();
+        showLocationInMap();
+    }
+
+    @OnClick(R.id.issues_map_close)
+    protected void closeScreen(View v) {
+        ((BaseActivity) getActivity()).removeFragment(Constants.FRAGMENTS.BILL_DETAILS);
+    }
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
+        mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
@@ -235,13 +275,43 @@ public class IssuesMapFragment extends SupportMapFragment
 
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             for (MarkerData data : getRandomLocation(100)) {
-                mMap.addMarker(new MarkerOptions()
-                        .icon(getPowerOutageImageRes(data))
-                        .position(data.getMarkerLatLng()));
+                switch (data.getOutageType()) {
+                    case Constants.OUTAGE_TYPE.POWER_OUTAGE:
+                        if (powerOutageView.isSelected()) {
+                            mMap.addMarker(new MarkerOptions()
+                                    .icon(getPowerOutageImageRes(data))
+                                    .position(data.getMarkerLatLng()));
 
-                builder.include(data.getMarkerLatLng());
+                            builder.include(data.getMarkerLatLng());
+                        }
+                        break;
+                    case Constants.OUTAGE_TYPE.OTHER_OUTAGE:
+                        // nothing doing
+                        break;
+                    case Constants.OUTAGE_TYPE.STREET_LIGHT_OUTAGE:
+                        if (streetOutageView.isSelected()) {
+                            mMap.addMarker(new MarkerOptions()
+                                    .icon(getPowerOutageImageRes(data))
+                                    .position(data.getMarkerLatLng()));
+
+                            builder.include(data.getMarkerLatLng());
+                        }
+                        break;
+                    case Constants.OUTAGE_TYPE.SAFETY_CONCERN:
+                        if (safetyOutageView.isSelected()) {
+                            mMap.addMarker(new MarkerOptions()
+                                    .icon(getPowerOutageImageRes(data))
+                                    .position(data.getMarkerLatLng()));
+
+                            builder.include(data.getMarkerLatLng());
+                        }
+                        break;
+                }
+
             }
-
+            if (mCurrentLocation != null) {
+                builder.include(new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()));
+            }
             LatLngBounds bounds = builder.build();
 
             int width = getResources().getDisplayMetrics().widthPixels;

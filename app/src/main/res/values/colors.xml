@@ -26,4 +26,6 @@
     <color name="details_heading_color">#9b9b9b</color>
     <color name="details_heading_content_color">#484e63</color>
 
+    <color name="outageHeading_color">@color/colorAccent</color>
+
 </resources>
