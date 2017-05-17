@@ -269,4 +269,11 @@ public class Constants {
         public static final int PREVIOUS = 3;
     }
 
+    public final class OUTAGE_TYPE {
+        public static final int STREET_LIGHT_OUTAGE = 0;
+        public static final int SAFETY_CONCERN = 1;
+        public static final int POWER_OUTAGE = 2;
+        public static final int OTHER_OUTAGE = 3;
+    }
+
 }

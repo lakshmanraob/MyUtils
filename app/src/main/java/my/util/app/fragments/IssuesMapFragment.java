@@ -24,10 +24,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import my.util.app.R;
+import my.util.app.models.MarkerData;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
@@ -37,7 +41,6 @@ import my.util.app.utils.Utils;
 
 public class IssuesMapFragment extends SupportMapFragment
         implements OnMapReadyCallback,
-        GoogleMap.OnCameraMoveListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
@@ -52,6 +55,8 @@ public class IssuesMapFragment extends SupportMapFragment
     GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
+
+    private ArrayList<MarkerData> myOutageListData = new ArrayList<>();
 
     public static IssuesMapFragment newInstance(String param1, String param2) {
         IssuesMapFragment fragment = new IssuesMapFragment();
@@ -74,6 +79,9 @@ public class IssuesMapFragment extends SupportMapFragment
         View view = inflater.inflate(R.layout.fragment_issues_map,
                 container, false);
 
+        //building the Google Apiclient
+        buildGoogleApiClient();
+
         getMapAsync(this);
 
         View mapView = super.onCreateView(inflater, container, savedInstanceState);
@@ -95,6 +103,11 @@ public class IssuesMapFragment extends SupportMapFragment
                 getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
+            if (mCurrentLocation != null) {
+                //move the camera to the current location
+                LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
+            }
         } else {
             requestPermissions(new String[]{
                             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -118,11 +131,6 @@ public class IssuesMapFragment extends SupportMapFragment
                 }
                 break;
         }
-    }
-
-    @Override
-    public void onCameraMove() {
-
     }
 
     @Override
@@ -172,9 +180,23 @@ public class IssuesMapFragment extends SupportMapFragment
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
             LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(currentLatLng));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+            LatLng newcurrentLatLng = new LatLng(mCurrentLocation.getLatitude() + 0.2, mCurrentLocation.getLongitude() - 0.3);
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
+
+            mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.powerred))
+                    .position(currentLatLng));
+
+            mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.safetyred))
+                    .position(newcurrentLatLng));
+
         }
+    }
+
+    private void drawMarkersAroundLocation() {
+
     }
 
     @Override
@@ -207,6 +229,5 @@ public class IssuesMapFragment extends SupportMapFragment
             mLocationRequest.setSmallestDisplacement(Constants.LOCATION_UPDATE_REQUEST_IN_METERS);
         }
     }
-
 
 }
