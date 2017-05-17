@@ -20,15 +20,19 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import my.util.app.R;
 import my.util.app.models.MarkerData;
@@ -161,6 +165,7 @@ public class IssuesMapFragment extends SupportMapFragment
             super.onLocationResult(locationResult);
             mCurrentLocation = locationResult.getLastLocation();
             showLocationInMap();
+            getRandomLocation(1000);
         }
 
         @Override
@@ -172,6 +177,54 @@ public class IssuesMapFragment extends SupportMapFragment
         }
     };
 
+    /**
+     * Getting the random location basing on the radius around the current location
+     *
+     * @param radius
+     * @return
+     */
+    public ArrayList<MarkerData> getRandomLocation(int radius) {
+
+        LatLng point = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+
+        ArrayList<MarkerData> randomMarkerData = new ArrayList<>();
+        Location myLocation = new Location("");
+        myLocation.setLatitude(point.latitude);
+        myLocation.setLongitude(point.longitude);
+
+        //This is to generate 10 random points
+        for (int i = 0; i < 20; i++) {
+            double x0 = point.latitude;
+            double y0 = point.longitude;
+
+            Random random = new Random();
+
+            // Convert radius from meters to degrees
+            double radiusInDegrees = radius / 111000f;
+
+            double u = random.nextDouble();
+            double v = random.nextDouble();
+            double w = radiusInDegrees * Math.sqrt(u);
+            double t = 2 * Math.PI * v;
+            double x = w * Math.cos(t);
+            double y = w * Math.sin(t);
+
+            // Adjust the x-coordinate for the shrinking of the east-west distances
+            double new_x = x / Math.cos(y0);
+
+            double foundLatitude = new_x + x0;
+            double foundLongitude = y + y0;
+            LatLng randomLatLng = new LatLng(foundLatitude, foundLongitude);
+            MarkerData markerData = new MarkerData();
+            markerData.setMarkerLatLng(randomLatLng);
+            markerData.setOutageType(i % 3);
+
+            randomMarkerData.add(markerData);
+
+        }
+        return randomMarkerData;
+    }
+
     private void showLocationInMap() {
         if (ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -179,25 +232,44 @@ public class IssuesMapFragment extends SupportMapFragment
                 getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-            LatLng newcurrentLatLng = new LatLng(mCurrentLocation.getLatitude() + 0.2, mCurrentLocation.getLongitude() - 0.3);
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (MarkerData data : getRandomLocation(100)) {
+                mMap.addMarker(new MarkerOptions()
+                        .icon(getPowerOutageImageRes(data))
+                        .position(data.getMarkerLatLng()));
 
-            mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.powerred))
-                    .position(currentLatLng));
+                builder.include(data.getMarkerLatLng());
+            }
 
-            mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.safetyred))
-                    .position(newcurrentLatLng));
+            LatLngBounds bounds = builder.build();
+
+            int width = getResources().getDisplayMetrics().widthPixels;
+            int height = getResources().getDisplayMetrics().heightPixels;
+            int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+
+            mMap.animateCamera(cu);
 
         }
     }
 
-    private void drawMarkersAroundLocation() {
+    private BitmapDescriptor getPowerOutageImageRes(MarkerData data) {
+        switch (data.getOutageType()) {
+            case Constants.OUTAGE_TYPE.POWER_OUTAGE:
+                return BitmapDescriptorFactory.fromResource(R.mipmap.powerred);
+            case Constants.OUTAGE_TYPE.SAFETY_CONCERN:
+                return BitmapDescriptorFactory.fromResource(R.mipmap.safetyred);
+            case Constants.OUTAGE_TYPE.STREET_LIGHT_OUTAGE:
+                return BitmapDescriptorFactory.fromResource(R.mipmap.streetred);
+            case Constants.OUTAGE_TYPE.OTHER_OUTAGE:
+            default:
+                return BitmapDescriptorFactory.fromResource(R.mipmap.powerred);
 
+        }
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
