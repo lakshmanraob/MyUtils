@@ -55,7 +55,7 @@ public class Constants {
     public static final long INFO_DISPLAY_TIME = 5000L;
 
     public static final long PROGRESS_TIME = 1000;
-    public static final long LOGOUT_TIME = 500;
+    public static final long PROCESS_TIME = 500;
 
     public final class FRAGMENTS {
         public static final int BILLS = 0;

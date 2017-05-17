@@ -34,11 +34,13 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
     static Context ctx;
     List<String> titles;
     HashMap<String, List<BillDetails>> allBills;
+    boolean isAccConfirmation;
 
-    public AddressExpandableListAdapter(Context ctx, List<String> titles, HashMap<String, List<BillDetails>> allBills) {
+    public AddressExpandableListAdapter(Context ctx, List<String> titles, HashMap<String, List<BillDetails>> allBills, boolean isAccountConfirmation) {
         this.ctx = ctx;
         this.titles = titles;
         this.allBills = allBills;
+        this.isAccConfirmation = isAccountConfirmation;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return allBills.get(titles.get(groupPosition)).size();
+        return (isAccConfirmation ? 1 : allBills.get(titles.get(groupPosition)).size());
     }
 
     @Override
@@ -105,30 +107,42 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        ChildViewHolder holder;
-        if (convertView != null) {
-            holder = (ChildViewHolder) convertView.getTag();
+        if (isAccConfirmation) {
+            AccountConfirmationHolder holder;
+            if (convertView != null) {
+                holder = (AccountConfirmationHolder) convertView.getTag();
+            } else {
+                convertView = ((LayoutInflater) ctx.getSystemService
+                        (Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.account_confirmation_child_item, parent, false);
+                holder = new AccountConfirmationHolder(convertView);
+                convertView.setTag(holder);
+            }
         } else {
-            convertView = ((LayoutInflater) ctx.getSystemService
-                    (Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.address_list_child_item, parent, false);
-            holder = new ChildViewHolder(convertView);
-            convertView.setTag(holder);
-        }
-        BillDetails currentItem = getChild(groupPosition, childPosition);
-        holder.currentBill = currentItem; // RE-CHECK
+            ChildViewHolder holder;
+            if (convertView != null) {
+                holder = (ChildViewHolder) convertView.getTag();
+            } else {
+                convertView = ((LayoutInflater) ctx.getSystemService
+                        (Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.address_list_child_item, parent, false);
+                holder = new ChildViewHolder(convertView);
+                convertView.setTag(holder);
+            }
+            BillDetails currentItem = getChild(groupPosition, childPosition);
+            holder.currentBill = currentItem; // RE-CHECK
 
-        int type = holder.currentBill.getBillType();
-        holder.billTypeIcon.setImageResource(type == 1 ? R.drawable.bulb_icon : R.drawable.gas_icon);
-        holder.billType.setText(type == 1 ? "Elctricity Services" : "Gas Services");
-        holder.complaintDate.setText(holder.currentBill.getBillingDate());
-        holder.consumption.setText(holder.currentBill.getConsumption() + (type == 1 ? " Kwh" : " Thm"));
-        holder.amount.setText("$" + holder.currentBill.getTotal());
-        int total = getBillTotal(groupPosition);
-        if (total > 0 && getChildrenCount(groupPosition) == (childPosition + 1)) {
-            holder.totalView.setVisibility(View.VISIBLE);
-            holder.totalBill.setText("$" + total);
-        } else {
-            holder.totalView.setVisibility(View.GONE);
+            int type = holder.currentBill.getBillType();
+            holder.billTypeIcon.setImageResource(type == 1 ? R.drawable.bulb_icon : R.drawable.gas_icon);
+            holder.billType.setText(type == 1 ? "Elctricity Services" : "Gas Services");
+            holder.complaintDate.setText(holder.currentBill.getBillingDate());
+            holder.consumption.setText(holder.currentBill.getConsumption() + (type == 1 ? " Kwh" : " Thm"));
+            holder.amount.setText("$" + holder.currentBill.getTotal());
+            int total = getBillTotal(groupPosition);
+            if (total > 0 && getChildrenCount(groupPosition) == (childPosition + 1)) {
+                holder.totalView.setVisibility(View.VISIBLE);
+                holder.totalBill.setText("$" + total);
+            } else {
+                holder.totalView.setVisibility(View.GONE);
+            }
         }
         return convertView;
     }
@@ -202,5 +216,10 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
             Utils.showShortToast(ctx, "In Progress...");
         }
 
+    }
+
+    static class AccountConfirmationHolder {
+        public AccountConfirmationHolder(View view) {
+        }
     }
 }

@@ -30,15 +30,21 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.joanzapata.iconify.widget.IconTextView;
 
 import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -47,10 +53,14 @@ import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.AuthActivity;
 import my.util.app.activity.BaseActivity;
+import my.util.app.activity.SignUpActivity;
+import my.util.app.adapter.AddressExpandableListAdapter;
+import my.util.app.models.BillDetails;
 import my.util.app.models.IssueDetails;
 
 public class Utils {
     private static ProgressDialog mProgressDialog;
+    static int prev = -1;
 
     public static void showShortToast(Context context, String toastMsg) {
         Toast.makeText(context, toastMsg, Toast.LENGTH_SHORT).show();
@@ -147,6 +157,59 @@ public class Utils {
                     addressFragments);
         }
         return detected;
+    }
+
+    public static void fetchSignUpDetails(final Activity act) {
+        showProgressBarWithListener(act, new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                showAccountConfirmationDialog(act);
+            }
+        });
+    }
+
+    public static void showAccountConfirmationDialog(final Activity ctx) {
+        prev = -1;
+        final Dialog dialog = new Dialog(ctx, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.account_confirmation_dialog, null);
+        ((IconTextView) view.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        final ExpandableListView addressList = (ExpandableListView) view.findViewById(R.id.address_expandable_list);
+        HashMap<String, List<BillDetails>> allBills = Constants.getRecentBills(ctx);
+        addressList.setAdapter(new AddressExpandableListAdapter(ctx, Constants.getBillTitles(allBills), allBills, true));
+        addressList.setGroupIndicator(null);
+        addressList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (prev != -1 && prev != groupPosition) {
+                    addressList.collapseGroup(prev);
+                }
+                prev = groupPosition;
+            }
+        });
+        View footerView = inflater.inflate(R.layout.ud_footer, null);
+        Button btn = (Button) footerView.findViewById(R.id.logout_btn);
+        btn.setText("Confirm");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataManager.getInstance(ctx).setAccountDetailsConfirmed(true);
+                dialog.dismiss();
+                ((SignUpActivity) ctx).nextText.performClick();
+            }
+        });
+        addressList.addFooterView(footerView);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
     public static void showEmergencyCallDialog(final Context ctx) {
@@ -262,7 +325,19 @@ public class Utils {
         return bitmap;
     }
 
-    public static void logoutUser(final Activity act){
+    public static void logoutUser(final Activity act) {
+        showProgressBarWithListener(act, new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                DataManager.getInstance(act).clearData();
+                Utils.showShortToast(act, "You have been successfully logged out !");
+                act.startActivity(new Intent(act, AuthActivity.class));
+                act.finish();
+            }
+        });
+    }
+
+    private static void showProgressBarWithListener(final Activity act, DialogInterface.OnCancelListener listener) {
         final ProgressDialog progress = new ProgressDialog(act);
         progress.setMessage("Please wait...");
         progress.show();
@@ -272,17 +347,10 @@ public class Utils {
                 progress.cancel();
             }
         };
-        progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                DataManager.getInstance(act).clearData();
-                Utils.showShortToast(act, "You have been successfully logged out !");
-                act.startActivity(new Intent(act, AuthActivity.class));
-                act.finish();
-            }
-        });
+        progress.setOnCancelListener(listener);
         Handler mHandler = new Handler();
-        mHandler.postDelayed(progressRunnable, Constants.LOGOUT_TIME);
+        mHandler.postDelayed(progressRunnable, Constants.PROCESS_TIME);
     }
+
 
 }

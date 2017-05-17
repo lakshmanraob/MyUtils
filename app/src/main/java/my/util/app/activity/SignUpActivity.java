@@ -11,19 +11,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.fragments.SignupFragmentFour;
 import my.util.app.fragments.SignupFragmentOne;
 import my.util.app.fragments.SignupFragmentThree;
 import my.util.app.fragments.SignupFragmentTwo;
 import my.util.app.utils.UtilDialog;
+import my.util.app.utils.Utils;
 
 public class SignUpActivity extends BaseActivity {
 
     ViewPager signupViewPager;
 
     TextView cancelText;
-    TextView nextText;
+    public TextView nextText;
 
     LinearLayout signupPagerIndicators;
 
@@ -73,7 +75,10 @@ public class SignUpActivity extends BaseActivity {
                                         finish();
                                     }
                                 });
+                    } else if (signupViewPager.getCurrentItem() == 0 && !DataManager.getInstance(SignUpActivity.this).isAccountDetailsConfirmed()) {
+                        Utils.fetchSignUpDetails(SignUpActivity.this);
                     } else {
+                        DataManager.getInstance(SignUpActivity.this).setAccountDetailsConfirmed(false);
                         signupViewPager.setCurrentItem(signupViewPager.getCurrentItem() >
                                 DOT_COOUNT ? 0 : signupViewPager.getCurrentItem() + 1);
                     }

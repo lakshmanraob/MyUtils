@@ -19,6 +19,7 @@ public class DataManager {
     private static ArrayList<IssueDetails> mComplaintsList;
     private static ArrayList<BillDetails> mBillList;
     private static BillDetails mCurrentBill;
+    private boolean isAccountDetailsConfirmed;
 
     private DataManager(Context ctx) {
         mContext = ctx;
@@ -78,5 +79,13 @@ public class DataManager {
 
     public void setmCurrentBill(BillDetails mCurrentBill) {
         DataManager.mCurrentBill = mCurrentBill;
+    }
+
+    public boolean isAccountDetailsConfirmed() {
+        return isAccountDetailsConfirmed;
+    }
+
+    public void setAccountDetailsConfirmed(boolean accountDetailsConfirmed) {
+        isAccountDetailsConfirmed = accountDetailsConfirmed;
     }
 }

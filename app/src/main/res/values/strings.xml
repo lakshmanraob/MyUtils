@@ -114,6 +114,7 @@
     <string name="hint_confirm_pwd">Confirm Password</string>
     <string name="pwd_help">Please provide a password to secure your account.
         This password will be used to login to your account.</string>
+    <string name="account_confirmation">Your TECO Account number is associated with\nthe following service addresses and services:</string>
 
 
     <string name="personal_details">Personal Details</string>

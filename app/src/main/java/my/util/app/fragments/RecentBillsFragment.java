@@ -57,7 +57,7 @@ public class RecentBillsFragment extends Fragment {
         View content = inflater.inflate(R.layout.fragment_recent_bills, container, false);
         ButterKnife.bind(this, content);
         HashMap<String, List<BillDetails>> allBills = Constants.getRecentBills(getContext());
-        addressExpandableList.setAdapter(new AddressExpandableListAdapter(getActivity(), Constants.getBillTitles(allBills), allBills));
+        addressExpandableList.setAdapter(new AddressExpandableListAdapter(getActivity(), Constants.getBillTitles(allBills), allBills, false));
         addressExpandableList.setGroupIndicator(null);
         addressExpandableList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override

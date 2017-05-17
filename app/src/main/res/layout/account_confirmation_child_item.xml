@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/screen_outer_padding">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_grey_bg"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/widgets_inner_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/five_val"
+            android:layout_marginBottom="@dimen/five_val"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.5"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/widgets_inner_padding">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/teco"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_large"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/widgets_inner_padding"
+                        android:gravity="bottom"
+                        android:text="Gas Services"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_general"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/widgets_inner_padding"
+                    android:text="Economy House Rural Plan"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_general" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/widgets_inner_padding"
+                    android:text="Valid till: 12/25/2020"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_general" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/five_val"
+                android:layout_marginRight="@dimen/five_val"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical"
+                android:src="@drawable/gas_icon" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/five_val"
+            android:layout_marginBottom="@dimen/five_val"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/widgets_inner_padding">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.5"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/widgets_inner_padding">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/teco"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_large"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/widgets_inner_padding"
+                        android:gravity="bottom"
+                        android:text="Electricity Services"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_small"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/widgets_inner_padding"
+                    android:text="Economy 100 Plan"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_general" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/widgets_inner_padding"
+                    android:text="Valid till: 12/25/2020"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_general" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/five_val"
+                android:layout_marginRight="@dimen/five_val"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical"
+                android:src="@drawable/bulb_icon" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
