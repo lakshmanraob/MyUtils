@@ -3,17 +3,29 @@ package my.util.app.fragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import my.util.app.R;
 import my.util.app.utils.Constants;
@@ -23,7 +35,11 @@ import my.util.app.utils.Utils;
  * Created by labattula on 16/05/17.
  */
 
-public class IssuesMapFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnCameraMoveListener {
+public class IssuesMapFragment extends SupportMapFragment
+        implements OnMapReadyCallback,
+        GoogleMap.OnCameraMoveListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -32,6 +48,10 @@ public class IssuesMapFragment extends SupportMapFragment implements OnMapReadyC
     private String mParam2;
 
     private GoogleMap mMap;
+
+    GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
+    private Location mCurrentLocation;
 
     public static IssuesMapFragment newInstance(String param1, String param2) {
         IssuesMapFragment fragment = new IssuesMapFragment();
@@ -104,4 +124,89 @@ public class IssuesMapFragment extends SupportMapFragment implements OnMapReadyC
     public void onCameraMove() {
 
     }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(
+                getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+            if (mCurrentLocation != null) {
+                showLocationInMap();
+            } else {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, mLocationCallback, null);
+            }
+        } else {
+            requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION},
+                    Constants.LOCATION_PERMISSIONS_CODE);
+        }
+    }
+
+    private LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+            mCurrentLocation = locationResult.getLastLocation();
+            showLocationInMap();
+        }
+
+        @Override
+        public void onLocationAvailability(LocationAvailability locationAvailability) {
+            super.onLocationAvailability(locationAvailability);
+            if (!locationAvailability.isLocationAvailable() && mCurrentLocation == null) {
+                Utils.showShortToast(getContext(), getString(R.string.error_location));
+            }
+        }
+    };
+
+    private void showLocationInMap() {
+        if (ActivityCompat.checkSelfPermission(
+                getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+            LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(currentLatLng));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Utils.showShortToast(getContext(), getString(R.string.error_location));
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+
+        initLocationRequest();
+
+    }
+
+    private void initLocationRequest() {
+        if (mLocationRequest == null) {
+            //Location request creation
+            mLocationRequest = LocationRequest.create();
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+            mLocationRequest.setSmallestDisplacement(Constants.LOCATION_UPDATE_REQUEST_IN_METERS);
+        }
+    }
+
+
 }
