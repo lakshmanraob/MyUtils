@@ -62,7 +62,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/seventy_spacing"
+            android:layout_marginTop="@dimen/fifty_spacing"
             android:gravity="center">
 
             <ImageView
@@ -87,6 +87,15 @@
                 android:visibility="gone" />
 
         </FrameLayout>
+
+        <Button
+            android:id="@+id/btn_link_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorAccent" />
 
     </LinearLayout>
 
@@ -343,10 +352,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:paddingBottom="@dimen/widgets_inner_padding"
                 android:paddingLeft="@dimen/screen_outer_padding"
                 android:paddingRight="@dimen/screen_outer_padding"
-                android:paddingTop="@dimen/screen_outer_padding"
-                android:paddingBottom="@dimen/widgets_inner_padding">
+                android:paddingTop="@dimen/screen_outer_padding">
 
                 <TextView
                     android:layout_width="wrap_content"

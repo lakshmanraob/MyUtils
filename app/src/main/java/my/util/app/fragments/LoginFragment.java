@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +36,8 @@ public class LoginFragment extends Fragment {
     IconTextView progress;
     @BindView(R.id.btn_login)
     ImageView loginBtn;
+    @BindView(R.id.btn_link_signup)
+    Button signup;
 
     @BindView(R.id.login_account_help)
     TextView accountHelp;
@@ -93,6 +96,7 @@ public class LoginFragment extends Fragment {
             if (!TextUtils.isEmpty(password) && password.length() >= Constants.ACC_NO_LEN) {
                 if(getActivity() instanceof AuthActivity) {
                     loginBtn.setVisibility(View.GONE);
+                    signup.setVisibility(View.GONE);
                     progress.setVisibility(View.VISIBLE);
                     progress.postDelayed(new Runnable() {
                         @Override

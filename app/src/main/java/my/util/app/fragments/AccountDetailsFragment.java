@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import my.util.app.R;
 import my.util.app.adapter.UserBilldetailsAdapter;
 import my.util.app.models.UserDetails;
 import my.util.app.utils.Constants;
+import my.util.app.utils.Utils;
 
 public class AccountDetailsFragment extends Fragment {
 
@@ -40,6 +42,7 @@ public class AccountDetailsFragment extends Fragment {
     ExpandableListView mAccountList;
 
     LinearLayout headerView;
+    LinearLayout footerView;
     private static int prev = -1;
 
     public AccountDetailsFragment() {
@@ -100,11 +103,25 @@ public class AccountDetailsFragment extends Fragment {
         mAddress.setContent(userDetails.getAddress());
     }
 
+    private void createFooterView(){
+        LayoutInflater inflatter = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        footerView = (LinearLayout) inflatter.inflate(R.layout.ud_footer, null);
+
+        ((Button)footerView.findViewById(R.id.logout_btn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.logoutUser(getActivity());
+            }
+        });
+    }
+
     private void updateView() {
 
         createHeaderView();
-
         mAccountList.addHeaderView(headerView);
+
+        createFooterView();
+        mAccountList.addFooterView(footerView);
 
         //Setting up the adapter for the spinner
         UserBilldetailsAdapter adapter = new UserBilldetailsAdapter(getContext(), Constants.getBillTitles(), Constants.getRecentBills(getContext()));

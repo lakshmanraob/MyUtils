@@ -1,5 +1,6 @@
 package my.util.app.fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import butterknife.OnClick;
 import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
+import my.util.app.activity.SignUpActivity;
 import my.util.app.models.BillDetails;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
@@ -45,6 +47,8 @@ public class PayAccountFragment extends Fragment {
     ImageView enter;
     @BindView(R.id.progress)
     IconTextView progress;
+    @BindView(R.id.btn_link_signup)
+    Button signup;
     @BindView(R.id.pay_account_help)
     TextView payAccountHelp;
 
@@ -137,6 +141,13 @@ public class PayAccountFragment extends Fragment {
         return content;
     }
 
+    @OnClick(R.id.btn_link_signup)
+    protected void signUp(View v) {
+        Intent signupIntent = new Intent();
+        signupIntent.setClass(getActivity(), SignUpActivity.class);
+        startActivity(signupIntent);
+    }
+
     @OnClick(R.id.pay_info)
     protected void showPayInfo(View v) {
         payAccountHelp.setVisibility(View.VISIBLE);
@@ -154,6 +165,7 @@ public class PayAccountFragment extends Fragment {
         String accountNo = payAccountEdit.getText().toString();
         if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN) {
             enter.setVisibility(View.GONE);
+            signup.setVisibility(View.GONE);
             progress.setVisibility(View.VISIBLE);
             progress.postDelayed(new Runnable() {
                 @Override
@@ -165,6 +177,7 @@ public class PayAccountFragment extends Fragment {
             }, Constants.PROGRESS_TIME);
         } else {
             enter.setVisibility(View.VISIBLE);
+            signup.setVisibility(View.VISIBLE);
             Utils.showShortToast(getContext(), "Please enter a valid account no.");
         }
     }

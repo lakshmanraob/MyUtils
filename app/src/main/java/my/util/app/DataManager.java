@@ -31,6 +31,10 @@ public class DataManager {
         return mInstance;
     }
 
+    public void clearData(){
+        mInstance = null;
+    }
+
     public void init(){
         Log.d("DEBUG_LOG", "DataManager : init called");
         mDbHelper = new DbHelper(mContext);

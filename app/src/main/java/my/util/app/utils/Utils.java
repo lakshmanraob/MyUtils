@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -22,6 +23,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.TextUtils;
@@ -41,7 +43,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import my.util.app.DataManager;
 import my.util.app.R;
+import my.util.app.activity.AuthActivity;
 import my.util.app.activity.BaseActivity;
 import my.util.app.models.IssueDetails;
 
@@ -256,6 +260,29 @@ public class Utils {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return bitmap;
+    }
+
+    public static void logoutUser(final Activity act){
+        final ProgressDialog progress = new ProgressDialog(act);
+        progress.setMessage("Please wait...");
+        progress.show();
+        Runnable progressRunnable = new Runnable() {
+            @Override
+            public void run() {
+                progress.cancel();
+            }
+        };
+        progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                DataManager.getInstance(act).clearData();
+                Utils.showShortToast(act, "You have been successfully logged out !");
+                act.startActivity(new Intent(act, AuthActivity.class));
+                act.finish();
+            }
+        });
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(progressRunnable, Constants.LOGOUT_TIME);
     }
 
 }

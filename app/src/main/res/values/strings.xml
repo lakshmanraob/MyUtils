@@ -55,6 +55,7 @@
 
     <!--Placeholder texts-->
     <string name="submit">Submit</string>
+    <string name="logout">Logout</string>
     <string name="no_match">No Match</string>
 
     <!--  -->
