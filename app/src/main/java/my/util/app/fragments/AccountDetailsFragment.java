@@ -91,7 +91,7 @@ public class AccountDetailsFragment extends Fragment {
         mLastName.setContent(userDetails.getLastName());
 
         mDob = (DetailsView) headerView.findViewById(R.id.ud_dob);
-        mDob.setContent(userDetails.getDob());
+        mDob.setContent(Utils.convertDate(userDetails.getDob()));
 
         mPhoneNumber = (DetailsView) headerView.findViewById(R.id.ud_phone);
         mPhoneNumber.setContent(userDetails.getPhoneNumber());
@@ -103,11 +103,11 @@ public class AccountDetailsFragment extends Fragment {
         mAddress.setContent(userDetails.getAddress());
     }
 
-    private void createFooterView(){
+    private void createFooterView() {
         LayoutInflater inflatter = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         footerView = (LinearLayout) inflatter.inflate(R.layout.ud_footer, null);
 
-        ((Button)footerView.findViewById(R.id.logout_btn)).setOnClickListener(new View.OnClickListener() {
+        ((Button) footerView.findViewById(R.id.logout_btn)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Utils.logoutUser(getActivity());
@@ -142,8 +142,8 @@ public class AccountDetailsFragment extends Fragment {
     private UserDetails getUserDetails() {
 
         UserDetails userDetails =
-                new UserDetails("9876543212", "Edward", "Hogan", "10/3/1984", "123456789",
-                        "test@deloitte.com", "Marathahalli, Bangalore", Constants.getRecentBills(getContext()));
+                new UserDetails("9876543212", "Edward", "Hogan", "10/3/1984", "(737) 711-8796",
+                        "ehogan@teco.com", Constants.USER_ADDRESSES.PEENYA, Constants.getRecentBills(getContext()));
 
         return userDetails;
 

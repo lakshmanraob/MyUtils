@@ -3,7 +3,7 @@
     <string name="touch_sensor">Touch sensor</string>
 
     <string name="emergency_msg">To report any life threatening conditions, please call 911</string>
-    <string name="outage_select">Choose outage type</string>
+    <string name="outage_select">Choose Issue type</string>
     <string name="streetlight_outage">Streetlight Outage</string>
     <string name="safety_concern">Safety Concern</string>
     <string name="power_outage">Power Outage</string>
@@ -14,7 +14,7 @@
     <string name="complaints">Complaints</string>
     <string name="add_photos">Add Photos</string>
     <string name="report_issue">Report an Issue</string>
-    <string name="report_issue_heading">Report a new issue</string>
+    <string name="report_issue_heading">Report a New Issue</string>
     <string name="issue_history">Issue History</string>
     <string name="enter_ref_no">Enter reference number</string>
     <string name="status">Status</string>

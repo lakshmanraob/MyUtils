@@ -1,9 +1,7 @@
 package my.util.app.adapter;
 
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +14,8 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import my.util.app.R;
-import my.util.app.utils.Constants;
 import my.util.app.models.IssueDetails;
+import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
 public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAdapter.ViewHolder> {
@@ -31,7 +29,7 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
         this.complaints = complaints;
     }
 
-    public void updateList(ArrayList<IssueDetails> complaintsList){
+    public void updateList(ArrayList<IssueDetails> complaintsList) {
         this.complaints = Utils.sortComplaintsList(complaintsList);
         notifyDataSetChanged();
     }
@@ -48,8 +46,9 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
 
         Calendar complaintDate = issue.getComplaintDate();
         holder.outageType.setText(issue.getOutageType());
-        holder.complaintDate.setText(complaintDate.get(Calendar.DAY_OF_MONTH) + "/" +
-                complaintDate.get(Calendar.MONTH) + "/" + complaintDate.get(Calendar.YEAR));
+//        holder.complaintDate.setText(complaintDate.get(Calendar.MONTH) + "/" +
+//                complaintDate.get(Calendar.DAY_OF_MONTH) + "/" + complaintDate.get(Calendar.YEAR));
+        holder.complaintDate.setText(Utils.convertDate(complaintDate));
         holder.referenceNumber.setText(String.valueOf(issue.getReferenceNo()));
         holder.outageSubType.setText(issue.getOutageType());
         holder.complaintAddress.setText(issue.getAddress());

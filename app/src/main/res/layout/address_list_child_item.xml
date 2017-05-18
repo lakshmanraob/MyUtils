@@ -213,6 +213,7 @@
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/bill_item_total"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/five_val"

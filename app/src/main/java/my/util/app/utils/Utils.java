@@ -39,8 +39,11 @@ import android.widget.Toast;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -371,5 +374,35 @@ public class Utils {
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    /**
+     * Converting the Date to required format
+     *
+     * @param currentDate
+     * @return
+     */
+    public static String convertDate(String currentDate) {
+        try {
+            String currentDateFormat = "dd/MM/yyyy";
+            SimpleDateFormat sdf = new SimpleDateFormat(currentDateFormat, Locale.US);//set format of date you receiving from db
+            Date date = sdf.parse(currentDate);
+            SimpleDateFormat newDate = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.US);//set format of new date
+            System.out.println(newDate.format(date));
+            return newDate.format(date);
+        } catch (ParseException e) {
+            return currentDate;
+        }
+    }
+
+    /**
+     * Converting the Calender Date to required format
+     * @param calDate
+     * @return
+     */
+    public static String convertDate(Calendar calDate){
+        long currentDateLong = calDate.getTimeInMillis();
+        SimpleDateFormat newDate = new SimpleDateFormat(Constants.DATE_FORMAT,Locale.US);
+        return newDate.format(new Date(currentDateLong));
     }
 }

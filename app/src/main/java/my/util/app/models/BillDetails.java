@@ -1,5 +1,7 @@
 package my.util.app.models;
 
+import my.util.app.utils.Utils;
+
 public class BillDetails {
 
     private String address;
@@ -86,7 +88,7 @@ public class BillDetails {
     }
 
     public String getBillingDate() {
-        return billingDate;
+        return Utils.convertDate(billingDate);
     }
 
     public void setBillingDate(String billingDate) {
@@ -102,7 +104,7 @@ public class BillDetails {
     }
 
     public String getPayByDate() {
-        return payByDate;
+        return Utils.convertDate(payByDate);
     }
 
     public void setPayByDate(String payByDate) {

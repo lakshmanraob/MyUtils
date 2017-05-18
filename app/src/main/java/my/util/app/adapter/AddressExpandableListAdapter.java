@@ -139,9 +139,12 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
             int total = getBillTotal(groupPosition);
             if (total > 0 && getChildrenCount(groupPosition) == (childPosition + 1)) {
                 holder.totalView.setVisibility(View.VISIBLE);
+                holder.totalViewTxt.setText(R.string.total_amount);
                 holder.totalBill.setText("$" + total);
             } else {
-                holder.totalView.setVisibility(View.GONE);
+                holder.totalView.setVisibility(View.VISIBLE);
+                holder.totalViewTxt.setText(R.string.total);
+                holder.totalBill.setText("$" + currentItem.getTotal());
             }
         }
         return convertView;
@@ -186,6 +189,8 @@ public class AddressExpandableListAdapter extends BaseExpandableListAdapter {
 
         @BindView(R.id.total_view)
         LinearLayout totalView;
+        @BindView(R.id.bill_item_total)
+        TextView totalViewTxt;
         @BindView(R.id.total_bill)
         TextView totalBill;
 

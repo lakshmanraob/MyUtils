@@ -59,6 +59,8 @@ public class Constants {
 
     public static final int LOCATION_UPDATE_REQUEST_IN_METERS = 1600; // 1 mile = 1.6 km
 
+    public static final String DATE_FORMAT = "MM/dd/yyyy";
+
     public final class FRAGMENTS {
         public static final int BILLS = 0;
         public static final int COMPLAINTS = 1;
@@ -76,13 +78,13 @@ public class Constants {
     }
 
     public final class USER_ADDRESSES {
-        public static final String ECITY = "Infosys Drieway, Electronic City \nPhase 1, Bangalore";
-        public static final String HOSAROAD = "12/34, Hosa Road Junction, \nBangalore";
-        public static final String BOSH = "Bosh, Plot No. 4, Konapana Agrahara, \nBangalore";
-        public static final String HSR = "15 Main Road, 22 Cross Road, Sector 3, \nHSR Layout, Bangalore";
-        public static final String OFC = "Deloitte, Divyashree Tech Park, Yamalur, \nHAL Rd, Bangalore";
-        public static final String MRTHLI = "705, Varthur Mn Rd, Marathahalli, \nBangalore";
-        public static final String PEENYA = "Peenya Metro Station, Peenya, \nBangalore";
+        public static final String ECITY = "4059 Dolphin Dr \nTampa, FL";
+        public static final String HOSAROAD = "203 S Hubert Avenue, \nTampa, FL";
+        public static final String BOSH = "2408 Gordon St, \nTampa, FL";
+        public static final String HSR = "1120 E Kennedy BLVD Unit 814, \nTampa, FL";
+        public static final String OFC = "3228 W Horbar Ave, \nTampa, FL";
+        public static final String MRTHLI = "3106 W Paxton Ave, \nTampa, FL";
+        public static final String PEENYA = "914E Ida St, \nTampa, FL";
     }
 
     public static ArrayList<IssueDetails> getDummyComplaintsList(Context ctx) {
@@ -164,11 +166,11 @@ public class Constants {
                 "1.4",
                 12,
                 "April 2017",
-                "05/03/2017 - 04/04/2017",
+                "03/05/2017 - 04/04/2017",
                 "20/04/2017",
                 "345627",
                 "Economy 100 Plan",
-                "0.12$",
+                "$0.12",
                 190));
         addressList.add(new BillDetails(USER_ADDRESSES.MRTHLI,
                 BILL_TYPES.GAS, TECO,
@@ -176,11 +178,11 @@ public class Constants {
                 "0.8",
                 14,
                 "April 2017",
-                "05/03/2017 - 04/04/2017",
+                "03/05/2017 - 04/04/2017",
                 "20/04/2017",
                 "345628",
                 "Economy House Rural Plan",
-                "0.15$",
+                "$0.15",
                 210));
         addressList.add(new BillDetails(USER_ADDRESSES.OFC,
                 BILL_TYPES.ELECTRICITY, TECO,
@@ -188,11 +190,11 @@ public class Constants {
                 "1.4",
                 12,
                 "Mar 2017",
-                "05/02/2017 - 04/03/2017",
+                "02/05/2017 - 03/04/2017",
                 "20/03/2017",
                 "333896",
                 "Economy 100 Plan",
-                "0.12$",
+                "$0.12",
                 240));
         addressList.add(new BillDetails(USER_ADDRESSES.HSR,
                 BILL_TYPES.ELECTRICITY, TECO,
@@ -200,11 +202,11 @@ public class Constants {
                 "1.4",
                 11,
                 "Mar 2017",
-                "05/02/2017 - 04/03/2017",
+                "02/05/2017 - 03/04/2017",
                 "20/03/2017",
                 "3289002",
                 "Economy 100 Plan",
-                "0.12$",
+                "$0.12",
                 155));
         return addressList;
     }
@@ -217,11 +219,11 @@ public class Constants {
                 "1.4",
                 12,
                 "April 2017",
-                "05/03/2017 - 04/04/2017",
+                "03/05/2017 - 04/04/2017",
                 "20/04/2017",
                 "345627",
                 "Economy 100 Plan",
-                "0.12$",
+                "$0.12",
                 144);
     }
 
