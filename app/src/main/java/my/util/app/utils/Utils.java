@@ -323,7 +323,6 @@ public class Utils {
     }
 
     public static void logoutUser(final Activity act) {
-<<<<<<<HEAD
         showProgressBarWithListener(act, new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
