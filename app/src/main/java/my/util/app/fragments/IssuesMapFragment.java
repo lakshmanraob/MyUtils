@@ -133,7 +133,7 @@ public class IssuesMapFragment extends SupportMapFragment
 
     @OnClick(R.id.issues_map_close)
     protected void closeScreen(View v) {
-        ((BaseActivity) getActivity()).removeFragment(Constants.FRAGMENTS.BILL_DETAILS);
+        ((BaseActivity) getActivity()).updateFragment(Constants.FRAGMENTS.COMPLAINTS);
     }
 
 

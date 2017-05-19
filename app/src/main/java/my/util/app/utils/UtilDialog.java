@@ -13,10 +13,6 @@ import android.widget.TextView;
 
 import my.util.app.R;
 
-/**
- * Created by labattula on 09/05/17.
- */
-
 public class UtilDialog {
 
     /**

@@ -25,16 +25,24 @@
             android:textColor="@color/app_bg_end"
             android:textSize="@dimen/font_size_general" />
 
-        <com.joanzapata.iconify.widget.IconTextView
+        <LinearLayout
             android:id="@+id/issues_map_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
+            android:gravity="center_vertical"
+            android:minHeight="30dp"
+            android:minWidth="30dp"
             android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:text="{md-clear}"
-            android:textColor="@color/outageHeading_color"
-            android:textSize="20sp" />
+            android:paddingStart="10dp">
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{md-clear}"
+                android:textColor="@color/outageHeading_color"
+                android:textSize="20sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
