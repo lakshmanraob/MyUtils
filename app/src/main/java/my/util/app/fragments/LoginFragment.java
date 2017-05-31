@@ -27,6 +27,7 @@ import my.util.app.activity.SignUpActivity;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
+import sheet.bottom.com.networklib.models.tecoutil.D;
 import sheet.bottom.com.networklib.models.tecoutil.LoginResult;
 import sheet.bottom.com.networklib.models.tecoutil.Results;
 import sheet.bottom.com.networklib.models.tecoutil.User;
@@ -131,24 +132,24 @@ public class LoginFragment extends Fragment {
         startActivity(signupIntent);
     }
 
-    private LoaderManager.LoaderCallbacks<MyLoaderResponse<Results>> mLoginLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<MyLoaderResponse<Results>>() {
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<D>> mLoginLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<D>>() {
 
                 @Override
-                public Loader<MyLoaderResponse<Results>> onCreateLoader(int loaderId, Bundle bundle) {
+                public Loader<MyLoaderResponse<D>> onCreateLoader(int loaderId, Bundle bundle) {
                     String userName = bundle.getString("user");
                     String password = bundle.getString("password");
                     return new UserAuthLoader(getContext(), userName, password);
                 }
 
                 @Override
-                public void onLoadFinished(Loader<MyLoaderResponse<Results>> loader, MyLoaderResponse<Results> loaderResult) {
+                public void onLoadFinished(Loader<MyLoaderResponse<D>> loader, MyLoaderResponse<D> loaderResult) {
                     progress.setVisibility(View.GONE);
                     ((AuthActivity) getActivity()).loginUser();
                 }
 
                 @Override
-                public void onLoaderReset(Loader<MyLoaderResponse<Results>> loaderResult) {
+                public void onLoaderReset(Loader<MyLoaderResponse<D>> loaderResult) {
                 }
             };
 
