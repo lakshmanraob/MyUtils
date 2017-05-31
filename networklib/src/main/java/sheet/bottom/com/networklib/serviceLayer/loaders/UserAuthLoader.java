@@ -7,8 +7,7 @@ import android.util.Log;
 import okhttp3.Credentials;
 import sheet.bottom.com.networklib.models.global.MyLoaderException;
 import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
-import sheet.bottom.com.networklib.models.tecoutil.D;
-import sheet.bottom.com.networklib.models.tecoutil.Results;
+import sheet.bottom.com.networklib.models.tecoutil.MyAuthResponse;
 import sheet.bottom.com.networklib.serviceLayer.HttpTaskLoader;
 import sheet.bottom.com.networklib.serviceLayer.UtilServiceLayer;
 
@@ -16,7 +15,7 @@ import sheet.bottom.com.networklib.serviceLayer.UtilServiceLayer;
  * Created by labattula on 30/05/17.
  */
 
-public class UserAuthLoader extends HttpTaskLoader<MyLoaderResponse<D>> {
+public class UserAuthLoader extends HttpTaskLoader<MyLoaderResponse<MyAuthResponse>> {
 
     String username;
     String password;
@@ -28,21 +27,21 @@ public class UserAuthLoader extends HttpTaskLoader<MyLoaderResponse<D>> {
     }
 
     @Override
-    protected MyLoaderResponse<D> loadDataInBackground() throws MyLoaderException {
+    protected MyLoaderResponse<MyAuthResponse> loadDataInBackground() throws MyLoaderException {
         String authToken = Credentials.basic(username, password);
-        MyLoaderResponse<D> resp = UtilServiceLayer.authenticate(authToken);
+        MyLoaderResponse<MyAuthResponse> resp = UtilServiceLayer.authenticate(authToken);
         Log.d("DEBUG_LOG", "****************");
         Log.d("DEBUG_LOG", "resp " + ((resp.toString() == null) ? "is null" : "NOT null : " + resp.toString()));
         Log.d("DEBUG_LOG", "resp.getData " + ((resp.getData() == null) ? "is null" : "NOT null : " + resp.getData()));
-        Results resultsData= ((D)resp.getData()).getResults();
-        Log.d("DEBUG_LOG", "resultsData length " + ((resultsData == null) ? "is null" : "NOT null : " + resultsData.getResults().length));
+        MyAuthResponse resultsData = resp.getData();
+        Log.d("DEBUG_LOG", "resultsData length " + ((resultsData == null) ? "is null" : "NOT null : " + resultsData.getD().getResults().length));
         Log.d("DEBUG_LOG", "****************");
         return resp;
 
     }
 
     @Override
-    protected MyLoaderResponse<D> buildEmptyResult() {
+    protected MyLoaderResponse<MyAuthResponse> buildEmptyResult() {
         return null;
     }
 }

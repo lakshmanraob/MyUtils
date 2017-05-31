@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -27,11 +26,8 @@ import my.util.app.activity.SignUpActivity;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
-import sheet.bottom.com.networklib.models.tecoutil.D;
-import sheet.bottom.com.networklib.models.tecoutil.LoginResult;
-import sheet.bottom.com.networklib.models.tecoutil.Results;
-import sheet.bottom.com.networklib.models.tecoutil.User;
-import sheet.bottom.com.networklib.serviceLayer.HttpTaskLoader;
+import sheet.bottom.com.networklib.models.tecoutil.DJavaClass;
+import sheet.bottom.com.networklib.models.tecoutil.MyAuthResponse;
 import sheet.bottom.com.networklib.serviceLayer.loaders.UserAuthLoader;
 
 public class LoginFragment extends Fragment {
@@ -132,24 +128,24 @@ public class LoginFragment extends Fragment {
         startActivity(signupIntent);
     }
 
-    private LoaderManager.LoaderCallbacks<MyLoaderResponse<D>> mLoginLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<MyLoaderResponse<D>>() {
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>> mLoginLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>>() {
 
                 @Override
-                public Loader<MyLoaderResponse<D>> onCreateLoader(int loaderId, Bundle bundle) {
+                public Loader<MyLoaderResponse<MyAuthResponse>> onCreateLoader(int loaderId, Bundle bundle) {
                     String userName = bundle.getString("user");
                     String password = bundle.getString("password");
                     return new UserAuthLoader(getContext(), userName, password);
                 }
 
                 @Override
-                public void onLoadFinished(Loader<MyLoaderResponse<D>> loader, MyLoaderResponse<D> loaderResult) {
+                public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
                     progress.setVisibility(View.GONE);
                     ((AuthActivity) getActivity()).loginUser();
                 }
 
                 @Override
-                public void onLoaderReset(Loader<MyLoaderResponse<D>> loaderResult) {
+                public void onLoaderReset(Loader<MyLoaderResponse<MyAuthResponse>> loaderResult) {
                 }
             };
 
