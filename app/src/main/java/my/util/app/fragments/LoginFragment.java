@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.AuthActivity;
 import my.util.app.activity.SignUpActivity;
@@ -102,6 +104,8 @@ public class LoginFragment extends Fragment {
                     loginBtn.setVisibility(View.GONE);
                     signup.setVisibility(View.GONE);
                     progress.setVisibility(View.VISIBLE);
+                    DataManager.getInstance(getContext()).setUsername(accountNo);
+                    DataManager.getInstance(getContext()).setPassword(password);
 //                    progress.postDelayed(new Runnable() {
 //                        @Override
 //                        public void run() {
@@ -109,8 +113,8 @@ public class LoginFragment extends Fragment {
 //                        }
 //                    }, Constants.PROGRESS_TIME);
                     Bundle bundle = new Bundle();
-                    bundle.putString("user", accountEdit.getText().toString());
-                    bundle.putString("password", passwordEdit.getText().toString());
+                    bundle.putString("user", accountNo);
+                    bundle.putString("password", password);
                     getLoaderManager().restartLoader(100, bundle, mLoginLoaderCallbacks);
                 }
             } else {
@@ -141,6 +145,9 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
                     progress.setVisibility(View.GONE);
+                    if (loaderResult != null && loaderResult.getHeaders() != null) {
+                        DataManager.getInstance(getContext()).setUserCsrfToken(loaderResult.getHeaders().get(Constants.CSRF_TOKEN));
+                    }
                     ((AuthActivity) getActivity()).loginUser();
                 }
 

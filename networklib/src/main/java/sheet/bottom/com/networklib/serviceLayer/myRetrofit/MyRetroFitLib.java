@@ -35,15 +35,32 @@ public class MyRetroFitLib {
                 .build();
     }
 
+    public static Retrofit addComplaint(String baseUrl, HashMap<String, String> headerMap) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        GsonConverterFactory lenientFactory = GsonConverterFactory.create(gson);
+        return new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(lenientFactory)
+                .client(getMobileEndpointClient(headerMap))
+                .build();
+    }
+
+
     /**
      * headerMap for authentication
      *
      * @return a client configured for authenticated HTTP requests
      */
     private static OkHttpClient getMobileEndpointClient(HashMap<String, String> headerMap) {
-        if (mobileEndpointClient == null) {
-            OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
+        OkHttpClient.Builder clientBuilder = null;
+        if (mobileEndpointClient == null || clientBuilder == null) {
+            clientBuilder = new OkHttpClient.Builder()
                     .addInterceptor(new HeaderRequestInterceptor(headerMap));
+            mobileEndpointClient = clientBuilder.build();
+        } else {
+            clientBuilder.addInterceptor(new HeaderRequestInterceptor(headerMap));
             mobileEndpointClient = clientBuilder.build();
         }
         return mobileEndpointClient;
