@@ -28,9 +28,9 @@ public class StackItemsLoader extends HttpTaskLoader<MyLoaderResponse<StackRespo
     @Override
     protected MyLoaderResponse<StackResponse> loadDataInBackground() throws MyLoaderException {
 
-        Call<StackResponse> stackCall = MyRetroFitLib.getAuthRetrofit(BASE_URL).create(StackOverFlowApi.class).loadQuestions(queryParam);
+//        Call<StackResponse> stackCall = MyRetroFitLib.getAuthRetrofit(BASE_URL).create(StackOverFlowApi.class).loadQuestions(queryParam);
 
-        return MyRetroFitLib.buildReponse(stackCall);
+        return null;//MyRetroFitLib.buildReponse(stackCall);
 
     }
 
@@ -44,7 +44,6 @@ public class StackItemsLoader extends HttpTaskLoader<MyLoaderResponse<StackRespo
         response.setException(errorBuilder.build());
         return response;
     }
-
 
 
 }

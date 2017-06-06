@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -21,10 +22,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.R;
 import my.util.app.activity.AuthActivity;
-import my.util.app.activity.MainActivity;
 import my.util.app.activity.SignUpActivity;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
+import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
+import sheet.bottom.com.networklib.models.tecoutil.DJavaClass;
+import sheet.bottom.com.networklib.models.tecoutil.MyAuthResponse;
+import sheet.bottom.com.networklib.serviceLayer.loaders.UserAuthLoader;
 
 public class LoginFragment extends Fragment {
 
@@ -94,16 +98,20 @@ public class LoginFragment extends Fragment {
         if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN) {
             String password = passwordEdit.getText().toString();
             if (!TextUtils.isEmpty(password) && password.length() >= Constants.ACC_NO_LEN) {
-                if(getActivity() instanceof AuthActivity) {
+                if (getActivity() instanceof AuthActivity) {
                     loginBtn.setVisibility(View.GONE);
                     signup.setVisibility(View.GONE);
                     progress.setVisibility(View.VISIBLE);
-                    progress.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            ((AuthActivity)getActivity()).loginUser();
-                        }
-                    }, Constants.PROGRESS_TIME);
+//                    progress.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ((AuthActivity) getActivity()).loginUser();
+//                        }
+//                    }, Constants.PROGRESS_TIME);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("user", accountEdit.getText().toString());
+                    bundle.putString("password", passwordEdit.getText().toString());
+                    getLoaderManager().restartLoader(100, bundle, mLoginLoaderCallbacks);
                 }
             } else {
                 Utils.showShortToast(getContext(), "Please enter your password.");
@@ -119,5 +127,26 @@ public class LoginFragment extends Fragment {
         signupIntent.setClass(getActivity(), SignUpActivity.class);
         startActivity(signupIntent);
     }
+
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>> mLoginLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>>() {
+
+                @Override
+                public Loader<MyLoaderResponse<MyAuthResponse>> onCreateLoader(int loaderId, Bundle bundle) {
+                    String userName = bundle.getString("user");
+                    String password = bundle.getString("password");
+                    return new UserAuthLoader(getContext(), userName, password);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
+                    progress.setVisibility(View.GONE);
+                    ((AuthActivity) getActivity()).loginUser();
+                }
+
+                @Override
+                public void onLoaderReset(Loader<MyLoaderResponse<MyAuthResponse>> loaderResult) {
+                }
+            };
 
 }

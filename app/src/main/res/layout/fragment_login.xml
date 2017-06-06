@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:text="vmeghmala"
                 android:hint="@string/hint_account"
                 android:inputType="textEmailAddress" />
 
@@ -66,6 +67,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_password"
+            android:text="vivsap001"
             android:inputType="textPassword"
             android:visibility="visible" />
     </android.support.design.widget.TextInputLayout>
