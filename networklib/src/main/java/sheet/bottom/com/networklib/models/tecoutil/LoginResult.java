@@ -2,21 +2,17 @@ package sheet.bottom.com.networklib.models.tecoutil;
 
 import sheet.bottom.com.networklib.models.global.MyUtilModel;
 
-/**
- * Created by labattula on 30/05/17.
- */
-
 public class LoginResult extends MyUtilModel {
 
     MetaData __metadata;
 
     String Bpart;
-    String FromDate;
-    String ToDate;
-    String Qmnum;
-    String Qmtxt;
-    String RetMessage;
-
+    String FirstName;
+    String LastName;
+    String Dob;
+    String Phone;
+    String Email;
+    String Address;
 
     public MetaData get__metadata() {
         return __metadata;
@@ -34,43 +30,51 @@ public class LoginResult extends MyUtilModel {
         Bpart = bpart;
     }
 
-    public String getFromDate() {
-        return FromDate;
+    public String getFirstName() {
+        return FirstName;
     }
 
-    public void setFromDate(String fromDate) {
-        FromDate = fromDate;
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
     }
 
-    public String getToDate() {
-        return ToDate;
+    public String getLastName() {
+        return LastName;
     }
 
-    public void setToDate(String toDate) {
-        ToDate = toDate;
+    public void setLastName(String lastName) {
+        LastName = lastName;
     }
 
-    public String getQmnum() {
-        return Qmnum;
+    public String getDob() {
+        return Dob;
     }
 
-    public void setQmnum(String qmnum) {
-        Qmnum = qmnum;
+    public void setDob(String dob) {
+        Dob = dob;
     }
 
-    public String getQmtxt() {
-        return Qmtxt;
+    public String getPhone() {
+        return Phone;
     }
 
-    public void setQmtxt(String qmtxt) {
-        Qmtxt = qmtxt;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 
-    public String getRetMessage() {
-        return RetMessage;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setRetMessage(String retMessage) {
-        RetMessage = retMessage;
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 }
