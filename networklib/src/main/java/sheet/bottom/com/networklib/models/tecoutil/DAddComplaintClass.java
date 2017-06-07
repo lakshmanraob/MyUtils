@@ -7,8 +7,13 @@ public class DAddComplaintClass extends MyUtilModel {
     MetaData __metadata;
 
     String Bpart;
+    String OutageTyp;
+    String LatiServAdd;
     String FromDate;
+    String IssueDate;
+    String LongServAdd;
     String ToDate;
+    String IssueStatus;
     String Qmnum;
     String Qmtxt;
     String RetMessage;
@@ -29,6 +34,22 @@ public class DAddComplaintClass extends MyUtilModel {
         Bpart = bpart;
     }
 
+    public String getOutageTyp() {
+        return OutageTyp;
+    }
+
+    public void setOutageTyp(String outageTyp) {
+        OutageTyp = outageTyp;
+    }
+
+    public String getLatiServAdd() {
+        return LatiServAdd;
+    }
+
+    public void setLatiServAdd(String latiServAdd) {
+        LatiServAdd = latiServAdd;
+    }
+
     public String getFromDate() {
         return FromDate;
     }
@@ -37,12 +58,36 @@ public class DAddComplaintClass extends MyUtilModel {
         FromDate = fromDate;
     }
 
+    public String getIssueDate() {
+        return IssueDate;
+    }
+
+    public void setIssueDate(String issueDate) {
+        IssueDate = issueDate;
+    }
+
+    public String getLongServAdd() {
+        return LongServAdd;
+    }
+
+    public void setLongServAdd(String longServAdd) {
+        LongServAdd = longServAdd;
+    }
+
     public String getToDate() {
         return ToDate;
     }
 
     public void setToDate(String toDate) {
         ToDate = toDate;
+    }
+
+    public String getIssueStatus() {
+        return IssueStatus;
+    }
+
+    public void setIssueStatus(String issueStatus) {
+        IssueStatus = issueStatus;
     }
 
     public String getQmnum() {

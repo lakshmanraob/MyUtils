@@ -1,5 +1,7 @@
 package sheet.bottom.com.networklib.serviceLayer.myRetrofit;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,18 +12,13 @@ import java.util.Map;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import sheet.bottom.com.networklib.models.global.MyLoaderException;
-import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
-import sheet.bottom.com.networklib.models.stackexchange.StackResponse;
-import sheet.bottom.com.networklib.models.tecoutil.LoginResult;
 
 public class MyRetroFitLib {
 
     private static OkHttpClient mobileEndpointClient;
+    private static OkHttpClient mobileEndpointClientForComplaints;
 
     public static Retrofit getAuthRetrofit(String baseUrl, HashMap<String, String> headerMap) {
         Gson gson = new GsonBuilder()
@@ -43,7 +40,7 @@ public class MyRetroFitLib {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(lenientFactory)
-                .client(getMobileEndpointClient(headerMap))
+                .client(getMobileEndpointClientForComplaints(headerMap))
                 .build();
     }
 
@@ -55,15 +52,28 @@ public class MyRetroFitLib {
      */
     private static OkHttpClient getMobileEndpointClient(HashMap<String, String> headerMap) {
         OkHttpClient.Builder clientBuilder = null;
-        if (mobileEndpointClient == null || clientBuilder == null) {
+        if (mobileEndpointClient == null) {
             clientBuilder = new OkHttpClient.Builder()
                     .addInterceptor(new HeaderRequestInterceptor(headerMap));
             mobileEndpointClient = clientBuilder.build();
-        } else {
-            clientBuilder.addInterceptor(new HeaderRequestInterceptor(headerMap));
-            mobileEndpointClient = clientBuilder.build();
         }
         return mobileEndpointClient;
+    }
+
+    /**
+     * headerMap for add complaint
+     *
+     * @return a client configured for authenticated HTTP requests
+     */
+    private static OkHttpClient getMobileEndpointClientForComplaints(HashMap<String, String> headerMap) {
+        Log.d("DEBUG_LOG", "getMobileEndpointClientForComplaints");
+        OkHttpClient.Builder clientBuilder = null;
+        if (mobileEndpointClientForComplaints == null) {
+            clientBuilder = new OkHttpClient.Builder()
+                    .addInterceptor(new HeaderRequestInterceptor(headerMap));
+            mobileEndpointClientForComplaints = clientBuilder.build();
+        }
+        return mobileEndpointClientForComplaints;
     }
 
     private static class HeaderRequestInterceptor implements Interceptor {

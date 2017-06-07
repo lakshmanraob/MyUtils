@@ -5,6 +5,9 @@ import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +48,7 @@ public class UtilServiceLayer {
     }
 
     public static MyLoaderResponse<AddComplaintResponse> addComplaint(String authtoken, String csrfToken) {
-        Log.d("DEBUG_LOG", "addComplaint with = " + csrfToken);
+        Log.d("DEBUG_LOG", "addComplaint with  " + csrfToken);
         HashMap<String, String> headersMap = new HashMap<>();
         headersMap.put("Authorization", authtoken);
         headersMap.put("Accept", "application/json");
@@ -53,7 +56,15 @@ public class UtilServiceLayer {
         headersMap.put("X-CSRF-Token", csrfToken);
 
         Map<String, String> requestBody = new HashMap<>();
-        requestBody.put("Bpart", "");
+        requestBody.put("Bpart", "100000086");
+
+        /*JSONObject object = new JSONObject();
+        try {
+            object.put("Bpart", "100000086");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+
         Call<AddComplaintResponse> addComplaintCall = MyRetroFitLib.addComplaint(BASE_URL, headersMap).create(LoginUserApi.class).addComplaint(requestBody);
         return buildAddComplaintResponse(addComplaintCall);
     }
@@ -98,11 +109,10 @@ public class UtilServiceLayer {
 
         try {
             Response<AddComplaintResponse> response = call.execute();
-            logLargeString(new GsonBuilder().setPrettyPrinting().create().toJson(response));
+            //logLargeString(new GsonBuilder().setPrettyPrinting().create().toJson(response));
             if (response.isSuccessful()) {
                 Log.d("DEBUG_LOG", "is SUCCESS ******************************");
-                Log.d("DEBUG_LOG", "X-CSRF-Token = " + response.headers().get("X-CSRF-Token"));
-                logLargeString(new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                //logLargeString(new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 returnValue.setData(response.body());
                 returnValue.setHeaders(response.headers());
             } else {
