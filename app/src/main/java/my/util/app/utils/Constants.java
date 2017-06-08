@@ -29,6 +29,7 @@ public class Constants {
     public static final String GAS_SERVICE = "Gas Services";
     public static final String TECO = "TECO";
     public static final String CSRF_TOKEN = "X-CSRF-Token";
+    public static final String USER_COOKIE = "set-cookie";
     public static final int ADD_MIN_LENGTH = 10;
 
     public static final double LAT_ECITY = 12.84598;

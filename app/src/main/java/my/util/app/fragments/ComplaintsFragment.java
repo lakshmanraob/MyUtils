@@ -1,19 +1,15 @@
 package my.util.app.fragments;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,7 +23,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -50,7 +45,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.DataManager;
 import my.util.app.R;
-import my.util.app.activity.AuthActivity;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.models.IssueDetails;
@@ -61,9 +55,7 @@ import my.util.app.utils.ImageCaptureListener;
 import my.util.app.utils.Utils;
 import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
 import sheet.bottom.com.networklib.models.tecoutil.AddComplaintResponse;
-import sheet.bottom.com.networklib.models.tecoutil.AddComplaintResponse;
 import sheet.bottom.com.networklib.serviceLayer.loaders.AddComplaintLoader;
-import sheet.bottom.com.networklib.serviceLayer.loaders.UserAuthLoader;
 
 public class ComplaintsFragment extends Fragment implements
         GoogleApiClient.ConnectionCallbacks,
@@ -540,7 +532,8 @@ public class ComplaintsFragment extends Fragment implements
                 public Loader<MyLoaderResponse<AddComplaintResponse>> onCreateLoader(int loaderId, Bundle bundle) {
                     String userName = bundle.getString("user");
                     String password = bundle.getString("password");
-                    return new AddComplaintLoader(getContext(), userName, password, DataManager.getInstance(getContext()).getUserCsrfToken());
+                    return new AddComplaintLoader(getContext(), userName, password, DataManager.getInstance(getContext()).getUserCsrfToken(),
+                            DataManager.getInstance(getContext()).getUserCookie1(), DataManager.getInstance(getContext()).getUserCookie2());
                 }
 
                 @Override

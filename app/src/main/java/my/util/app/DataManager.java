@@ -23,6 +23,8 @@ public class DataManager {
     private String username;
     private String password;
     private String userCsrfToken;
+    private String userCookie1;
+    private String userCookie2;
 
     private DataManager(Context ctx) {
         mContext = ctx;
@@ -114,5 +116,21 @@ public class DataManager {
 
     public void setUserCsrfToken(String userCsrfToken) {
         this.userCsrfToken = userCsrfToken;
+    }
+
+    public String getUserCookie1() {
+        return userCookie1;
+    }
+
+    public void setUserCookie1(String userCookie1) {
+        this.userCookie1 = userCookie1;
+    }
+
+    public String getUserCookie2() {
+        return userCookie2;
+    }
+
+    public void setUserCookie2(String userCookie2) {
+        this.userCookie2 = userCookie2;
     }
 }
