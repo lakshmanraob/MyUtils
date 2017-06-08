@@ -20,6 +20,11 @@ public class DataManager {
     private static ArrayList<BillDetails> mBillList;
     private static BillDetails mCurrentBill;
     private boolean isAccountDetailsConfirmed;
+    private String username;
+    private String password;
+    private String userCsrfToken;
+    private String userCookie1;
+    private String userCookie2;
 
     private DataManager(Context ctx) {
         mContext = ctx;
@@ -87,5 +92,45 @@ public class DataManager {
 
     public void setAccountDetailsConfirmed(boolean accountDetailsConfirmed) {
         isAccountDetailsConfirmed = accountDetailsConfirmed;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserCsrfToken() {
+        return userCsrfToken;
+    }
+
+    public void setUserCsrfToken(String userCsrfToken) {
+        this.userCsrfToken = userCsrfToken;
+    }
+
+    public String getUserCookie1() {
+        return userCookie1;
+    }
+
+    public void setUserCookie1(String userCookie1) {
+        this.userCookie1 = userCookie1;
+    }
+
+    public String getUserCookie2() {
+        return userCookie2;
+    }
+
+    public void setUserCookie2(String userCookie2) {
+        this.userCookie2 = userCookie2;
     }
 }

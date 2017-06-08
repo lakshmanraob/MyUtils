@@ -1,31 +1,28 @@
 package my.util.app.fragments;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -56,6 +53,9 @@ import my.util.app.service.FetchLocationAddress;
 import my.util.app.utils.Constants;
 import my.util.app.utils.ImageCaptureListener;
 import my.util.app.utils.Utils;
+import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
+import sheet.bottom.com.networklib.models.tecoutil.AddComplaintResponse;
+import sheet.bottom.com.networklib.serviceLayer.loaders.AddComplaintLoader;
 
 public class ComplaintsFragment extends Fragment implements
         GoogleApiClient.ConnectionCallbacks,
@@ -217,7 +217,11 @@ public class ComplaintsFragment extends Fragment implements
                         Log.d("DEBUG_LOG", "error " + resources.getString(R.string.error_database));
                         Utils.showShortToast(getActivity(), resources.getString(R.string.error_database));
                     } else {
-                        Utils.showSubmitDialog(getActivity(), referenceNumber);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("user", DataManager.getInstance(getContext()).getUsername());
+                        bundle.putString("password", DataManager.getInstance(getContext()).getPassword());
+                        getLoaderManager().restartLoader(100, bundle, mAddComplaintCallbacks);
                     }
                 } else {
                     Utils.showShortToast(getActivity(), resources.getString(R.string.error_location));
@@ -519,4 +523,28 @@ public class ComplaintsFragment extends Fragment implements
             updateAddressField(address);
         }
     }
+
+
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<AddComplaintResponse>> mAddComplaintCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<AddComplaintResponse>>() {
+
+                @Override
+                public Loader<MyLoaderResponse<AddComplaintResponse>> onCreateLoader(int loaderId, Bundle bundle) {
+                    String userName = bundle.getString("user");
+                    String password = bundle.getString("password");
+                    return new AddComplaintLoader(getContext(), userName, password, DataManager.getInstance(getContext()).getUserCsrfToken(),
+                            DataManager.getInstance(getContext()).getUserCookie1(), DataManager.getInstance(getContext()).getUserCookie2());
+                }
+
+                @Override
+                public void onLoadFinished(Loader<MyLoaderResponse<AddComplaintResponse>> loader, MyLoaderResponse<AddComplaintResponse> loaderResult) {
+                    Utils.showSubmitDialog(getActivity(), 1234567890);
+                }
+
+                @Override
+                public void onLoaderReset(Loader<MyLoaderResponse<AddComplaintResponse>> loaderResult) {
+                }
+            };
+
+
 }

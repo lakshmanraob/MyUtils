@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,19 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.AuthActivity;
 import my.util.app.activity.SignUpActivity;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
+import okhttp3.Headers;
 import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
-import sheet.bottom.com.networklib.models.tecoutil.DJavaClass;
 import sheet.bottom.com.networklib.models.tecoutil.MyAuthResponse;
 import sheet.bottom.com.networklib.serviceLayer.loaders.UserAuthLoader;
 
@@ -102,6 +106,8 @@ public class LoginFragment extends Fragment {
                     loginBtn.setVisibility(View.GONE);
                     signup.setVisibility(View.GONE);
                     progress.setVisibility(View.VISIBLE);
+                    DataManager.getInstance(getContext()).setUsername(accountNo);
+                    DataManager.getInstance(getContext()).setPassword(password);
 //                    progress.postDelayed(new Runnable() {
 //                        @Override
 //                        public void run() {
@@ -109,8 +115,8 @@ public class LoginFragment extends Fragment {
 //                        }
 //                    }, Constants.PROGRESS_TIME);
                     Bundle bundle = new Bundle();
-                    bundle.putString("user", accountEdit.getText().toString());
-                    bundle.putString("password", passwordEdit.getText().toString());
+                    bundle.putString("user", accountNo);
+                    bundle.putString("password", password);
                     getLoaderManager().restartLoader(100, bundle, mLoginLoaderCallbacks);
                 }
             } else {
@@ -128,6 +134,17 @@ public class LoginFragment extends Fragment {
         startActivity(signupIntent);
     }
 
+    private String trimPath(String raw) {
+        String modified = null;
+        if (raw.contains("path")) {
+            String[] split = raw.split("path");
+            modified = split[0];
+        } else {
+            modified = raw;
+        }
+        return modified;
+    }
+
     private LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>> mLoginLoaderCallbacks =
             new LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>>() {
 
@@ -141,6 +158,20 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
                     progress.setVisibility(View.GONE);
+                    if (loaderResult != null && loaderResult.getHeaders() != null) {
+                        Headers headerList = loaderResult.getHeaders();
+                        DataManager.getInstance(getContext()).setUserCsrfToken(headerList.get(Constants.CSRF_TOKEN));
+                        List<String> cookies = headerList.values(Constants.USER_COOKIE);
+                        for(int i=0; i < cookies.size(); i++) {
+                            String cookie = cookies.get(i);
+                            Log.d("DEBUG_LOG", "i " + i + " :  " + cookie);
+                            if (i==0) {
+                                DataManager.getInstance(getContext()).setUserCookie1(trimPath(cookie));
+                            } else if (i==1) {
+                                DataManager.getInstance(getContext()).setUserCookie2(trimPath(cookie));
+                            }
+                        }
+                    }
                     ((AuthActivity) getActivity()).loginUser();
                 }
 
@@ -148,5 +179,7 @@ public class LoginFragment extends Fragment {
                 public void onLoaderReset(Loader<MyLoaderResponse<MyAuthResponse>> loaderResult) {
                 }
             };
+
+
 
 }
