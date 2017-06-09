@@ -47,15 +47,15 @@ import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
+import my.util.app.models.AddComplaintResponse;
 import my.util.app.models.IssueDetails;
 import my.util.app.models.PhotoDetails;
+import my.util.app.network.global.MyLoaderResponse;
+import my.util.app.network.loaders.AddComplaintLoader;
 import my.util.app.service.FetchLocationAddress;
 import my.util.app.utils.Constants;
 import my.util.app.utils.ImageCaptureListener;
 import my.util.app.utils.Utils;
-import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
-import sheet.bottom.com.networklib.models.tecoutil.AddComplaintResponse;
-import sheet.bottom.com.networklib.serviceLayer.loaders.AddComplaintLoader;
 
 public class ComplaintsFragment extends Fragment implements
         GoogleApiClient.ConnectionCallbacks,

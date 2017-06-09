@@ -15,10 +15,6 @@ import java.util.Locale;
 
 import my.util.app.fragments.ComplaintsFragment;
 
-/**
- * Created by labattula on 09/05/17.
- */
-
 public class FetchLocationAddress extends IntentService {
 
     public static final String FETCH_LOCATION = "location";

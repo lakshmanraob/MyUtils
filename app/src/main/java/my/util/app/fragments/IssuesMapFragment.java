@@ -44,10 +44,6 @@ import my.util.app.models.MarkerData;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
-/**
- * Created by labattula on 16/05/17.
- */
-
 public class IssuesMapFragment extends SupportMapFragment
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
