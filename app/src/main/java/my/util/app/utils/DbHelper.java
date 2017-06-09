@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import my.util.app.models.BillDetails;
-import my.util.app.models.IssueDetails;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -83,7 +82,7 @@ public class DbHelper extends SQLiteOpenHelper {
         Log.d("DEBUG_LOG", "DbHelper : Table - " + BILLS_TABLE + " created");
     }
 
-    public long addNewComplaint(IssueDetails issue){
+    /*public long addNewComplaint(IssueDetails issue){
         Log.d("DEBUG_LOG", "DbHelper : new complaint added at : " + issue.getAddress());
         ContentValues values = new ContentValues();
         values.put(COL_OUTAGE_TYPE , issue.getOutageType());
@@ -95,7 +94,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(COL_REF_NO , issue.getReferenceNo());
 
         return getWritableDatabase().insert(COMPLAINTS_TABLE, null, values);
-        /*getWritableDatabase().execSQL("INSERT INTO " + COMPLAINTS_TABLE + " (" +
+        *//*getWritableDatabase().execSQL("INSERT INTO " + COMPLAINTS_TABLE + " (" +
                 COL_OUTAGE_TYPE + ", " +
                 COL_COMPLAINT_DATE + ", " +
                 COL_ADDRESS + ", " +
@@ -110,8 +109,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 issue.getLatitude() + ", "+
                 issue.getLongitude() + ", "+
                 issue.getReferenceNo() +");"
-        );*/
-    }
+        );
+    }*/
 
     public long addNewBill(BillDetails bill){
         Log.d("DEBUG_LOG", "DbHelper : new bill added at : " + bill.getAddress());
@@ -133,7 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return getWritableDatabase().insert(BILLS_TABLE, null, values);
     }
 
-    public ArrayList<IssueDetails> getAllComplaints(){
+    /*public ArrayList<IssueDetails> getAllComplaints(){
         ArrayList<IssueDetails> complaintsList = new ArrayList<>();
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + COMPLAINTS_TABLE, null);
         if (cursor.moveToFirst()) {
@@ -153,7 +152,7 @@ public class DbHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return complaintsList;
-    }
+    }*/
 
     public ArrayList<BillDetails> getAllBills(){
         ArrayList<BillDetails> billsList = new ArrayList<>();

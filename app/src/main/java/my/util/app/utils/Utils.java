@@ -56,7 +56,6 @@ import my.util.app.activity.BaseActivity;
 import my.util.app.activity.SignUpActivity;
 import my.util.app.adapter.AddressExpandableListAdapter;
 import my.util.app.models.BillDetails;
-import my.util.app.models.IssueDetails;
 
 public class Utils {
     private static ProgressDialog mProgressDialog;
@@ -284,7 +283,7 @@ public class Utils {
                         (int) Math.pow(10, Constants.REF_NO_LEN - 1);
     }
 
-    public static ArrayList<IssueDetails> sortComplaintsList(ArrayList<IssueDetails> rawList) {
+    /*public static ArrayList<IssueDetails> sortComplaintsList(ArrayList<IssueDetails> rawList) {
         ArrayList<IssueDetails> sortedList = new ArrayList<>();
         for (IssueDetails issue : rawList) {
             if (Constants.COMPLAINTS_TIMINGS.THIS_WEEK == issue.getComplaintTiming()) {
@@ -312,7 +311,7 @@ public class Utils {
             }
         }
         return sortComplaintsList(filteredList);
-    }
+    }*/
 
     public static Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
@@ -404,5 +403,19 @@ public class Utils {
         long currentDateLong = calDate.getTimeInMillis();
         SimpleDateFormat newDate = new SimpleDateFormat(Constants.DATE_FORMAT,Locale.US);
         return newDate.format(new Date(currentDateLong));
+    }
+
+    public static String getStatusString(String statusCode){
+        String status = "Received";
+        if (Constants.COMPLAINT_STATUS.DP.equalsIgnoreCase(statusCode)) {
+            status = "Dispatched";
+        } else if (Constants.COMPLAINT_STATUS.AC.equalsIgnoreCase(statusCode)) {
+            status = "Accepted";
+        } else if (Constants.COMPLAINT_STATUS.EN.equalsIgnoreCase(statusCode)) {
+            status = "En-Route";
+        } else if (Constants.COMPLAINT_STATUS.AR.equalsIgnoreCase(statusCode)) {
+            status = "Arrived";
+        }
+        return status;
     }
 }

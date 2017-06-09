@@ -48,7 +48,6 @@ import my.util.app.R;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.models.AddComplaintResponse;
-import my.util.app.models.IssueDetails;
 import my.util.app.models.PhotoDetails;
 import my.util.app.network.global.MyLoaderResponse;
 import my.util.app.network.loaders.AddComplaintLoader;
@@ -205,24 +204,24 @@ public class ComplaintsFragment extends Fragment implements
             if (!TextUtils.isEmpty(address) && address.length() > Constants.ADD_MIN_LENGTH) {
                 if (mCurrentLocation != null) {
                     int referenceNumber = Utils.getRandom();
-                    long dbStatus = DataManager.getInstance(getActivity()).getDbHelper().addNewComplaint(new IssueDetails(
+                    /*long dbStatus = DataManager.getInstance(getActivity()).getDbHelper().addNewComplaint(new IssueDetails(
                             outageType,
                             Calendar.getInstance(),
                             address,
-                            Constants.COMPLAINT_STATUS.SUBMITTED,
+                            Constants.COMPLAINT_STATUS.RC,
                             mCurrentLocation.getLatitude(),
                             mCurrentLocation.getLongitude(),
                             referenceNumber));
                     if (dbStatus == -1) {
                         Log.d("DEBUG_LOG", "error " + resources.getString(R.string.error_database));
                         Utils.showShortToast(getActivity(), resources.getString(R.string.error_database));
-                    } else {
+                    } else {*/
 
                         Bundle bundle = new Bundle();
                         bundle.putString("user", DataManager.getInstance(getContext()).getUsername());
                         bundle.putString("password", DataManager.getInstance(getContext()).getPassword());
                         getLoaderManager().restartLoader(100, bundle, mAddComplaintCallbacks);
-                    }
+//                    }
                 } else {
                     Utils.showShortToast(getActivity(), resources.getString(R.string.error_location));
                 }
@@ -359,7 +358,6 @@ public class ComplaintsFragment extends Fragment implements
     }
 
     public void updateImages(Drawable imageCaptured) {
-        //Utils.showShortToast(getActivity(), "Success");
         images.add(new PhotoDetails("image_seq_" + images.size() + 1, imageCaptured));
         updateCaptureActionImage();
         if (images.size() > Constants.IMAGE_COUNT) {

@@ -6,7 +6,8 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import my.util.app.models.BillDetails;
-import my.util.app.models.IssueDetails;
+import my.util.app.models.LoginResult;
+import my.util.app.models.MyAuthResponse;
 import my.util.app.utils.Constants;
 import my.util.app.utils.DbHelper;
 
@@ -16,7 +17,6 @@ public class DataManager {
     private static DbHelper mDbHelper;
     private static Context mContext;
 
-    private static ArrayList<IssueDetails> mComplaintsList;
     private static ArrayList<BillDetails> mBillList;
     private static BillDetails mCurrentBill;
     private boolean isAccountDetailsConfirmed;
@@ -25,6 +25,7 @@ public class DataManager {
     private String userCsrfToken;
     private String userCookie1;
     private String userCookie2;
+    private MyAuthResponse allComplaints;
 
     private DataManager(Context ctx) {
         mContext = ctx;
@@ -50,7 +51,7 @@ public class DataManager {
         return mDbHelper;
     }
 
-    public ArrayList<IssueDetails> fetchAllSavedComplaints(){
+    /*public ArrayList<IssueDetails> fetchAllSavedComplaints(){
         ArrayList<IssueDetails> allComplaints = mDbHelper.getAllComplaints();
         if (allComplaints == null || allComplaints.size() <= 0) {
             Log.d("DEBUG_LOG", "no complaints data exists : add dummy data");
@@ -62,7 +63,7 @@ public class DataManager {
             mComplaintsList = allComplaints;
         }
         return mComplaintsList;
-    }
+    }*/
 
     public ArrayList<BillDetails> fetchAllSavedBills(){
         ArrayList<BillDetails> allBills = mDbHelper.getAllBills();
@@ -132,5 +133,17 @@ public class DataManager {
 
     public void setUserCookie2(String userCookie2) {
         this.userCookie2 = userCookie2;
+    }
+
+    public MyAuthResponse getAllComplaints() {
+        return allComplaints;
+    }
+
+    public void setAllComplaints(MyAuthResponse allComplaints) {
+        this.allComplaints = allComplaints;
+    }
+
+    public LoginResult[] getComplaintsList() {
+        return allComplaints.getD().getResults();
     }
 }
