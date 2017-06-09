@@ -27,12 +27,12 @@ import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.AuthActivity;
 import my.util.app.activity.SignUpActivity;
+import my.util.app.models.MyAuthResponse;
+import my.util.app.network.global.MyLoaderResponse;
+import my.util.app.network.loaders.UserAuthLoader;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 import okhttp3.Headers;
-import sheet.bottom.com.networklib.models.global.MyLoaderResponse;
-import sheet.bottom.com.networklib.models.tecoutil.MyAuthResponse;
-import sheet.bottom.com.networklib.serviceLayer.loaders.UserAuthLoader;
 
 public class LoginFragment extends Fragment {
 
