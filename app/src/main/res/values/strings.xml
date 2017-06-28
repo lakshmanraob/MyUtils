@@ -36,6 +36,7 @@
 
     <string name="hint_password">Password</string>
     <string name="hint_account">Account Number</string>
+    <string name="hint_add">First 5 characters of Service Address</string>
     <string name="sign_up">Sign Up</string>
     <string name="util_txt">UTIL</string>
     <string name="util_help">A Utilities Management Application</string>

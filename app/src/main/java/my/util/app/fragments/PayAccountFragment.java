@@ -43,6 +43,8 @@ public class PayAccountFragment extends Fragment {
 
     @BindView(R.id.pay_input_account)
     EditText payAccountEdit;
+    @BindView(R.id.address_input)
+    EditText addressEdit;
     @BindView(R.id.enter)
     ImageView enter;
     @BindView(R.id.progress)
@@ -160,9 +162,16 @@ public class PayAccountFragment extends Fragment {
         }, Constants.INFO_DISPLAY_TIME);
     }
 
+
+    @OnClick(R.id.address_info)
+    protected void showAddressInfo(View v) {
+        Utils.showShortToast(getContext(), getString(R.string.hint_add));
+    }
+
     @OnClick(R.id.enter)
     protected void pay(View v) {
         String accountNo = payAccountEdit.getText().toString();
+        String address = addressEdit.getText().toString();
         if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN) {
             enter.setVisibility(View.GONE);
             signup.setVisibility(View.GONE);
