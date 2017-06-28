@@ -2,6 +2,7 @@ package my.util.app.adapter;
 
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +15,23 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import my.util.app.R;
-import my.util.app.models.IssueDetails;
+import my.util.app.models.LoginResult;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
 public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAdapter.ViewHolder> {
 
-    private ArrayList<IssueDetails> complaints;
+    private LoginResult[] complaints;
     private boolean weekLabelDisplayed;
     private boolean monthLabelDisplayed;
     private boolean previousLabelDisplayed;
 
-    public ComplaintsListAdapter(ArrayList<IssueDetails> complaints) {
+    public ComplaintsListAdapter(LoginResult[] complaints) {
         this.complaints = complaints;
     }
 
-    public void updateList(ArrayList<IssueDetails> complaintsList) {
-        this.complaints = Utils.sortComplaintsList(complaintsList);
+    public void updateList(LoginResult[] complaintsList) {
+        //this.complaints = Utils.sortComplaintsList(complaintsList); // TODO:
         notifyDataSetChanged();
     }
 
@@ -42,32 +43,36 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        IssueDetails issue = complaints.get(position);
+        LoginResult issue = complaints[position];
 
-        Calendar complaintDate = issue.getComplaintDate();
-        holder.outageType.setText(issue.getOutageType());
+        Log.d("DEBUG_LOG", "onBindViewHolder " + issue.getOutageType() + " - " + issue.getIssueStatus());
+
+//        Calendar complaintDate = issue.getComplaintDate();
+        String type = issue.getOutageType();
+        holder.outageType.setText(String.valueOf(type.charAt(0)).toUpperCase() + type.substring(1, type.length()).toLowerCase());
 //        holder.complaintDate.setText(complaintDate.get(Calendar.MONTH) + "/" +
 //                complaintDate.get(Calendar.DAY_OF_MONTH) + "/" + complaintDate.get(Calendar.YEAR));
-        holder.complaintDate.setText(Utils.convertDate(complaintDate));
-        holder.referenceNumber.setText(String.valueOf(issue.getReferenceNo()));
-        holder.outageSubType.setText(issue.getOutageType());
-        holder.complaintAddress.setText(issue.getAddress());
+        holder.complaintDate.setText(issue.getIssueDate());
+        holder.referenceNumber.setText(issue.getQmnum());
+//        holder.outageSubType.setText("outageSubType");
+        holder.complaintAddress.setText(issue.getLatiServAdd() + " - " + issue.getLongServAdd());
 
-        int status = issue.getStatus();
-        switch (status) {
-            case Constants.COMPLAINT_STATUS.UNDER_REVIEW:
-                showUnderReviewStatus(holder);
-                break;
-            case Constants.COMPLAINT_STATUS.RESOLVED:
-                showResolvedStatus(holder);
-                break;
-            case Constants.COMPLAINT_STATUS.SUBMITTED:
-            default:
-                showSubmittedStatus(holder);
-                break;
+        String status = issue.getIssueStatus();
+        if (Constants.COMPLAINT_STATUS.CL.equalsIgnoreCase(status)) {
+            Log.d("DEBUG_LOG", "showResolvedStatus");
+            showResolvedStatus(holder);
+        } else if (Constants.COMPLAINT_STATUS.DP.equalsIgnoreCase(status) ||
+                Constants.COMPLAINT_STATUS.AC.equalsIgnoreCase(status) ||
+                Constants.COMPLAINT_STATUS.EN.equalsIgnoreCase(status) ||
+                Constants.COMPLAINT_STATUS.AR.equalsIgnoreCase(status)) {
+            Log.d("DEBUG_LOG", "showUnderReviewStatus");
+            showUnderReviewStatus(holder, status);
+        } else if (Constants.COMPLAINT_STATUS.RC.equalsIgnoreCase(status)) {
+            Log.d("DEBUG_LOG", "showSubmittedStatus");
+            showSubmittedStatus(holder);
         }
 
-        if ((Constants.COMPLAINTS_TIMINGS.THIS_WEEK == issue.getComplaintTiming()) &&
+        /*if ((Constants.COMPLAINTS_TIMINGS.THIS_WEEK == issue.getComplaintTiming()) &&
                 (View.GONE == holder.weekLabel.getVisibility()) && !weekLabelDisplayed) {
             holder.weekLabel.setVisibility(View.VISIBLE);
             holder.monthLabel.setVisibility(View.GONE);
@@ -85,13 +90,13 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
             holder.weekLabel.setVisibility(View.GONE);
             holder.monthLabel.setVisibility(View.GONE);
             previousLabelDisplayed = true;
-        }
+        }*/
 
     }
 
     @Override
     public int getItemCount() {
-        return complaints.size();
+        return complaints.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -125,6 +130,8 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
         ImageView revieweFilled;
         @BindView(R.id.reviewed_border)
         ImageView revieweBorder;
+        @BindView(R.id.status_label)
+        TextView statusLabel;
         @BindView(R.id.resolved_light)
         ImageView resolvedLight;
         @BindView(R.id.resolved_filled)
@@ -143,24 +150,41 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
         holder.reportedLight.setVisibility(View.VISIBLE);
         holder.reportedFilled.setVisibility(View.VISIBLE);
         holder.reportedBorder.setVisibility(View.GONE);
+
+        holder.revieweLight.setVisibility(View.GONE);
+        holder.revieweFilled.setVisibility(View.GONE);
+        holder.revieweBorder.setVisibility(View.VISIBLE);
+
+        holder.resolvedLight.setVisibility(View.GONE);
+        holder.resolvedFilled.setVisibility(View.GONE);
+        holder.resolvedBorder.setVisibility(View.VISIBLE);
     }
 
-    private void showUnderReviewStatus(ViewHolder holder) {
+    private void showUnderReviewStatus(ViewHolder holder, String label) {
         holder.reportedLight.setVisibility(View.GONE);
         holder.reportedFilled.setVisibility(View.VISIBLE);
         holder.reportedBorder.setVisibility(View.GONE);
+
         holder.revieweLight.setVisibility(View.VISIBLE);
         holder.revieweFilled.setVisibility(View.VISIBLE);
         holder.revieweBorder.setVisibility(View.GONE);
+
+        holder.statusLabel.setText(Utils.getStatusString(label));
+
+        holder.resolvedLight.setVisibility(View.GONE);
+        holder.resolvedFilled.setVisibility(View.GONE);
+        holder.resolvedBorder.setVisibility(View.VISIBLE);
     }
 
     private void showResolvedStatus(ViewHolder holder) {
         holder.reportedLight.setVisibility(View.GONE);
         holder.reportedFilled.setVisibility(View.VISIBLE);
         holder.reportedBorder.setVisibility(View.GONE);
+
         holder.revieweLight.setVisibility(View.GONE);
         holder.revieweFilled.setVisibility(View.VISIBLE);
         holder.revieweBorder.setVisibility(View.GONE);
+
         holder.resolvedLight.setVisibility(View.VISIBLE);
         holder.resolvedFilled.setVisibility(View.VISIBLE);
         holder.resolvedBorder.setVisibility(View.GONE);

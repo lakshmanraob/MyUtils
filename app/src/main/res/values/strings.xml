@@ -137,4 +137,5 @@
 
     <string name="issues_around_you">Issues around you</string>
     <string name="tap_to_view_filters">Tap to view filters</string>
+    <string name="login_fail">Please check your login details.</string>
 </resources>

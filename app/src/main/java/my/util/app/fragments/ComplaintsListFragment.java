@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +16,16 @@ import android.widget.FrameLayout;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.DataManager;
-import my.util.app.MyUtilApp;
 import my.util.app.R;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ComplaintsListAdapter;
-import my.util.app.models.IssueDetails;
+import my.util.app.models.LoginResult;
+import my.util.app.models.MyAuthResponse;
 import my.util.app.utils.Constants;
-import my.util.app.utils.Utils;
 
 public class ComplaintsListFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -39,7 +35,8 @@ public class ComplaintsListFragment extends Fragment {
     private String mParam2;
 
     private ComplaintsListAdapter mComplaintsListAdapter;
-    private ArrayList<IssueDetails> complaintsList;
+    private MyAuthResponse allComplaintsData;
+    private LoginResult[] complaintsList;
 
     @BindView(R.id.complaints_list)
     protected RecyclerView mComplaintsListView;
@@ -108,7 +105,7 @@ public class ComplaintsListFragment extends Fragment {
     }
 
     private void refreshList(){
-        mComplaintsListAdapter.updateList(DataManager.getInstance(getActivity()).fetchAllSavedComplaints());
+        mComplaintsListAdapter.updateList(DataManager.getInstance(getActivity()).getComplaintsList());
         mComplaintsListView.invalidate();
     }
 
@@ -118,7 +115,8 @@ public class ComplaintsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_complaints_list, container, false);
         ButterKnife.bind(this, content);
-        complaintsList = DataManager.getInstance(getActivity()).fetchAllSavedComplaints();
+        allComplaintsData = DataManager.getInstance(getActivity()).getAllComplaints();
+        complaintsList = allComplaintsData.getD().getResults();
 
         mSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -131,9 +129,9 @@ public class ComplaintsListFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.size() > 0) {
-                    complaintsList = Utils.filterComplaintsList(complaintsList, s.toString());
-                    mComplaintsListAdapter.updateList(complaintsList);
+                if (!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.length > 0) {
+                    //complaintsList = Utils.filterComplaintsList(complaintsList, s.toString()); // TODO:
+                    mComplaintsListAdapter.updateList(complaintsList);// TODO:
                     mComplaintsListView.invalidate();
                 } else {
                     refreshList();

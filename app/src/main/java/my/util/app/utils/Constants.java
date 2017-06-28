@@ -1,19 +1,15 @@
 package my.util.app.utils;
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import my.util.app.DataManager;
-import my.util.app.R;
 import my.util.app.models.BillDetails;
-import my.util.app.models.IssueDetails;
 
 public class Constants {
 
@@ -74,9 +70,18 @@ public class Constants {
     }
 
     public final class COMPLAINT_STATUS {
-        public static final int SUBMITTED = 1;
-        public static final int UNDER_REVIEW = 2;
-        public static final int RESOLVED = 3;
+        /*public static final String RC = "Received";
+        public static final String DP = "Dispatched";
+        public static final String AC = "Accepted";
+        public static final String EN = "En-Route";
+        public static final String AR = "Arrived";
+        public static final String CL = "Cleared";*/
+        public static final String RC = "RC";
+        public static final String DP = "DP";
+        public static final String AC = "AC";
+        public static final String EN = "EN";
+        public static final String AR = "AR";
+        public static final String CL = "CL";
     }
 
     public final class USER_ADDRESSES {
@@ -87,77 +92,6 @@ public class Constants {
         public static final String OFC = "3228 W Horbar Ave, \nTampa, FL";
         public static final String MRTHLI = "3106 W Paxton Ave, \nTampa, FL";
         public static final String PEENYA = "914E Ida St, \nTampa, FL";
-    }
-
-    public static ArrayList<IssueDetails> getDummyComplaintsList(Context ctx) {
-        Resources res = ctx.getResources();
-        ArrayList<IssueDetails> complaints = new ArrayList<>();
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 7);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.streetlight_outage), cal,
-                USER_ADDRESSES.OFC, COMPLAINT_STATUS.SUBMITTED, Constants.LAT_OFC, Constants.LONG_OFC, Utils.getRandom()));
-        cal.set(Calendar.DAY_OF_MONTH, 8);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.safety_concern), cal,
-                USER_ADDRESSES.OFC, COMPLAINT_STATUS.SUBMITTED, Constants.LAT_OFC, Constants.LONG_OFC, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 5);
-        cal.set(Calendar.MONTH, 5);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.power_outage), cal,
-                USER_ADDRESSES.MRTHLI, COMPLAINT_STATUS.UNDER_REVIEW, Constants.LAT_MRTHLI, Constants.LONG_MRTHLI, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 4);
-        cal.set(Calendar.MONTH, 5);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.safety_concern), cal,
-                USER_ADDRESSES.ECITY, COMPLAINT_STATUS.SUBMITTED, Constants.LAT_ECITY, Constants.LONG_ECITY, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 3);
-        cal.set(Calendar.MONTH, 5);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.power_outage), cal,
-                USER_ADDRESSES.PEENYA, COMPLAINT_STATUS.UNDER_REVIEW, Constants.LAT_PEENYA, Constants.LONG_PEENYA, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 27);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.power_outage), cal,
-                USER_ADDRESSES.HOSAROAD, COMPLAINT_STATUS.RESOLVED, Constants.LAT_HOSAROAD, Constants.LONG_HOSAROAD, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 15);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.streetlight_outage), cal,
-                USER_ADDRESSES.BOSH, COMPLAINT_STATUS.RESOLVED, Constants.LAT_BOSH, Constants.LONG_BOSH, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 15);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.power_outage), cal,
-                USER_ADDRESSES.HSR, COMPLAINT_STATUS.RESOLVED, Constants.LAT_HSR, Constants.LONG_HSR, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 3);
-        cal.set(Calendar.MONTH, 4);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.others), cal,
-                USER_ADDRESSES.OFC, COMPLAINT_STATUS.RESOLVED, Constants.LAT_OFC, Constants.LONG_OFC, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 28);
-        cal.set(Calendar.MONTH, 3);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.safety_concern), cal,
-                USER_ADDRESSES.MRTHLI, COMPLAINT_STATUS.RESOLVED, Constants.LAT_MRTHLI, Constants.LONG_MRTHLI, Utils.getRandom()));
-        cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 7);
-        cal.set(Calendar.MONTH, 5);
-        cal.set(Calendar.YEAR, 2017);
-        complaints.add(new IssueDetails(res.getString(R.string.safety_concern), cal,
-                USER_ADDRESSES.MRTHLI, COMPLAINT_STATUS.UNDER_REVIEW, Constants.LAT_MRTHLI, Constants.LONG_MRTHLI, Utils.getRandom()));
-        return Utils.sortComplaintsList(complaints);
     }
 
     public static ArrayList<BillDetails> getDummyBillsList() {

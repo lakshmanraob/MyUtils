@@ -5,14 +5,17 @@ import my.util.app.network.global.MyUtilModel;
 public class LoginResult extends MyUtilModel {
 
     MetaData __metadata;
-
     String Bpart;
-    String FirstName;
-    String LastName;
-    String Dob;
-    String Phone;
-    String Email;
-    String Address;
+    String OutageType;
+    String LatiServAdd;
+    String FromDate;
+    String IssueDate;
+    String LongServAdd;
+    String ToDate;
+    String IssueStatus;
+    String Qmnum;
+    String Qmtxt;
+    String RetMessage;
 
     public MetaData get__metadata() {
         return __metadata;
@@ -30,51 +33,83 @@ public class LoginResult extends MyUtilModel {
         Bpart = bpart;
     }
 
-    public String getFirstName() {
-        return FirstName;
+    public String getOutageType() {
+        return OutageType;
     }
 
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
+    public void setOutageType(String outageType) {
+        OutageType = outageType;
     }
 
-    public String getLastName() {
-        return LastName;
+    public String getLatiServAdd() {
+        return LatiServAdd;
     }
 
-    public void setLastName(String lastName) {
-        LastName = lastName;
+    public void setLatiServAdd(String latiServAdd) {
+        LatiServAdd = latiServAdd;
     }
 
-    public String getDob() {
-        return Dob;
+    public String getFromDate() {
+        return FromDate;
     }
 
-    public void setDob(String dob) {
-        Dob = dob;
+    public void setFromDate(String fromDate) {
+        FromDate = fromDate;
     }
 
-    public String getPhone() {
-        return Phone;
+    public String getIssueDate() {
+        return IssueDate;
     }
 
-    public void setPhone(String phone) {
-        Phone = phone;
+    public void setIssueDate(String issueDate) {
+        IssueDate = issueDate;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getLongServAdd() {
+        return LongServAdd;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setLongServAdd(String longServAdd) {
+        LongServAdd = longServAdd;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getToDate() {
+        return ToDate;
     }
 
-    public void setAddress(String address) {
-        Address = address;
+    public void setToDate(String toDate) {
+        ToDate = toDate;
+    }
+
+    public String getIssueStatus() {
+        return IssueStatus;
+    }
+
+    public void setIssueStatus(String issueStatus) {
+        IssueStatus = issueStatus;
+    }
+
+    public String getQmnum() {
+        return Qmnum;
+    }
+
+    public void setQmnum(String qmnum) {
+        Qmnum = qmnum;
+    }
+
+    public String getQmtxt() {
+        return Qmtxt;
+    }
+
+    public void setQmtxt(String qmtxt) {
+        Qmtxt = qmtxt;
+    }
+
+    public String getRetMessage() {
+        return RetMessage;
+    }
+
+    public void setRetMessage(String retMessage) {
+        RetMessage = retMessage;
     }
 }

@@ -171,8 +171,14 @@ public class LoginFragment extends Fragment {
                                 DataManager.getInstance(getContext()).setUserCookie2(trimPath(cookie));
                             }
                         }
+                        DataManager.getInstance(getContext()).setAllComplaints(loaderResult.getData());
+                        ((AuthActivity) getActivity()).loginUser();
+                    } else {
+                        loginBtn.setVisibility(View.VISIBLE);
+                        signup.setVisibility(View.VISIBLE);
+                        progress.setVisibility(View.GONE);
+                        Utils.showSubmitDialog(getContext(), R.layout.login_fail_dialog);
                     }
-                    ((AuthActivity) getActivity()).loginUser();
                 }
 
                 @Override
