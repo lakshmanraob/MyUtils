@@ -127,7 +127,12 @@ public class AuthActivity extends BaseActivity {
         }
     }
 
-    public void loginUser() {
+    public void setPinForUser() {
+        startActivity(new Intent(this, MainActivity.class));
+        this.finish();
+    }
+
+    public void loginUser1() {
         startActivity(new Intent(this, MainActivity.class));
         this.finish();
     }

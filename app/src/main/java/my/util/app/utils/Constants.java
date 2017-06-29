@@ -13,6 +13,7 @@ import my.util.app.models.BillDetails;
 
 public class Constants {
 
+    public static final String PREFERENCE = "util_app_prefs";
     public static final String CAPTURE_IMAGE_NAME = "capture_image";
     public static final int CAMERA_REQUEST_CODE = 1001;
     public static final int IMAGE_COUNT = 3;
@@ -45,6 +46,11 @@ public class Constants {
 
     public static final int ACC_NO_LEN = 6;
     public static final int REF_NO_LEN = 6;
+    public static final int SSN_LEN = 4;
+    public static final int PIN_LEN = 4;
+
+    public static final String ACC_NUMBER = "acc_no";
+    public static final String SSN_DIGITS = "ssn_digits";
 
     public static final String PAGE_TITLE = "pageTitle";
     public static final String PAGE_NUMBER = "pageNumber";

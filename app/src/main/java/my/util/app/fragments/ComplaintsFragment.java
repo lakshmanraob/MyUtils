@@ -218,8 +218,8 @@ public class ComplaintsFragment extends Fragment implements
                     } else {*/
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("user", DataManager.getInstance(getContext()).getUsername());
-                        bundle.putString("password", DataManager.getInstance(getContext()).getPassword());
+                        bundle.putString("user", DataManager.getInstance(getContext()).getAccNo());
+                        bundle.putString("ssn", DataManager.getInstance(getContext()).getSsn());
                         getLoaderManager().restartLoader(100, bundle, mAddComplaintCallbacks);
 //                    }
                 } else {

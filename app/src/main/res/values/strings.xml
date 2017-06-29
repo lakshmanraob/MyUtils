@@ -35,6 +35,9 @@
     </array>
 
     <string name="hint_password">Password</string>
+    <string name="hint_ssn_login">Last 4 digits of your SSN</string>
+    <string name="hint_pin">Enter a 4 digit PIN</string>
+    <string name="hint_pin_confirm">Confirm your PIN</string>
     <string name="hint_account">Account Number</string>
     <string name="hint_add">First 5 characters of Service Address</string>
     <string name="sign_up">Sign Up</string>
