@@ -15,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import my.util.app.network.global.MyLoaderException;
 import my.util.app.network.global.MyLoaderResponse;
-import my.util.app.network.apicalls.LoginUserApi;
+import my.util.app.network.apicalls.ApiCalls;
 import my.util.app.network.myRetrofit.MyRetroFitLib;
 
 public class UtilServiceLayer {
@@ -29,7 +29,7 @@ public class UtilServiceLayer {
         headersMap.put("Accept", "application/json");
         headersMap.put("X-CSRF-Token", "Fetch");
 
-        Call<LoginResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(LoginUserApi.class).authenticate();
+        Call<LoginResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(ApiCalls.class).authenticate();
         return buildResponse(authCall);
     }
 
@@ -39,7 +39,7 @@ public class UtilServiceLayer {
         headersMap.put("Authorization", authtoken);
         headersMap.put("Accept", "application/json");
 
-        Call<MyAuthResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(LoginUserApi.class).fetchComplaints();
+        Call<MyAuthResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(ApiCalls.class).fetchComplaints();
         return buildFetchComplaintsResponse(authCall);
     }
 
@@ -53,7 +53,7 @@ public class UtilServiceLayer {
 
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("Bpart", ""); // hardcoded
-        Call<AddComplaintResponse> addComplaintCall = MyRetroFitLib.addComplaint(BASE_URL, headersMap).create(LoginUserApi.class).addComplaint(requestBody);
+        Call<AddComplaintResponse> addComplaintCall = MyRetroFitLib.addComplaint(BASE_URL, headersMap).create(ApiCalls.class).addComplaint(requestBody);
         return buildAddComplaintResponse(addComplaintCall);
     }
 

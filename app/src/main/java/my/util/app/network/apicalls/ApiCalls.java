@@ -10,7 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-public interface LoginUserApi {
+public interface ApiCalls {
 
     @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/NOTIF_AUTHSet(Bpart='1000000014',SsnPwd='0000')?$format=json")
     Call<LoginResponse> authenticate();
