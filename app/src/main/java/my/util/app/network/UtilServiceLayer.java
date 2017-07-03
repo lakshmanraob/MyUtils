@@ -2,11 +2,14 @@ package my.util.app.network;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import my.util.app.models.AddComplaintResponse;
+import my.util.app.models.LoginResponse;
 import my.util.app.models.MyAuthResponse;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -20,13 +23,13 @@ public class UtilServiceLayer {
 
     private static final String BASE_URL = "http://socwes1er46.solutions.glbsnet.com:8000/";
 
-    public static MyLoaderResponse<MyAuthResponse> authenticate(String authtoken) {
+    public static MyLoaderResponse<LoginResponse> authenticate(String authtoken) {
         HashMap<String, String> headersMap = new HashMap<>();
         headersMap.put("Authorization", authtoken);
         headersMap.put("Accept", "application/json");
         headersMap.put("X-CSRF-Token", "Fetch");
 
-        Call<MyAuthResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(LoginUserApi.class).authenticate();
+        Call<LoginResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(LoginUserApi.class).authenticate();
         return buildResponse(authCall);
     }
 
@@ -44,13 +47,15 @@ public class UtilServiceLayer {
         return buildAddComplaintResponse(addComplaintCall);
     }
 
-    public static MyLoaderResponse<MyAuthResponse> buildResponse(Call<MyAuthResponse> call) {
-        MyLoaderResponse<MyAuthResponse> returnValue = new MyLoaderResponse<>();
+    public static MyLoaderResponse<LoginResponse> buildResponse(Call<LoginResponse> call) {
+        MyLoaderResponse<LoginResponse> returnValue = new MyLoaderResponse<>();
         MyLoaderException.Builder errorBuilder = new MyLoaderException.Builder();
 
         try {
-            Response<MyAuthResponse> response = call.execute();
+            Response<LoginResponse> response = call.execute();
             if (response.isSuccessful()) {
+                Log.d("DEBUG_LOG", "HEADERS > " + response.headers());
+                Log.d("DEBUG_LOG", "BODY > " + new Gson().toJson(response.body()));
                 returnValue.setData(response.body());
                 returnValue.setHeaders(response.headers());
             } else {

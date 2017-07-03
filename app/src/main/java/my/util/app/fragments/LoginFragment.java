@@ -29,11 +29,10 @@ import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.activity.AuthActivity;
 import my.util.app.activity.SignUpActivity;
-import my.util.app.models.MyAuthResponse;
+import my.util.app.models.LoginResponse;
 import my.util.app.network.global.MyLoaderResponse;
 import my.util.app.network.loaders.UserAuthLoader;
 import my.util.app.utils.Constants;
-import my.util.app.utils.PrefsHelper;
 import my.util.app.utils.Utils;
 import okhttp3.Headers;
 
@@ -125,12 +124,6 @@ public class LoginFragment extends Fragment {
                     signup.setVisibility(View.GONE);
                     progress.setVisibility(View.VISIBLE);
                     callLoginApi();
-//                    progress.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            ((AuthActivity) getActivity()).loginUser();
-//                        }
-//                    }, Constants.PROGRESS_TIME);
                 }
             } else {
                 Utils.showShortToast(getContext(), "Please enter the last 4 digits of your SSN.");
@@ -145,7 +138,7 @@ public class LoginFragment extends Fragment {
         String pinEnteredDigits = pinEntered.getText().toString();
         String pinConfirmedDigits = pinConfirmed.getText().toString();
         if (TextUtils.isEmpty(pinEnteredDigits)) {
-            Utils.showShortToast(getContext(), "Please enter a desired digit PIN.");
+            Utils.showShortToast(getContext(), "Please enter a desired PIN.");
         } else if (pinEnteredDigits.length() != Constants.PIN_LEN) {
             Utils.showShortToast(getContext(), "PIN should be 4 digits long.");
         } else if (TextUtils.isEmpty(pinConfirmedDigits) || pinConfirmedDigits.length() != Constants.PIN_LEN) {
@@ -157,6 +150,7 @@ public class LoginFragment extends Fragment {
                 pinEnteredDigits.length() == Constants.PIN_LEN &&
                 pinConfirmedDigits.length() == Constants.PIN_LEN &&
                 pinEnteredDigits.equals(pinConfirmedDigits)) {
+            DataManager.getInstance(getContext()).setUserPin(pinEnteredDigits);
             pinSetBtn.setVisibility(View.GONE);
             pinProgress.setVisibility(View.VISIBLE);
             new SetUserPin().execute();
@@ -183,57 +177,61 @@ public class LoginFragment extends Fragment {
         return modified;
     }
 
-    private void callLoginApi(){
+    private void callLoginApi() {
         Bundle bundle = new Bundle();
-        bundle.putString("user", "vmeghmala");//DataManager.getInstance(getActivity()).getAccNo()
-        bundle.putString("ssn", "vivsap001");//DataManager.getInstance(getActivity()).getSsn()
+        bundle.putString(Constants.USER_LABEL, Constants.USERNAME);
+        bundle.putString(Constants.SSN_LABEL, Constants.PASSWORD);
         getLoaderManager().restartLoader(100, bundle, mLoginLoaderCallbacks);
     }
 
-    private void loginToApp(MyLoaderResponse<MyAuthResponse> loaderResult){
+    private void loginToApp(MyLoaderResponse<LoginResponse> loaderResult) {
         if (loaderResult != null && loaderResult.getHeaders() != null) {
             Headers headerList = loaderResult.getHeaders();
             DataManager.getInstance(getContext()).setUserCsrfToken(headerList.get(Constants.CSRF_TOKEN));
             List<String> cookies = headerList.values(Constants.USER_COOKIE);
-            for(int i=0; i < cookies.size(); i++) {
+            for (int i = 0; i < cookies.size(); i++) {
                 String cookie = cookies.get(i);
                 Log.d("DEBUG_LOG", "i " + i + " :  " + cookie);
-                if (i==0) {
+                if (i == 0) {
                     DataManager.getInstance(getContext()).setUserCookie1(trimPath(cookie));
-                } else if (i==1) {
+                } else if (i == 1) {
                     DataManager.getInstance(getContext()).setUserCookie2(trimPath(cookie));
                 }
             }
-            DataManager.getInstance(getContext()).setAllComplaints(loaderResult.getData());
-            ((AuthActivity) getActivity()).loginUser1();
+            /*Log.d("DEBUG_LOG", "set all complaints");
+            DataManager.getInstance(getContext()).setAllComplaints(loaderResult.getData());*/
+            Log.d("DEBUG_LOG", "DONE " + loaderResult.getData());
+            loginFrame.setVisibility(View.GONE);
+            setPinFrame.setVisibility(View.VISIBLE);
         } else {
+            loginFrame.setVisibility(View.VISIBLE);
+            setPinFrame.setVisibility(View.GONE);
             loginBtn.setVisibility(View.VISIBLE);
             signup.setVisibility(View.VISIBLE);
             progress.setVisibility(View.GONE);
+            Log.d("DEBUG_LOG", "set error");
             Utils.showSubmitDialog(getContext(), R.layout.login_fail_dialog);
         }
     }
 
-    private LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>> mLoginLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>>() {
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<LoginResponse>> mLoginLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<LoginResponse>>() {
 
                 @Override
-                public Loader<MyLoaderResponse<MyAuthResponse>> onCreateLoader(int loaderId, Bundle bundle) {
-                    String userName = bundle.getString("user");
-                    String password = bundle.getString("password");
+                public Loader<MyLoaderResponse<LoginResponse>> onCreateLoader(int loaderId, Bundle bundle) {
+                    String userName = bundle.getString(Constants.USER_LABEL);
+                    String password = bundle.getString(Constants.SSN_LABEL);
                     return new UserAuthLoader(getContext(), userName, password);
                 }
 
                 @Override
-                public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
+                public void onLoadFinished(Loader<MyLoaderResponse<LoginResponse>> loader, MyLoaderResponse<LoginResponse> loaderResult) {
                     progress.setVisibility(View.GONE);
-                    loginFrame.setVisibility(View.GONE);
-                    setPinFrame.setVisibility(View.VISIBLE);
-                    //loginToApp(loaderResult);
+                    loginToApp(loaderResult);
                 }
 
                 @Override
-                public void onLoaderReset(Loader<MyLoaderResponse<MyAuthResponse>> loaderResult) {
+                public void onLoaderReset(Loader<MyLoaderResponse<LoginResponse>> loaderResult) {
                 }
             };
 
@@ -242,7 +240,7 @@ public class LoginFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(Constants.PROCESS_TIME);
             } catch (InterruptedException e) {
                 Thread.interrupted();
             }
@@ -251,6 +249,8 @@ public class LoginFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
+            pinProgress.setVisibility(View.GONE);
+            ((AuthActivity) getActivity()).loginUser();
         }
     }
 

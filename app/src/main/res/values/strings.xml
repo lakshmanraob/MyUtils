@@ -37,10 +37,12 @@
     <string name="hint_password">Password</string>
     <string name="hint_ssn_login">Last 4 digits of your SSN</string>
     <string name="hint_pin">Enter a 4 digit PIN</string>
+    <string name="hint_login_pin">Enter your PIN</string>
     <string name="hint_pin_confirm">Confirm your PIN</string>
     <string name="hint_account">Account Number</string>
     <string name="hint_add">First 5 characters of Service Address</string>
     <string name="sign_up">Sign Up</string>
+    <string name="forgot_pin">Forgot PIN</string>
     <string name="util_txt">UTIL</string>
     <string name="util_help">A Utilities Management Application</string>
 

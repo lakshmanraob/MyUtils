@@ -23,6 +23,7 @@ public class DataManager {
     private boolean isAccountDetailsConfirmed;
     private String accNo;
     private String ssn;
+    private String userPin;
     private String userCsrfToken;
     private String userCookie1;
     private String userCookie2;
@@ -101,6 +102,7 @@ public class DataManager {
     }
 
     public void setAccNo(String accNo) {
+        Log.d("DEBUG_LOG", "acc no set " + accNo);
         PrefsHelper.getInstance().setStringPref(Constants.ACC_NUMBER, accNo);
         this.accNo = accNo;
     }
@@ -112,6 +114,16 @@ public class DataManager {
     public void setSsn(String ssn) {
         PrefsHelper.getInstance().setStringPref(Constants.SSN_DIGITS, ssn);
         this.ssn = ssn;
+    }
+
+    public String getUserPin() {
+        return PrefsHelper.getInstance().getStringPref(Constants.USER_PIN, "");
+    }
+
+    public void setUserPin(String userPin) {
+        Log.d("DEBUG_LOG", "USER_PIN set " + userPin);
+        PrefsHelper.getInstance().setStringPref(Constants.USER_PIN, userPin);
+        this.userPin = userPin;
     }
 
     public String getUserCsrfToken() {

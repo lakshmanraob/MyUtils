@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:ems="4"
                 android:hint="@string/hint_pin"
-                android:inputType="textEmailAddress"
+                android:inputType="numberPassword"
                 android:maxLength="4"
                 android:text="" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:ems="4"
             android:hint="@string/hint_pin_confirm"
-            android:inputType="textEmailAddress"
+            android:inputType="numberPassword"
             android:maxLength="4"
             android:text="" />
 

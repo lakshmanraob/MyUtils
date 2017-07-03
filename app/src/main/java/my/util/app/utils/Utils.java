@@ -336,7 +336,7 @@ public class Utils {
         });
     }
 
-    private static void showProgressBarWithListener(final Activity act, DialogInterface.OnCancelListener listener) {
+    public static void showProgressBarWithListener(final Activity act, DialogInterface.OnCancelListener listener) {
         final ProgressDialog progress = new ProgressDialog(act);
         progress.setMessage("Please wait...");
         progress.show();
@@ -350,7 +350,6 @@ public class Utils {
         Handler mHandler = new Handler();
         mHandler.postDelayed(progressRunnable, Constants.PROCESS_TIME);
     }
-
 
     /**
      * One Info the layout must contain the OK (R.id.ok) TextView
