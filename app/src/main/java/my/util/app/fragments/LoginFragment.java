@@ -30,7 +30,9 @@ import my.util.app.R;
 import my.util.app.activity.AuthActivity;
 import my.util.app.activity.SignUpActivity;
 import my.util.app.models.LoginResponse;
+import my.util.app.models.MyAuthResponse;
 import my.util.app.network.global.MyLoaderResponse;
+import my.util.app.network.loaders.FetchComplaintsLoader;
 import my.util.app.network.loaders.UserAuthLoader;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
@@ -100,8 +102,6 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.login_info)
     protected void loginInfo(View v) {
         accountHelp.setVisibility(View.VISIBLE);
-        //progressView.setVisibility(View.VISIBLE);
-
         accountHelp.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -187,7 +187,9 @@ public class LoginFragment extends Fragment {
     private void loginToApp(MyLoaderResponse<LoginResponse> loaderResult) {
         if (loaderResult != null && loaderResult.getHeaders() != null) {
             Headers headerList = loaderResult.getHeaders();
-            DataManager.getInstance(getContext()).setUserCsrfToken(headerList.get(Constants.CSRF_TOKEN));
+            String csrfToken = headerList.get(Constants.CSRF_TOKEN);
+            DataManager.getInstance(getContext()).setUserCsrfToken(csrfToken);
+            Log.d("DEBUG_LOG", "csrfToken recvd : " + csrfToken);
             List<String> cookies = headerList.values(Constants.USER_COOKIE);
             for (int i = 0; i < cookies.size(); i++) {
                 String cookie = cookies.get(i);
@@ -253,5 +255,4 @@ public class LoginFragment extends Fragment {
             ((AuthActivity) getActivity()).loginUser();
         }
     }
-
 }

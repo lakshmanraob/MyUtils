@@ -33,6 +33,16 @@ public class UtilServiceLayer {
         return buildResponse(authCall);
     }
 
+    public static MyLoaderResponse<MyAuthResponse> fetchComplaints(String authtoken) {
+        Log.d("DEBUG_LOG", "fetchComplaints");
+        HashMap<String, String> headersMap = new HashMap<>();
+        headersMap.put("Authorization", authtoken);
+        headersMap.put("Accept", "application/json");
+
+        Call<MyAuthResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(LoginUserApi.class).fetchComplaints();
+        return buildFetchComplaintsResponse(authCall);
+    }
+
     public static MyLoaderResponse<AddComplaintResponse> addComplaint(String authtoken, String csrfToken, String cookie1, String cookie2) {
         HashMap<String, String> headersMap = new HashMap<>();
         headersMap.put("Authorization", authtoken);
@@ -53,6 +63,34 @@ public class UtilServiceLayer {
 
         try {
             Response<LoginResponse> response = call.execute();
+            if (response.isSuccessful()) {
+                Log.d("DEBUG_LOG", "HEADERS > " + response.headers());
+                Log.d("DEBUG_LOG", "BODY > " + new Gson().toJson(response.body()));
+                returnValue.setData(response.body());
+                returnValue.setHeaders(response.headers());
+            } else {
+                returnValue.setData(null);
+                errorBuilder.setErrorCode(101);
+                errorBuilder.setDetailMessage("Request Failure");
+                returnValue.setException(errorBuilder.build());
+            }
+        } catch (IOException e) {
+            errorBuilder.setErrorCode(101);
+            errorBuilder.setDetailMessage("IOException");
+        } catch (Exception e) {
+            errorBuilder.setErrorCode(101);
+            errorBuilder.setDetailMessage("SomeOtherException");
+        }
+        return returnValue;
+    }
+
+    public static MyLoaderResponse<MyAuthResponse> buildFetchComplaintsResponse(Call<MyAuthResponse> call) {
+        Log.d("DEBUG_LOG", "buildFetchComplaintsResponse");
+        MyLoaderResponse<MyAuthResponse> returnValue = new MyLoaderResponse<>();
+        MyLoaderException.Builder errorBuilder = new MyLoaderException.Builder();
+
+        try {
+            Response<MyAuthResponse> response = call.execute();
             if (response.isSuccessful()) {
                 Log.d("DEBUG_LOG", "HEADERS > " + response.headers());
                 Log.d("DEBUG_LOG", "BODY > " + new Gson().toJson(response.body()));

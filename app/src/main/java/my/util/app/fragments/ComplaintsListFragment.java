@@ -1,13 +1,17 @@
 package my.util.app.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +20,24 @@ import android.widget.FrameLayout;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.DataManager;
 import my.util.app.R;
+import my.util.app.activity.AuthActivity;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ComplaintsListAdapter;
 import my.util.app.models.LoginResult;
 import my.util.app.models.MyAuthResponse;
+import my.util.app.network.global.MyLoaderResponse;
+import my.util.app.network.loaders.FetchComplaintsLoader;
 import my.util.app.utils.Constants;
+import my.util.app.utils.Utils;
+import okhttp3.Headers;
+import okhttp3.internal.Util;
 
 public class ComplaintsListFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -35,7 +47,7 @@ public class ComplaintsListFragment extends Fragment {
     private String mParam2;
 
     private ComplaintsListAdapter mComplaintsListAdapter;
-    private MyAuthResponse allComplaintsData;
+    private MyAuthResponse complaintsResponse;
     private LoginResult[] complaintsList;
 
     @BindView(R.id.complaints_list)
@@ -67,7 +79,7 @@ public class ComplaintsListFragment extends Fragment {
         mSearchInputLayout.setVisibility(View.GONE);
         mSearchOpen.setVisibility(View.VISIBLE);
         mSearchDivider.setVisibility(View.VISIBLE);
-        refreshList();
+        //refreshList();
     }
 
     @OnClick(R.id.search_open)
@@ -101,13 +113,13 @@ public class ComplaintsListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        refreshList();
+        //refreshList();
     }
 
-    private void refreshList(){
+    /*private void refreshList(){
         mComplaintsListAdapter.updateList(DataManager.getInstance(getActivity()).getComplaintsList());
         mComplaintsListView.invalidate();
-    }
+    }*/
 
     @Nullable
     @Override
@@ -115,9 +127,6 @@ public class ComplaintsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_complaints_list, container, false);
         ButterKnife.bind(this, content);
-        allComplaintsData = DataManager.getInstance(getActivity()).getAllComplaints();
-        complaintsList = allComplaintsData.getD().getResults();
-
         mSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -129,23 +138,65 @@ public class ComplaintsListFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.length > 0) {
+                /*if (!TextUtils.isEmpty(s.toString()) && android.text.TextUtils.isDigitsOnly(s.toString()) && complaintsList != null && complaintsList.length > 0) {
                     //complaintsList = Utils.filterComplaintsList(complaintsList, s.toString()); // TODO:
                     mComplaintsListAdapter.updateList(complaintsList);// TODO:
                     mComplaintsListView.invalidate();
                 } else {
                     refreshList();
-                }
+                }*/
             }
         });
 
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.USER_LABEL, Constants.USERNAME);
+        bundle.putString(Constants.SSN_LABEL, Constants.PASSWORD);
+
+        getLoaderManager().restartLoader(100, bundle, mFetchComplaintsLoaderCallbacks);
+
+        return content;
+    }
+
+    private void refreshComplaintsList(){
+        complaintsList = complaintsResponse.getD().getResults();
         mComplaintsListAdapter = new ComplaintsListAdapter(complaintsList);
         LinearLayoutManager mngr = new LinearLayoutManager(getActivity());
         mComplaintsListView.setAdapter(mComplaintsListAdapter);
         mComplaintsListView.setLayoutManager(mngr);
         mComplaintsListView.invalidate();
-
-        return content;
     }
+
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>> mFetchComplaintsLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>>() {
+
+                @Override
+                public Loader<MyLoaderResponse<MyAuthResponse>> onCreateLoader(int loaderId, Bundle bundle) {
+                    Log.d("DEBUG_LOG", "onCreateLoader");
+                    Utils.showProgressDialog(getContext());
+                    String userName = bundle.getString(Constants.USER_LABEL);
+                    String password = bundle.getString(Constants.SSN_LABEL);
+                    return new FetchComplaintsLoader(getContext(), userName, password);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
+                    if (loaderResult != null && loaderResult.getData() != null) {
+                        Log.d("DEBUG_LOG", "fetch complaints onLoadFinished");
+                        Utils.hideProgressDialog();
+                        complaintsResponse = loaderResult.getData();
+                        if (complaintsResponse != null && complaintsResponse.getD() != null && complaintsResponse.getD().getResults() != null) {
+                            Log.d("DEBUG_LOG", "refreshComplaintsList");
+                            refreshComplaintsList();
+                        } else {
+                            Log.d("DEBUG_LOG", "refreshComplaintsList FAIL");
+                        }
+                    }
+                }
+
+                @Override
+                public void onLoaderReset(Loader<MyLoaderResponse<MyAuthResponse>> loaderResult) {
+                }
+            };
 
 }

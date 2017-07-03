@@ -15,6 +15,9 @@ public interface LoginUserApi {
     @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/NOTIF_AUTHSet(Bpart='1000000014',SsnPwd='0000')?$format=json")
     Call<LoginResponse> authenticate();
 
+    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_mainSet")
+    Call<MyAuthResponse> fetchComplaints();
+
     @POST("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_mainSet")
     Call<AddComplaintResponse> addComplaint(@Body Map<String, String> body);
 }
