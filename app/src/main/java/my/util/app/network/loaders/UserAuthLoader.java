@@ -3,6 +3,7 @@ package my.util.app.network.loaders;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import my.util.app.models.LoginResponse;
 import my.util.app.models.MyAuthResponse;
 import my.util.app.network.HttpTaskLoader;
 import my.util.app.network.UtilServiceLayer;
@@ -10,7 +11,7 @@ import my.util.app.network.global.MyLoaderException;
 import my.util.app.network.global.MyLoaderResponse;
 import okhttp3.Credentials;
 
-public class UserAuthLoader extends HttpTaskLoader<MyLoaderResponse<MyAuthResponse>> {
+public class UserAuthLoader extends HttpTaskLoader<MyLoaderResponse<LoginResponse>> {
 
     String username;
     String password;
@@ -22,15 +23,15 @@ public class UserAuthLoader extends HttpTaskLoader<MyLoaderResponse<MyAuthRespon
     }
 
     @Override
-    protected MyLoaderResponse<MyAuthResponse> loadDataInBackground() throws MyLoaderException {
+    protected MyLoaderResponse<LoginResponse> loadDataInBackground() throws MyLoaderException {
         String authToken = Credentials.basic(username, password);
-        MyLoaderResponse<MyAuthResponse> resp = UtilServiceLayer.authenticate(authToken);
+        MyLoaderResponse<LoginResponse> resp = UtilServiceLayer.authenticate(authToken);
         return resp;
 
     }
 
     @Override
-    protected MyLoaderResponse<MyAuthResponse> buildEmptyResult() {
+    protected MyLoaderResponse<LoginResponse> buildEmptyResult() {
         return null;
     }
 }

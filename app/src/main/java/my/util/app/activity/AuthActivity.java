@@ -10,14 +10,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import my.util.app.DataManager;
 import my.util.app.R;
 import my.util.app.fragments.LoginFragment;
+import my.util.app.fragments.LoginPinFragment;
 import my.util.app.fragments.PayAccountFragment;
 import my.util.app.utils.StringUtils;
 
@@ -97,8 +101,16 @@ public class AuthActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0: //login Page
-                    return LoginFragment.newInstance(getAuthPageTitle(position), position);
+                case 0: //Login Page
+                    String userPin = DataManager.getInstance(AuthActivity.this).getUserPin();
+                    Log.d("DEBUG_LOG", "user saved PIN >" + userPin + "< ****************");
+                    if (TextUtils.isEmpty(userPin)) {
+                        Log.d("DEBUG_LOG", "LoginFragment displayed");
+                        return LoginFragment.newInstance(getAuthPageTitle(position), position);
+                    } else {
+                        Log.d("DEBUG_LOG", "LoginPinFragment displayed");
+                        return LoginPinFragment.newInstance(getAuthPageTitle(position), position);
+                    }
                 case 1: //Pay for account
                     return PayAccountFragment.newInstance(getAuthPageTitle(position), position);
             }
@@ -131,5 +143,4 @@ public class AuthActivity extends BaseActivity {
         startActivity(new Intent(this, MainActivity.class));
         this.finish();
     }
-
 }

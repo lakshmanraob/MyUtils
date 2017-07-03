@@ -10,6 +10,7 @@ import my.util.app.models.LoginResult;
 import my.util.app.models.MyAuthResponse;
 import my.util.app.utils.Constants;
 import my.util.app.utils.DbHelper;
+import my.util.app.utils.PrefsHelper;
 
 public class DataManager {
 
@@ -20,8 +21,9 @@ public class DataManager {
     private static ArrayList<BillDetails> mBillList;
     private static BillDetails mCurrentBill;
     private boolean isAccountDetailsConfirmed;
-    private String username;
-    private String password;
+    private String accNo;
+    private String ssn;
+    private String userPin;
     private String userCsrfToken;
     private String userCookie1;
     private String userCookie2;
@@ -95,20 +97,33 @@ public class DataManager {
         isAccountDetailsConfirmed = accountDetailsConfirmed;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAccNo() {
+        return accNo;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccNo(String accNo) {
+        Log.d("DEBUG_LOG", "acc no set " + accNo);
+        PrefsHelper.getInstance().setStringPref(Constants.ACC_NUMBER, accNo);
+        this.accNo = accNo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSsn() {
+        return ssn;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSsn(String ssn) {
+        PrefsHelper.getInstance().setStringPref(Constants.SSN_DIGITS, ssn);
+        this.ssn = ssn;
+    }
+
+    public String getUserPin() {
+        return PrefsHelper.getInstance().getStringPref(Constants.USER_PIN, "");
+    }
+
+    public void setUserPin(String userPin) {
+        Log.d("DEBUG_LOG", "USER_PIN set " + userPin);
+        PrefsHelper.getInstance().setStringPref(Constants.USER_PIN, userPin);
+        this.userPin = userPin;
     }
 
     public String getUserCsrfToken() {
