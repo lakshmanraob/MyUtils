@@ -2,6 +2,7 @@ package my.util.app.network.apicalls;
 
 import java.util.Map;
 
+import my.util.app.models.AccountDetailsResponse;
 import my.util.app.models.AddComplaintResponse;
 import my.util.app.models.LoginResponse;
 import my.util.app.models.MyAuthResponse;
@@ -20,4 +21,8 @@ public interface ApiCalls {
 
     @POST("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_mainSet")
     Call<AddComplaintResponse> addComplaint(@Body Map<String, String> body);
+
+//    @POST("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_accountSet(Bpart='1000000014')?$format=json")
+    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_accountSet?$format=json")
+    Call<AccountDetailsResponse> getAccountDetails();
 }

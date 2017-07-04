@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import my.util.app.models.AccountDetailsResponse;
 import my.util.app.models.AddComplaintResponse;
 import my.util.app.models.LoginResponse;
 import my.util.app.models.MyAuthResponse;
@@ -41,6 +42,16 @@ public class UtilServiceLayer {
 
         Call<MyAuthResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(ApiCalls.class).fetchComplaints();
         return buildFetchComplaintsResponse(authCall);
+    }
+
+    public static MyLoaderResponse<AccountDetailsResponse> getAccountDetails(String authtoken) {
+        Log.d("DEBUG_LOG", "getAccountDetails");
+        HashMap<String, String> headersMap = new HashMap<>();
+        headersMap.put("Authorization", authtoken);
+        headersMap.put("Accept", "application/json");
+
+        Call<AccountDetailsResponse> authCall = MyRetroFitLib.getAuthRetrofit(BASE_URL, headersMap).create(ApiCalls.class).getAccountDetails();
+        return buildAccountDetailsResponse(authCall);
     }
 
     public static MyLoaderResponse<AddComplaintResponse> addComplaint(String authtoken, String csrfToken, String cookie1, String cookie2) {
@@ -122,6 +133,37 @@ public class UtilServiceLayer {
                 returnValue.setData(response.body());
                 returnValue.setHeaders(response.headers());
             } else {
+                returnValue.setData(null);
+                errorBuilder.setErrorCode(101);
+                errorBuilder.setDetailMessage("Request Failure");
+                returnValue.setException(errorBuilder.build());
+            }
+        } catch (IOException e) {
+            Log.d("DEBUG_LOG", "FAIL IOException * " + e.getMessage());
+            errorBuilder.setErrorCode(101);
+            errorBuilder.setDetailMessage("IOException");
+        } catch (Exception e) {
+            Log.d("DEBUG_LOG", "FAIL Exception * " + e.getMessage());
+            errorBuilder.setErrorCode(101);
+            errorBuilder.setDetailMessage("SomeOtherException");
+        }
+        return returnValue;
+    }
+
+    public static MyLoaderResponse<AccountDetailsResponse> buildAccountDetailsResponse(Call<AccountDetailsResponse> call) {
+        Log.d("DEBUG_LOG", "buildAccountDetailsResponse");
+        MyLoaderResponse<AccountDetailsResponse> returnValue = new MyLoaderResponse<>();
+        MyLoaderException.Builder errorBuilder = new MyLoaderException.Builder();
+
+        try {
+            Response<AccountDetailsResponse> response = call.execute();
+            if (response.isSuccessful()) {
+                Log.d("DEBUG_LOG", "HEADERS > " + response.headers());
+                Log.d("DEBUG_LOG", "BODY > " + new Gson().toJson(response.body()));
+                returnValue.setData(response.body());
+                returnValue.setHeaders(response.headers());
+            } else {
+                Log.d("DEBUG_LOG", "error");
                 returnValue.setData(null);
                 errorBuilder.setErrorCode(101);
                 errorBuilder.setDetailMessage("Request Failure");

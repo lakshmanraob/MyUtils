@@ -152,7 +152,6 @@ public class ComplaintsListFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.USER_LABEL, Constants.USERNAME);
         bundle.putString(Constants.SSN_LABEL, Constants.PASSWORD);
-
         getLoaderManager().restartLoader(100, bundle, mFetchComplaintsLoaderCallbacks);
 
         return content;
