@@ -117,6 +117,7 @@ public class PayAccountFragment extends Fragment {
     ArrayAdapter<String> addressAdapter;
     ArrayList<String> addresses;
     AccountResult[] result;
+    boolean validAccNoEntered;
     boolean validAddressSelected;
     String title;
     int page;
@@ -145,7 +146,7 @@ public class PayAccountFragment extends Fragment {
         View content = inflater.inflate(R.layout.fragment_pay_account, container, false);
         ButterKnife.bind(this, content);
         payAccountHelp.setVisibility(View.INVISIBLE);
-        Log.d("DEBUG_LOG", "Pay Acc Frag " + validAddressSelected);
+        Log.d("DEBUG_LOG", "Pay Acc Frag");
 
         Drawable circle = getContext().getResources().getDrawable(R.drawable.white_circle_filled);
         Bitmap circleBitmap = Utils.drawableToBitmap(circle);
@@ -160,6 +161,25 @@ public class PayAccountFragment extends Fragment {
         }
         populateBillCard();
         populateBillDetails();
+
+        payAccountEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String accountNo = s.toString();
+                if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN ) {
+                    validAccNoEntered = true;
+                } else {
+                    validAccNoEntered = false;
+                }
+                if (validAccNoEntered){
+                    fetchAddresses();
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         addresses = new ArrayList<>();
         addresses.add("Loading...");
@@ -184,14 +204,24 @@ public class PayAccountFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {}
         });
+        addressEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DEBUG_LOG", "addressEdit OnClick");
+                addressEdit.showDropDown();
+            }
+        });
 
+        //fetchAddresses();
 
+        return content;
+    }
+
+    private void fetchAddresses(){
         Bundle bundle = new Bundle();
         bundle.putString(Constants.USER_LABEL, Constants.USERNAME);
         bundle.putString(Constants.SSN_LABEL, Constants.PASSWORD);
         getLoaderManager().restartLoader(100, bundle, mAccountDetailsLoaderCallbacks);
-
-        return content;
     }
 
     @OnClick(R.id.btn_link_signup)
@@ -224,7 +254,7 @@ public class PayAccountFragment extends Fragment {
         Log.d("DEBUG_LOG", "Pay clicked " + validAddressSelected);
         String accountNo = payAccountEdit.getText().toString();
         String address = addressEdit.getText().toString();
-        if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN && validAddressSelected) {
+        if (validAccNoEntered && validAddressSelected) {
             enter.setVisibility(View.GONE);
             signup.setVisibility(View.GONE);
             progress.setVisibility(View.VISIBLE);

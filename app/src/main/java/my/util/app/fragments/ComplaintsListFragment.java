@@ -164,6 +164,8 @@ public class ComplaintsListFragment extends Fragment {
         mComplaintsListView.setAdapter(mComplaintsListAdapter);
         mComplaintsListView.setLayoutManager(mngr);
         mComplaintsListView.invalidate();
+        Log.d("DEBUG_LOG", "hide now......");
+        Utils.hideProgressDialog();
     }
 
     private LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>> mFetchComplaintsLoaderCallbacks =
@@ -182,7 +184,6 @@ public class ComplaintsListFragment extends Fragment {
                 public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
                     if (loaderResult != null && loaderResult.getData() != null) {
                         Log.d("DEBUG_LOG", "fetch complaints onLoadFinished");
-                        Utils.hideProgressDialog();
                         complaintsResponse = loaderResult.getData();
                         if (complaintsResponse != null && complaintsResponse.getD() != null && complaintsResponse.getD().getResults() != null) {
                             Log.d("DEBUG_LOG", "refreshComplaintsList");

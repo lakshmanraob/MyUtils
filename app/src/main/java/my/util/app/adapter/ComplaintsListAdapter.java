@@ -1,6 +1,7 @@
 package my.util.app.adapter;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -38,7 +40,7 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.complaint_list_item, parent, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v, parent.getContext());
     }
 
     @Override
@@ -55,7 +57,12 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
         holder.complaintDate.setText(issue.getIssueDate());
         holder.referenceNumber.setText(issue.getQmnum());
 //        holder.outageSubType.setText("outageSubType");
-        holder.complaintAddress.setText(issue.getLatiServAdd() + " - " + issue.getLongServAdd());
+        try {
+            holder.complaintAddress.setText(Utils.getAddressText(holder.ctx, Double.parseDouble(issue.getLatiServAdd()), Double.parseDouble(issue.getLongServAdd())));
+        } catch (Exception e) {
+            Log.d("DEBUG_LOG", "error while displaying address " + e.getMessage());
+            e.printStackTrace();
+        }
 
         String status = issue.getIssueStatus();
         if (Constants.COMPLAINT_STATUS.CL.equalsIgnoreCase(status)) {
@@ -100,6 +107,8 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        Context ctx;
+
         @BindView(R.id.week_label)
         TextView weekLabel;
         @BindView(R.id.month_label)
@@ -140,9 +149,10 @@ public class ComplaintsListAdapter extends RecyclerView.Adapter<ComplaintsListAd
         ImageView resolvedBorder;
 
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, Context context) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            this.ctx = context;
         }
     }
 

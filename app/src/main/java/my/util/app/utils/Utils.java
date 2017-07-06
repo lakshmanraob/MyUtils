@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -100,6 +101,8 @@ public class Utils {
             mProgressDialog = new ProgressDialog(ctx);
             mProgressDialog.setCancelable(false);
             mProgressDialog.setMessage("Loading...");
+            mProgressDialog.show();
+        } else {
             mProgressDialog.show();
         }
     }
@@ -416,5 +419,48 @@ public class Utils {
             status = "Arrived";
         }
         return status;
+    }
+    
+    public static String getAddressText(Context ctx, double latitude, double longitude) throws IOException {
+        StringBuilder addressText = new StringBuilder();
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(ctx, Locale.getDefault());
+
+        addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+        String knownName = addresses.get(0).getFeatureName();
+        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        String city = addresses.get(0).getLocality();
+        String state = addresses.get(0).getAdminArea();
+        String country = addresses.get(0).getCountryName();
+        String postalCode = addresses.get(0).getPostalCode();
+
+        //Log.d("DEBUG_LOG", "> " + address + " < > " + city + " < > " + state + " < > " + country + " < > " + postalCode + " < > " + knownName);
+        /*if (!TextUtils.isEmpty(knownName)) {
+            addressText.append(knownName);
+        }*/
+        if (!TextUtils.isEmpty(address)) {
+            //addressText.append(", ");
+            addressText.append(address);
+        }
+        if (!TextUtils.isEmpty(city)) {
+            addressText.append(", ");
+            addressText.append(city);
+        }
+        if (!TextUtils.isEmpty(state)) {
+            addressText.append(", ");
+            addressText.append(state);
+        }
+        if (!TextUtils.isEmpty(country)) {
+            addressText.append(", ");
+            addressText.append(country);
+        }
+        if (!TextUtils.isEmpty(postalCode)) {
+            addressText.append(", ");
+            addressText.append(postalCode);
+        }
+        
+        return addressText.toString();
     }
 }

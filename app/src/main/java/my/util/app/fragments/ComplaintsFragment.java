@@ -48,6 +48,7 @@ import my.util.app.R;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ImagesAdapter;
 import my.util.app.models.AddComplaintResponse;
+import my.util.app.models.LoginResult;
 import my.util.app.models.PhotoDetails;
 import my.util.app.network.global.MyLoaderResponse;
 import my.util.app.network.loaders.AddComplaintLoader;
@@ -69,6 +70,7 @@ public class ComplaintsFragment extends Fragment implements
     private ImageCaptureListener mImageCaptureListener;
     private ArrayList<PhotoDetails> images;
     private ImagesAdapter imagesAdapter;
+    LoginResult complaintData;
 
     @BindView(R.id.outage_type)
     protected Spinner mOutageTypeSpinner;
@@ -217,10 +219,12 @@ public class ComplaintsFragment extends Fragment implements
                         Utils.showShortToast(getActivity(), resources.getString(R.string.error_database));
                     } else {*/
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("user", DataManager.getInstance(getContext()).getAccNo());
-                        bundle.putString("ssn", DataManager.getInstance(getContext()).getSsn());
-                        getLoaderManager().restartLoader(100, bundle, mAddComplaintCallbacks);
+                    complaintData = new LoginResult();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("user", DataManager.getInstance(getContext()).getAccNo());
+                    bundle.putString("ssn", DataManager.getInstance(getContext()).getSsn());
+                    getLoaderManager().restartLoader(100, bundle, mAddComplaintCallbacks);
 //                    }
                 } else {
                     Utils.showShortToast(getActivity(), resources.getString(R.string.error_location));
@@ -531,7 +535,8 @@ public class ComplaintsFragment extends Fragment implements
                     String userName = bundle.getString("user");
                     String password = bundle.getString("password");
                     return new AddComplaintLoader(getContext(), userName, password, DataManager.getInstance(getContext()).getUserCsrfToken(),
-                            DataManager.getInstance(getContext()).getUserCookie1(), DataManager.getInstance(getContext()).getUserCookie2());
+                            DataManager.getInstance(getContext()).getUserCookie1(), DataManager.getInstance(getContext()).getUserCookie2(),
+                            complaintData);
                 }
 
                 @Override
