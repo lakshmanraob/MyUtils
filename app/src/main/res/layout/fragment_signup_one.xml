@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/screen_outer_padding"
+        android:layout_weight="3"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_pager_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:gravity="center"
+            android:scaleType="center"
+            android:src="@mipmap/logo" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:padding="@dimen/screen_outer_padding">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_account"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/widgets_inner_padding"
+            android:layout_marginRight="@dimen/widgets_inner_padding">
+
+
+            <EditText
+                android:id="@+id/signup_input_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_account"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_ssn"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_account"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/widgets_inner_padding"
+            android:layout_marginRight="@dimen/widgets_inner_padding">
+
+
+            <EditText
+                android:id="@+id/signup_input_ssn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_ssn"
+                android:inputType="number"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general"
+                android:visibility="visible" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txt_signup_help"
+            style="@style/SignUpLayoutStyle.help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_ssn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/screen_outer_padding"
+            android:layout_marginRight="@dimen/screen_outer_padding"
+            android:gravity="center"
+            android:text="@string/signup_help"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_size_general" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

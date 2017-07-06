@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/login_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/screen_outer_padding">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/screen_outer_padding"
+            android:paddingRight="@dimen/screen_outer_padding">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/login_input_layout_pin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/widgets_inner_padding">
+
+                <EditText
+                    android:id="@+id/login_input_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_login_pin"
+                    android:inputType="numberPassword"
+                    android:text="1111" />
+
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/seventy_spacing"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fifty_spacing"
+                android:background="@mipmap/cta" />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/forty_spacing"
+                android:shadowColor="#22000000"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="1"
+                android:text="{fa-refresh spin}"
+                android:textColor="@color/grey"
+                android:textSize="30sp"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btn_link_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widgets_inner_padding"
+            android:background="@android:color/transparent"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorAccent" />
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/login_progress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:shadowColor="#22000000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="{fa-rotate-right spin}"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/font_icon_size"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_link_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widgets_inner_padding"
+            android:background="@android:color/transparent"
+            android:text="@string/forgot_pin"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+</LinearLayout>

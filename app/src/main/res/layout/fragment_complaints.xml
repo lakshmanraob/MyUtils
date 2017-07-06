@@ -1,24 +1,206 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="my.util.app.fragments.ComplaintsFragment">
 
-    <TextView
-        android:id="@+id/textHeading"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <com.joanzapata.iconify.widget.IconTextView
-        android:layout_margin="30dp"
-        android:text="I {fa-heart-o} to {fa-code} on {fa-android}"
-        android:shadowColor="#22000000"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="1"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FF0000" />
 
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/widgets_inner_padding">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:src="@drawable/telemarketer" />
+
+                <TextView
+                    android:id="@+id/complaints_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/report_issue_heading"
+                    android:textColor="@color/app_bg_end"
+                    android:textSize="@dimen/font_size_general" />
+            </LinearLayout>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_margin="@dimen/widgets_inner_padding"
+                android:text="{md-clear}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="@dimen/screen_outer_padding">
+
+            <TextView
+                android:id="@+id/emergency_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/hundred_spacing"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:lines="2"
+                android:text="@string/emergency_msg"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_general" />
+
+            <ImageView
+                android:id="@+id/call_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/call" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_grey" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/widgets_inner_padding">
+
+            <Spinner
+                android:id="@+id/outage_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/widgets_inner_padding"
+                android:background="@color/transparent"
+                android:spinnerMode="dropdown" />
+
+
+            <ImageView
+                android:id="@+id/spinner_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:paddingRight="@dimen/widgets_inner_padding"
+                android:src="@drawable/arrow_down" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/screen_outer_padding">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:descendantFocusability="beforeDescendants"
+                android:elevation="2dp"
+                android:focusableInTouchMode="true"
+                app:cardCornerRadius="@dimen/card_corner_radius">
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="50dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/address"
+                    android:lines="1"
+                    android:padding="@dimen/widgets_inner_padding"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_size_general" />
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:id="@+id/location_detector"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:gravity="center"
+                    android:shadowColor="#22000000"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="1"
+                    android:text="{md-my-location}"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/font_icon_size" />
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/widgets_spacing"
+            android:orientation="vertical"
+            android:padding="@dimen/screen_outer_padding">
+
+            <TextView
+                android:id="@+id/add_photos_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lines="2"
+                android:text="@string/add_photos"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_size_general" />
+
+            <GridView
+                android:id="@+id/photos_grid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/widgets_inner_padding"
+            android:background="@drawable/rounded_bg_filled"
+            android:paddingLeft="@dimen/fifty_spacing"
+            android:paddingRight="@dimen/fifty_spacing"
+            android:textSize="@dimen/font_size_large"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</ScrollView>

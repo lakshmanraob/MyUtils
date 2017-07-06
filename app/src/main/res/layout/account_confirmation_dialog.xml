@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/screen_outer_padding"
+            android:src="@mipmap/pipe" />
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/screen_outer_padding"
+            android:text="{md-clear}"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/txt_account_details"
+        style="@style/SignUpLayoutStyle.help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/widgets_inner_padding"
+        android:text="@string/account_confirmation"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/font_size_general" />
+
+    <ExpandableListView
+        android:id="@+id/address_expandable_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txt_account_details"
+        android:layout_margin="@dimen/screen_outer_padding"
+        android:background="@color/white"
+        android:divider="@color/grey"
+        android:dividerHeight="0.5dp"
+        android:footerDividersEnabled="false" />
+
+</RelativeLayout>

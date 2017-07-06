@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/grid_image_size"
+        android:layout_height="@dimen/grid_image_size"
+        android:layout_gravity="center"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/imageViewCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/camera" />
+
+    <ImageView
+        android:id="@+id/imageViewOverlay"
+        android:layout_width="@dimen/grid_image_size"
+        android:layout_height="@dimen/grid_image_size"
+        android:layout_gravity="center"
+        android:src="@drawable/rounded_bg_overlay"
+        android:visibility="gone" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/imageViewOverlayCross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="{md-clear}"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</FrameLayout>

@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "539734199675",
-    "firebase_url": "https://myfirecastapp.firebaseio.com",
-    "project_id": "myfirecastapp",
-    "storage_bucket": "myfirecastapp.appspot.com"
+    "project_number": "570955064919",
+    "firebase_url": "https://myutilapp-f97e9.firebaseio.com",
+    "project_id": "myutilapp-f97e9",
+    "storage_bucket": "myutilapp-f97e9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:539734199675:android:11c99cceb12af3cd",
+        "mobilesdk_app_id": "1:570955064919:android:1c93dc6274a391c6",
         "android_client_info": {
-          "package_name": "sheet.bottom.com.bottomsheetapp"
+          "package_name": "my.util.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "539734199675-aikr3eu239thu7f2rdaekejtphs5euqq.apps.googleusercontent.com",
+          "client_id": "570955064919-fnmd97i7bj0itnngn1h0ancg9qd3aq19.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "sheet.bottom.com.bottomsheetapp",
-            "certificate_hash": "1B21E93ECF7DFC66F121CE7C90D37C0A743C992B"
+            "package_name": "my.util.app",
+            "certificate_hash": "dc2f2e709ff3db5eaad1155758b52686303c962d"
           }
         },
         {
-          "client_id": "539734199675-j0r7n2f0pgm2hbhdrc8lfm3lu4jcl58i.apps.googleusercontent.com",
+          "client_id": "570955064919-q1dku0cao674ppvp7r8rbqf7ks7o5si5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2DkCkfToE1i5k0FCreEuJUNtA62fMBiA"
+          "current_key": "AIzaSyAjqbKKw32WmeUX76dKw3ZH1eohu5eAKpw"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "539734199675-j0r7n2f0pgm2hbhdrc8lfm3lu4jcl58i.apps.googleusercontent.com",
+              "client_id": "570955064919-q1dku0cao674ppvp7r8rbqf7ks7o5si5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

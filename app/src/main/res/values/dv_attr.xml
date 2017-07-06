@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DetailsView">
+        <attr name="heading" format="string" localization="suggested" />
+        <attr name="content" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="OutageView">
+        <attr name="selectedStateDrawable" format="reference" />
+        <attr name="selectedStateTextColor" format="color" />
+        <attr name="select" format="boolean" />
+        <attr name="outageString" format="string" />
+    </declare-styleable>
+
+</resources>

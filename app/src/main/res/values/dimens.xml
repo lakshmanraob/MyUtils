@@ -1,5 +1,34 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="screen_outer_padding">20dp</dimen>
+    <dimen name="widgets_inner_padding">10dp</dimen>
+    <dimen name="widgets_spacing">15dp</dimen>
+    <dimen name="widgets_spacing_double">30dp</dimen>
+    <dimen name="font_size_small">12sp</dimen>
+    <dimen name="font_size_general">14sp</dimen>
+    <dimen name="font_size_large">18sp</dimen>
+    <dimen name="font_size_extra_large">22sp</dimen>
+    <dimen name="font_icon_size">30sp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="grid_image_size">100dp</dimen>
+    <dimen name="images_grid_spacing">5dp</dimen>
+    <dimen name="fifty_spacing">50dp</dimen>
+    <dimen name="forty_spacing">40dp</dimen>
+    <dimen name="divider_margin">25dp</dimen>
+    <dimen name="seventy_spacing">70dp</dimen>
+    <dimen name="hundred_spacing">100dp</dimen>
+    <dimen name="overlay_rounded_corners">20dp</dimen>
+
+    <dimen name="five_val">5dp</dimen>
+    <dimen name="six_val">6dp</dimen>
+    <dimen name="thirty_val">30dp</dimen>
+    <dimen name="twenty_val">20dp</dimen>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">15sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">15sp</dimen>
+
 </resources>

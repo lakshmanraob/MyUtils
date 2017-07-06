@@ -1,4 +1,147 @@
 <resources>
-    <string name="app_name">BottomSheetApp</string>
+    <string name="app_name">MyUtilApp</string>
     <string name="touch_sensor">Touch sensor</string>
+
+    <string name="emergency_msg">To report any life threatening conditions, please call 911</string>
+    <string name="outage_select">Choose Issue type</string>
+    <string name="streetlight_outage">Streetlight Outage</string>
+    <string name="safety_concern">Safety Concern</string>
+    <string name="power_outage">Power Outage</string>
+    <string name="others">Others</string>
+    <string name="service_address">Service Address</string>
+    <string name="reference_number">Reference Number</string>
+    <string name="address">Address</string>
+    <string name="complaints">Complaints</string>
+    <string name="add_photos">Add Photos</string>
+    <string name="report_issue">Report an Issue</string>
+    <string name="report_issue_heading">Report a New Issue</string>
+    <string name="issue_history">Issue History</string>
+    <string name="enter_ref_no">Enter reference number</string>
+    <string name="status">Status</string>
+    <string name="status_reported">Report \nSubmitted</string>
+    <string name="status_review">Under \n Review</string>
+    <string name="status_resolved">Resolved</string>
+    <string name="account_details">Account Details</string>
+    <string name="confirm_call">Call <b>911</b> ?</string>
+
+    <string name="submit_message_start">Thank you! Your notification has been \nreceived. Your reference number is \n</string>
+    <string name="ok">Ok</string>
+    <array name="outage_type">
+        <item>@string/outage_select</item>
+        <item>@string/streetlight_outage</item>
+        <item>@string/safety_concern</item>
+        <item>@string/power_outage</item>
+        <item>@string/others</item>
+    </array>
+
+    <string name="hint_password">Password</string>
+    <string name="hint_ssn_login">Last 4 digits of your SSN</string>
+    <string name="hint_pin">Enter a 4 digit PIN</string>
+    <string name="hint_login_pin">Enter your PIN</string>
+    <string name="hint_pin_confirm">Confirm your PIN</string>
+    <string name="hint_account">Account Number</string>
+    <string name="hint_add">First 5 characters of Service Address</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_pin">Forgot PIN</string>
+    <string name="util_txt">UTIL</string>
+    <string name="util_help">A Utilities Management Application</string>
+
+    <string name="login_heading">Login</string>
+    <string name="pay_for_other">Pay for another</string>
+
+    <string name="account_help">This is the account number with which you are registered with TECO.</string>
+    <string name="account_help_another">This is the account number registered with TECO.</string>
+
+    <!--SignUp-->
+
+    <string name="cancel_str">Cancel</string>
+    <string name="next_str">Next</string>
+    <string name="ok_str">Ok</string>
+
+    <string name="call_911">Call 911?</string>
+
+    <!--Placeholder texts-->
+    <string name="submit">Submit</string>
+    <string name="logout">Logout</string>
+    <string name="no_match">No Match</string>
+
+    <!--  -->
+    <string name="recent_bills_title">Recent Bills</string>
+    <string name="complaints_title">Report an Issue</string>
+    <string name="account_details_title">Account Details</string>
+
+    <!-- Dummy values-->
+    <string name="dm_accountnumber">68979790</string>
+    <string name="account_number">AccountNumber</string>
+
+    <string name="new_complaint_title">New Complaint</string>
+    <string name="bill_details_title">Bill Details</string>
+
+    <string name="this_week">This Week</string>
+    <string name="this_month">This Month</string>
+    <string name="previous">Previous</string>
+
+    <!-- Dummy values-->
+    <string name="error_outage_type">Please select an outage type.</string>
+    <string name="error_address">Please enter a proper address.</string>
+    <string name="error_location">Please enable location services.</string>
+    <string name="error_database">Something went wrong. Please try again.</string>
+
+    <!--Bill Labels-->
+    <string name="teco">Teco</string>
+    <string name="teco_electricity">Teco Electricty Services</string>
+    <string name="teco_gas">Teco Gas Services</string>
+    <string name="total_consumption">Total Consumption</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="total">Total</string>
+    <string name="view_details">View Details</string>
+    <string name="billing_address">Billing Address</string>
+    <string name="billing_date">Billing Date</string>
+    <string name="meter_number">Meter Number</string>
+    <string name="consumption">Consumption</string>
+    <string name="consumption_details">Consumption Details</string>
+    <string name="avg_consumption">Average Day-to-day consumption</string>
+    <string name="avg_spending">Average monthly Spending</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="plan_details">Plan Details</string>
+    <string name="cost_per_unit">Cost per Unit</string>
+    <string name="cost_per_kwh">Cost per Kwh</string>
+    <string name="cost_per_thm">Cost per Thm</string>
+    <string name="kwh">Kwh</string>
+    <string name="thm">Thm</string>
+    <string name="pay_by_date">Pay by date</string>
+    <string name="pay">Pay</string>
+    <string name="no_data">Sorry, no data available.\nPlease try again later.</string>
+
+    <!-- Sign up text messages-->
+    <string name="hint_ssn">Last four digits of your SSN</string>
+    <string name="signup_help">Please provide the Account Number with which you are registered to TECO.
+        Please enter the last 4 digits of your SSN to verify account</string>
+
+    <string name="hint_confirm_pwd">Confirm Password</string>
+    <string name="pwd_help">Please provide a password to secure your account.
+        This password will be used to login to your account.</string>
+    <string name="account_confirmation">Your TECO Account number is associated with\nthe following service addresses and services:</string>
+
+    <string name="personal_details">Personal Details</string>
+
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="dob_hint">Date of Birth</string>
+
+    <string name="contact_details">Contact Details</string>
+    <string name="phone_hint">Phone Number</string>
+    <string name="email_hint">Email Address</string>
+
+    <string name="residential_address">Residential Address</string>
+    <string name="address_hint">@string/address</string>
+    <string name="pincode_hint">Pincode</string>
+    <string name="city_hint">City</string>
+    <string name="back_str">Back</string>
+
+    <string name="reg_submit_message">You have successfully registered your account!</string>
+
+    <string name="issues_around_you">Issues around you</string>
+    <string name="tap_to_view_filters">Tap to view filters</string>
+    <string name="login_fail">Please check your login details.</string>
 </resources>

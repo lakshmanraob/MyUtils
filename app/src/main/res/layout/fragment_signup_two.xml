@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical"
+    android:padding="@dimen/screen_outer_padding">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/screen_outer_padding">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/screen_outer_padding"
+            android:src="@mipmap/elec" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/personal_details_help"
+        style="@style/SignUpLayoutStyle.heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/screen_outer_padding"
+        android:gravity="center"
+        android:text="@string/personal_details" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:padding="@dimen/widgets_inner_padding"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_first"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/first_name_hint"
+                android:inputType="text"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_last"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_first"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_last"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/last_name_hint"
+                android:inputType="text"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_dob"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_last"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/dob_hint"
+                android:inputType="text"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

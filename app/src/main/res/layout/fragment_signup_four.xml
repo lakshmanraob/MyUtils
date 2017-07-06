@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/elec" />
+
+        <TextView
+            android:id="@+id/txt_pwd_help"
+            style="@style/SignUpLayoutStyle.help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widgets_inner_padding"
+            android:layout_marginRight="@dimen/widgets_inner_padding"
+            android:gravity="center"
+            android:padding="@dimen/screen_outer_padding"
+            android:text="@string/pwd_help"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_size_general" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:padding="20dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_pwd"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:id="@+id/signup_input_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widgets_inner_padding"
+                android:layout_marginRight="@dimen/widgets_inner_padding"
+                android:ems="10"
+                android:hint="@string/hint_password"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_input_layout_pwd_confirm"
+            style="@style/SignUpLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_input_layout_pwd"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/widgets_inner_padding"
+            android:layout_marginRight="@dimen/widgets_inner_padding">
+
+            <EditText
+                android:id="@+id/signup_input_pwd_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_confirm_pwd"
+                android:inputType="number"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_size_general"
+                android:visibility="visible" />
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

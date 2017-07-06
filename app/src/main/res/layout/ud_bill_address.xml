@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/screen_outer_padding">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/details_heading"
+            style="@style/DetailsHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="FirstName" />
+
+        <TextView
+            android:id="@+id/deatils_content"
+            style="@style/DetailsHeading.Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Name" />
+    </LinearLayout>
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/expanded_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/images_grid_spacing"
+        android:text="{md-remove-circle-outline}"
+        android:textColor="@color/pink"
+        android:textSize="20sp" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/collapsed_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/images_grid_spacing"
+        android:layout_toLeftOf="@id/expanded_indicator"
+        android:text="{md-add-circle-outline}"
+        android:textColor="@color/pink"
+        android:textSize="20sp" />
+
+</RelativeLayout>

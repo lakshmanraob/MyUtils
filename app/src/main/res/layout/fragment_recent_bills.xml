@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="my.util.app.fragments.ComplaintsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/widgets_inner_padding">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:src="@drawable/recent_bills" />
+
+        <TextView
+            android:id="@+id/complaints_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_bills_title"
+            android:textColor="@color/app_bg_end"
+            android:textSize="@dimen/font_size_general" />
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@+id/address_expandable_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:divider="@color/grey"
+        android:dividerHeight="0.5dp" />
+
+</LinearLayout>
