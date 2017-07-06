@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +20,13 @@ import butterknife.ButterKnife;
 import my.util.app.DetailsView;
 import my.util.app.R;
 import my.util.app.adapter.UserBilldetailsAdapter;
+import my.util.app.models.AccountDetailsResponse;
+import my.util.app.models.AccountResult;
+import my.util.app.models.MyAuthResponse;
 import my.util.app.models.UserDetails;
+import my.util.app.network.global.MyLoaderResponse;
+import my.util.app.network.loaders.AccountDetailsLoader;
+import my.util.app.network.loaders.FetchComplaintsLoader;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
@@ -44,6 +53,8 @@ public class AccountDetailsFragment extends Fragment {
     LinearLayout headerView;
     LinearLayout footerView;
     private static int prev = -1;
+
+    AccountDetailsResponse accountDetailsData;
 
     public AccountDetailsFragment() {
     }
@@ -72,7 +83,12 @@ public class AccountDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_account_details, container, false);
         ButterKnife.bind(this, content);
-        updateView();
+        Log.d("DEBUG_LOG", "Acc details frag");
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.USER_LABEL, Constants.USERNAME);
+        bundle.putString(Constants.SSN_LABEL, Constants.PASSWORD);
+        getLoaderManager().restartLoader(100, bundle, mAccountDetailsLoaderCallbacks);
         return content;
     }
 
@@ -80,9 +96,9 @@ public class AccountDetailsFragment extends Fragment {
         LayoutInflater inflatter = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         headerView = (LinearLayout) inflatter.inflate(R.layout.ud_header, null);
 
-        UserDetails userDetails = getUserDetails();
+        AccountResult userDetails = accountDetailsData.getD().getResults()[0];
         mAccountNumber = (TextView) headerView.findViewById(R.id.ud_accountnumber);
-        mAccountNumber.setText(userDetails.getAccountNumber());
+        mAccountNumber.setText(userDetails.getBpart());
 
         mFirstName = (DetailsView) headerView.findViewById(R.id.ud_firstName);
         mFirstName.setContent(userDetails.getFirstName());
@@ -94,7 +110,7 @@ public class AccountDetailsFragment extends Fragment {
         mDob.setContent(Utils.convertDate(userDetails.getDob()));
 
         mPhoneNumber = (DetailsView) headerView.findViewById(R.id.ud_phone);
-        mPhoneNumber.setContent(userDetails.getPhoneNumber());
+        mPhoneNumber.setContent(userDetails.getPhone());
 
         mEmail = (DetailsView) headerView.findViewById(R.id.ud_email);
         mEmail.setContent(userDetails.getEmail());
@@ -139,14 +155,38 @@ public class AccountDetailsFragment extends Fragment {
 
     }
 
-    private UserDetails getUserDetails() {
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<AccountDetailsResponse>> mAccountDetailsLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<AccountDetailsResponse>>() {
 
-        UserDetails userDetails =
-                new UserDetails("9876543212", "Edward", "Hogan", "10/3/1984", "(737) 711-8796",
-                        "ehogan@teco.com", Constants.USER_ADDRESSES.PEENYA, Constants.getRecentBills(getContext()));
+                @Override
+                public Loader<MyLoaderResponse<AccountDetailsResponse>> onCreateLoader(int loaderId, Bundle bundle) {
+                    Log.d("DEBUG_LOG", "onCreateLoader Acc Details");
+                    Utils.showProgressDialog(getContext());
+                    String userName = bundle.getString(Constants.USER_LABEL);
+                    String password = bundle.getString(Constants.SSN_LABEL);
+                    return new AccountDetailsLoader(getContext(), userName, password);
+                }
 
-        return userDetails;
+                @Override
+                public void onLoadFinished(Loader<MyLoaderResponse<AccountDetailsResponse>> loader, MyLoaderResponse<AccountDetailsResponse> loaderResult) {
+                    if (loaderResult != null && loaderResult.getData() != null) {
+                        Log.d("DEBUG_LOG", "fetch acc details onLoadFinished");
+                        Utils.hideProgressDialog();
+                        accountDetailsData = loaderResult.getData();
+                        if (accountDetailsData != null && accountDetailsData.getD() != null &&
+                                accountDetailsData.getD().getResults() != null  && accountDetailsData.getD().getResults().length > 0) {
+                            Log.d("DEBUG_LOG", "refresh account details");
+                            updateView();
+                        } else {
+                            Log.d("DEBUG_LOG", "refresh  account details FAIL");
+                        }
+                    }
+                }
 
-    }
+                @Override
+                public void onLoaderReset(Loader<MyLoaderResponse<AccountDetailsResponse>> loaderResult) {
+                }
+            };
+
 
 }

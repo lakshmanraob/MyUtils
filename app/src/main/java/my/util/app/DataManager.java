@@ -27,7 +27,7 @@ public class DataManager {
     private String userCsrfToken;
     private String userCookie1;
     private String userCookie2;
-    private MyAuthResponse allComplaints;
+//    private MyAuthResponse allComplaints;
 
     private DataManager(Context ctx) {
         mContext = ctx;
@@ -150,7 +150,7 @@ public class DataManager {
         this.userCookie2 = userCookie2;
     }
 
-    public MyAuthResponse getAllComplaints() {
+    /*public MyAuthResponse getAllComplaints() {
         return allComplaints;
     }
 
@@ -160,5 +160,5 @@ public class DataManager {
 
     public LoginResult[] getComplaintsList() {
         return allComplaints.getD().getResults();
-    }
+    }*/
 }

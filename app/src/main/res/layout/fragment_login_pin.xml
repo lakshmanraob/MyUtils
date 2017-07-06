@@ -34,7 +34,7 @@
                     android:ems="10"
                     android:hint="@string/hint_login_pin"
                     android:inputType="numberPassword"
-                    android:text="" />
+                    android:text="1111" />
 
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>

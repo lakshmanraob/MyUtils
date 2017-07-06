@@ -6,10 +6,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,14 +27,19 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.util.app.DataManager;
 import my.util.app.R;
-import my.util.app.activity.BaseActivity;
 import my.util.app.activity.SignUpActivity;
+import my.util.app.models.AccountDetailsResponse;
+import my.util.app.models.AccountResult;
 import my.util.app.models.BillDetails;
+import my.util.app.network.global.MyLoaderResponse;
+import my.util.app.network.loaders.AccountDetailsLoader;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
@@ -44,7 +57,9 @@ public class PayAccountFragment extends Fragment {
     @BindView(R.id.pay_input_account)
     EditText payAccountEdit;
     @BindView(R.id.address_input)
-    EditText addressEdit;
+    AutoCompleteTextView addressEdit;
+    @BindView(R.id.service_address_selected)
+    EditText serviceAddressSelected;
     @BindView(R.id.enter)
     ImageView enter;
     @BindView(R.id.progress)
@@ -99,9 +114,15 @@ public class PayAccountFragment extends Fragment {
     @BindView(R.id.total)
     protected TextView mTotal;
 
+    ArrayAdapter<String> addressAdapter;
+    ArrayList<String> addresses;
+    AccountResult[] result;
+    boolean validAccNoEntered;
+    boolean validAddressSelected;
     String title;
     int page;
     BillDetails bill;
+    AccountDetailsResponse accountDetailsData;
 
     public static PayAccountFragment newInstance(String title, int pageNumber) {
         PayAccountFragment fragment = new PayAccountFragment();
@@ -125,6 +146,7 @@ public class PayAccountFragment extends Fragment {
         View content = inflater.inflate(R.layout.fragment_pay_account, container, false);
         ButterKnife.bind(this, content);
         payAccountHelp.setVisibility(View.INVISIBLE);
+        Log.d("DEBUG_LOG", "Pay Acc Frag");
 
         Drawable circle = getContext().getResources().getDrawable(R.drawable.white_circle_filled);
         Bitmap circleBitmap = Utils.drawableToBitmap(circle);
@@ -140,7 +162,66 @@ public class PayAccountFragment extends Fragment {
         populateBillCard();
         populateBillDetails();
 
+        payAccountEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String accountNo = s.toString();
+                if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN ) {
+                    validAccNoEntered = true;
+                } else {
+                    validAccNoEntered = false;
+                }
+                if (validAccNoEntered){
+                    fetchAddresses();
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        addresses = new ArrayList<>();
+        addresses.add("Loading...");
+        addressAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, addresses);
+        addressEdit.setAdapter(addressAdapter);
+        addressEdit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("DEBUG_LOG", "validAddressSelected made TRUE");
+                validAddressSelected = true;
+                serviceAddressSelected.setText(addressAdapter.getItem(position).toString());
+            }
+        });
+        addressEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d("DEBUG_LOG", "validAddressSelected made false");
+                validAddressSelected = false;
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+        addressEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DEBUG_LOG", "addressEdit OnClick");
+                addressEdit.showDropDown();
+            }
+        });
+
+        //fetchAddresses();
+
         return content;
+    }
+
+    private void fetchAddresses(){
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.USER_LABEL, Constants.USERNAME);
+        bundle.putString(Constants.SSN_LABEL, Constants.PASSWORD);
+        getLoaderManager().restartLoader(100, bundle, mAccountDetailsLoaderCallbacks);
     }
 
     @OnClick(R.id.btn_link_signup)
@@ -170,9 +251,10 @@ public class PayAccountFragment extends Fragment {
 
     @OnClick(R.id.enter)
     protected void pay(View v) {
+        Log.d("DEBUG_LOG", "Pay clicked " + validAddressSelected);
         String accountNo = payAccountEdit.getText().toString();
         String address = addressEdit.getText().toString();
-        if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN) {
+        if (validAccNoEntered && validAddressSelected) {
             enter.setVisibility(View.GONE);
             signup.setVisibility(View.GONE);
             progress.setVisibility(View.VISIBLE);
@@ -184,6 +266,8 @@ public class PayAccountFragment extends Fragment {
                     detailsCardLayout.setVisibility(View.VISIBLE);
                 }
             }, Constants.PROGRESS_TIME);
+        } else if (!validAddressSelected) {
+            Utils.showShortToast(getContext(), "Please select a valid address from the options.");
         } else {
             enter.setVisibility(View.VISIBLE);
             signup.setVisibility(View.VISIBLE);
@@ -219,7 +303,7 @@ public class PayAccountFragment extends Fragment {
         bill = Constants.getFriendsBill();
         int type = bill.getBillType();
         billTypeIcon.setImageResource(type == 1 ? R.drawable.bulb_icon : R.drawable.gas_icon);
-        billType.setText(type == 1 ? "Elctricity Services" : "Gas Services");
+        billType.setText(type == 1 ? "Electricity Services" : "Gas Services");
         complaintDate.setText(bill.getBillingDate());
         address.setText(bill.getAddress());
         consumption.setText(bill.getConsumption() + (type == 1 ? " Kwh" : " Thm"));
@@ -240,5 +324,48 @@ public class PayAccountFragment extends Fragment {
         mCostPerUnit.setText(bill.getPlanCost() + "/" + unit);
         mPayByDate.setText(bill.getPayByDate());
         mTotal.setText("$" + bill.getTotal());
+    }
+
+    private LoaderManager.LoaderCallbacks<MyLoaderResponse<AccountDetailsResponse>> mAccountDetailsLoaderCallbacks =
+            new LoaderManager.LoaderCallbacks<MyLoaderResponse<AccountDetailsResponse>>() {
+
+                @Override
+                public Loader<MyLoaderResponse<AccountDetailsResponse>> onCreateLoader(int loaderId, Bundle bundle) {
+                    Log.d("DEBUG_LOG", "onCreateLoader drop down addresses");
+                    Utils.showProgressDialog(getContext());
+                    String userName = bundle.getString(Constants.USER_LABEL);
+                    String password = bundle.getString(Constants.SSN_LABEL);
+                    return new AccountDetailsLoader(getContext(), userName, password);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<MyLoaderResponse<AccountDetailsResponse>> loader, MyLoaderResponse<AccountDetailsResponse> loaderResult) {
+                    if (loaderResult != null && loaderResult.getData() != null) {
+                        Log.d("DEBUG_LOG", "fetch acc details onLoadFinished");
+                        Utils.hideProgressDialog();
+                        accountDetailsData = loaderResult.getData();
+                        if (accountDetailsData != null && accountDetailsData.getD() != null &&
+                                accountDetailsData.getD().getResults() != null && accountDetailsData.getD().getResults().length > 0) {
+                            Log.d("DEBUG_LOG", "populateDropDownAddresses");
+                            result = accountDetailsData.getD().getResults();
+                            populateDropDownAddresses();
+                        } else {
+                            Log.d("DEBUG_LOG", "populateDropDownAddresses FAIL");
+                        }
+                    }
+                }
+
+                @Override
+                public void onLoaderReset(Loader<MyLoaderResponse<AccountDetailsResponse>> loaderResult) {
+                }
+            };
+
+    private void populateDropDownAddresses() {
+        addresses.clear();
+        for(AccountResult addressItem:result){
+            Log.d("DEBUG_LOG", "added " + addressItem.getAddress());
+            addresses.add(addressItem.getAddress());
+        }
+        addressAdapter.notifyDataSetChanged();
     }
 }
