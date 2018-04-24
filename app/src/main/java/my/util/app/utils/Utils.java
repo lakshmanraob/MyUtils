@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -97,13 +96,15 @@ public class Utils {
     }
 
     public static void showProgressDialog(Context ctx) {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(ctx);
-            mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.show();
-        } else {
-            mProgressDialog.show();
+        if (ctx != null) {
+            if (mProgressDialog == null) {
+                mProgressDialog = new ProgressDialog(ctx);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.setMessage("Loading...");
+                mProgressDialog.show();
+            } else {
+                mProgressDialog.show();
+            }
         }
     }
 
@@ -398,16 +399,17 @@ public class Utils {
 
     /**
      * Converting the Calender Date to required format
+     *
      * @param calDate
      * @return
      */
-    public static String convertDate(Calendar calDate){
+    public static String convertDate(Calendar calDate) {
         long currentDateLong = calDate.getTimeInMillis();
-        SimpleDateFormat newDate = new SimpleDateFormat(Constants.DATE_FORMAT,Locale.US);
+        SimpleDateFormat newDate = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.US);
         return newDate.format(new Date(currentDateLong));
     }
 
-    public static String getStatusString(String statusCode){
+    public static String getStatusString(String statusCode) {
         String status = "Received";
         if (Constants.COMPLAINT_STATUS.DP.equalsIgnoreCase(statusCode)) {
             status = "Dispatched";
@@ -420,7 +422,7 @@ public class Utils {
         }
         return status;
     }
-    
+
     public static String getAddressText(Context ctx, double latitude, double longitude) throws IOException {
         StringBuilder addressText = new StringBuilder();
         Geocoder geocoder;
@@ -460,7 +462,7 @@ public class Utils {
             addressText.append(", ");
             addressText.append(postalCode);
         }
-        
+
         return addressText.toString();
     }
 }

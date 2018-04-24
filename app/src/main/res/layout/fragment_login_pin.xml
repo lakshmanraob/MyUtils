@@ -33,8 +33,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/hint_login_pin"
-                    android:inputType="numberPassword"
-                    android:text="1111" />
+                    android:inputType="numberPassword" />
 
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
