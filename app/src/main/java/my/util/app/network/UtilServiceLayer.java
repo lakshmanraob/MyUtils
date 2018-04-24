@@ -22,7 +22,8 @@ import my.util.app.network.myRetrofit.MyRetroFitLib;
 public class UtilServiceLayer {
 
 
-    private static final String BASE_URL = "http://socwes1er46.solutions.glbsnet.com:8000/";
+//    private static final String BASE_URL = "http://socwes1er46.solutions.glbsnet.com:8000/";
+    private static final String BASE_URL = "https://desolate-cliffs-96575.herokuapp.com/";
 
     public static MyLoaderResponse<LoginResponse> authenticate(String authtoken) {
         HashMap<String, String> headersMap = new HashMap<>();

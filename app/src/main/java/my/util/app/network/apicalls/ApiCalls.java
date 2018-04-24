@@ -13,16 +13,20 @@ import retrofit2.http.POST;
 
 public interface ApiCalls {
 
-    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/NOTIF_AUTHSet(Bpart='1000000014',SsnPwd='0000')?$format=json")
+    //    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/NOTIF_AUTHSet(Bpart='1000000014',SsnPwd='0000')?$format=json")
+    @GET("loginutil")
     Call<LoginResponse> authenticate();
 
-    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_mainSet")
+    //    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_mainSet")
+    @GET("fetchcomplaints")
     Call<MyAuthResponse> fetchComplaints();
 
-    @POST("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_mainSet")
+    //    @POST("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_mainSet")
+    @POST("addcomplaint")
     Call<AddComplaintResponse> addComplaint(@Body Map<String, String> body);
 
-//    @POST("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_accountSet(Bpart='1000000014')?$format=json")
-    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_accountSet?$format=json")
+    //    @POST("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_accountSet(Bpart='1000000014')?$format=json")
+    //    @GET("sap/opu/odata/sap/ZUTIL_APP_SRV/Notif_accountSet?$format=json")
+    @GET("accountdetails")
     Call<AccountDetailsResponse> getAccountDetails();
 }
