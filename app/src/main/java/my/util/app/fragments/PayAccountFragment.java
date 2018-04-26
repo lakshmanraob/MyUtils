@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -124,6 +125,9 @@ public class PayAccountFragment extends Fragment {
     BillDetails bill;
     AccountDetailsResponse accountDetailsData;
 
+    @BindView(R.id.bill_progress)
+    protected ProgressBar billProgress;
+
     public static PayAccountFragment newInstance(String title, int pageNumber) {
         PayAccountFragment fragment = new PayAccountFragment();
         Bundle bundle = new Bundle();
@@ -164,21 +168,25 @@ public class PayAccountFragment extends Fragment {
 
         payAccountEdit.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String accountNo = s.toString();
-                if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN ) {
+                if (!TextUtils.isEmpty(accountNo) && accountNo.length() >= Constants.ACC_NO_LEN) {
                     validAccNoEntered = true;
                 } else {
                     validAccNoEntered = false;
                 }
-                if (validAccNoEntered){
+                if (validAccNoEntered) {
                     fetchAddresses();
                 }
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         addresses = new ArrayList<>();
@@ -195,14 +203,18 @@ public class PayAccountFragment extends Fragment {
         });
         addressEdit.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.d("DEBUG_LOG", "validAddressSelected made false");
                 validAddressSelected = false;
             }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
         addressEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,7 +229,7 @@ public class PayAccountFragment extends Fragment {
         return content;
     }
 
-    private void fetchAddresses(){
+    private void fetchAddresses() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.USER_LABEL, Constants.USERNAME);
         bundle.putString(Constants.SSN_LABEL, Constants.PASSWORD);
@@ -332,7 +344,7 @@ public class PayAccountFragment extends Fragment {
                 @Override
                 public Loader<MyLoaderResponse<AccountDetailsResponse>> onCreateLoader(int loaderId, Bundle bundle) {
                     Log.d("DEBUG_LOG", "onCreateLoader drop down addresses");
-                    Utils.showProgressDialog(getContext());
+                    billProgress.setVisibility(View.VISIBLE);
                     String userName = bundle.getString(Constants.USER_LABEL);
                     String password = bundle.getString(Constants.SSN_LABEL);
                     return new AccountDetailsLoader(getContext(), userName, password);
@@ -342,7 +354,7 @@ public class PayAccountFragment extends Fragment {
                 public void onLoadFinished(Loader<MyLoaderResponse<AccountDetailsResponse>> loader, MyLoaderResponse<AccountDetailsResponse> loaderResult) {
                     if (loaderResult != null && loaderResult.getData() != null) {
                         Log.d("DEBUG_LOG", "fetch acc details onLoadFinished");
-                        Utils.hideProgressDialog();
+                        billProgress.setVisibility(View.GONE);
                         accountDetailsData = loaderResult.getData();
                         if (accountDetailsData != null && accountDetailsData.getD() != null &&
                                 accountDetailsData.getD().getResults() != null && accountDetailsData.getD().getResults().length > 0) {
@@ -362,7 +374,7 @@ public class PayAccountFragment extends Fragment {
 
     private void populateDropDownAddresses() {
         addresses.clear();
-        for(AccountResult addressItem:result){
+        for (AccountResult addressItem : result) {
             Log.d("DEBUG_LOG", "added " + addressItem.getAddress());
             addresses.add(addressItem.getAddress());
         }

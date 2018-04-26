@@ -478,5 +478,13 @@
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/bill_progress"
+            style="?android:progress"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center" />
+
     </android.support.v7.widget.CardView>
+
 </LinearLayout>

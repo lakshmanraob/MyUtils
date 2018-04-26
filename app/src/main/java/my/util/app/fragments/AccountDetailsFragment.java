@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -22,11 +23,8 @@ import my.util.app.R;
 import my.util.app.adapter.UserBilldetailsAdapter;
 import my.util.app.models.AccountDetailsResponse;
 import my.util.app.models.AccountResult;
-import my.util.app.models.MyAuthResponse;
-import my.util.app.models.UserDetails;
 import my.util.app.network.global.MyLoaderResponse;
 import my.util.app.network.loaders.AccountDetailsLoader;
-import my.util.app.network.loaders.FetchComplaintsLoader;
 import my.util.app.utils.Constants;
 import my.util.app.utils.Utils;
 
@@ -52,6 +50,10 @@ public class AccountDetailsFragment extends Fragment {
 
     LinearLayout headerView;
     LinearLayout footerView;
+
+    @BindView(R.id.account_details_progress)
+    ProgressBar headingProgress;
+
     private static int prev = -1;
 
     AccountDetailsResponse accountDetailsData;
@@ -117,6 +119,8 @@ public class AccountDetailsFragment extends Fragment {
 
         mAddress = (DetailsView) headerView.findViewById(R.id.ud_address);
         mAddress.setContent(userDetails.getAddress());
+
+//        headingProgress = headerView.findViewById(R.id.account_details_progress);
     }
 
     private void createFooterView() {
@@ -161,7 +165,7 @@ public class AccountDetailsFragment extends Fragment {
                 @Override
                 public Loader<MyLoaderResponse<AccountDetailsResponse>> onCreateLoader(int loaderId, Bundle bundle) {
                     Log.d("DEBUG_LOG", "onCreateLoader Acc Details");
-                    Utils.showProgressDialog(getContext());
+                    headingProgress.setVisibility(View.VISIBLE);
                     String userName = bundle.getString(Constants.USER_LABEL);
                     String password = bundle.getString(Constants.SSN_LABEL);
                     return new AccountDetailsLoader(getContext(), userName, password);
@@ -171,10 +175,10 @@ public class AccountDetailsFragment extends Fragment {
                 public void onLoadFinished(Loader<MyLoaderResponse<AccountDetailsResponse>> loader, MyLoaderResponse<AccountDetailsResponse> loaderResult) {
                     if (loaderResult != null && loaderResult.getData() != null) {
                         Log.d("DEBUG_LOG", "fetch acc details onLoadFinished");
-                        Utils.hideProgressDialog();
+                        headingProgress.setVisibility(View.GONE);
                         accountDetailsData = loaderResult.getData();
                         if (accountDetailsData != null && accountDetailsData.getD() != null &&
-                                accountDetailsData.getD().getResults() != null  && accountDetailsData.getD().getResults().length > 0) {
+                                accountDetailsData.getD().getResults() != null && accountDetailsData.getD().getResults().length > 0) {
                             Log.d("DEBUG_LOG", "refresh account details");
                             updateView();
                         } else {

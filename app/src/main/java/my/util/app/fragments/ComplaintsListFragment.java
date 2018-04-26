@@ -1,6 +1,5 @@
 package my.util.app.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +8,6 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,17 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.joanzapata.iconify.widget.IconTextView;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import my.util.app.DataManager;
 import my.util.app.R;
-import my.util.app.activity.AuthActivity;
 import my.util.app.activity.BaseActivity;
 import my.util.app.adapter.ComplaintsListAdapter;
 import my.util.app.models.LoginResult;
@@ -35,9 +30,6 @@ import my.util.app.models.MyAuthResponse;
 import my.util.app.network.global.MyLoaderResponse;
 import my.util.app.network.loaders.FetchComplaintsLoader;
 import my.util.app.utils.Constants;
-import my.util.app.utils.Utils;
-import okhttp3.Headers;
-import okhttp3.internal.Util;
 
 public class ComplaintsListFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -62,6 +54,9 @@ public class ComplaintsListFragment extends Fragment {
     protected View mSearchDivider;
     @BindView(R.id.search_input)
     protected EditText mSearchInput;
+
+    @BindView(R.id.complaint_progress)
+    protected ProgressBar complaintProgress;
 
     @OnClick(R.id.report_btn)
     protected void reportNewIssue(View v) {
@@ -157,7 +152,7 @@ public class ComplaintsListFragment extends Fragment {
         return content;
     }
 
-    private void refreshComplaintsList(){
+    private void refreshComplaintsList() {
         complaintsList = complaintsResponse.getD().getResults();
         mComplaintsListAdapter = new ComplaintsListAdapter(complaintsList);
         LinearLayoutManager mngr = new LinearLayoutManager(getActivity());
@@ -165,7 +160,6 @@ public class ComplaintsListFragment extends Fragment {
         mComplaintsListView.setLayoutManager(mngr);
         mComplaintsListView.invalidate();
         Log.d("DEBUG_LOG", "hide now......");
-        Utils.hideProgressDialog();
     }
 
     private LoaderManager.LoaderCallbacks<MyLoaderResponse<MyAuthResponse>> mFetchComplaintsLoaderCallbacks =
@@ -174,7 +168,7 @@ public class ComplaintsListFragment extends Fragment {
                 @Override
                 public Loader<MyLoaderResponse<MyAuthResponse>> onCreateLoader(int loaderId, Bundle bundle) {
                     Log.d("DEBUG_LOG", "onCreateLoader");
-                    Utils.showProgressDialog(getContext());
+                    complaintProgress.setVisibility(View.VISIBLE);
                     String userName = bundle.getString(Constants.USER_LABEL);
                     String password = bundle.getString(Constants.SSN_LABEL);
                     return new FetchComplaintsLoader(getContext(), userName, password);
@@ -184,6 +178,7 @@ public class ComplaintsListFragment extends Fragment {
                 public void onLoadFinished(Loader<MyLoaderResponse<MyAuthResponse>> loader, MyLoaderResponse<MyAuthResponse> loaderResult) {
                     if (loaderResult != null && loaderResult.getData() != null) {
                         Log.d("DEBUG_LOG", "fetch complaints onLoadFinished");
+                        complaintProgress.setVisibility(View.GONE);
                         complaintsResponse = loaderResult.getData();
                         if (complaintsResponse != null && complaintsResponse.getD() != null && complaintsResponse.getD().getResults() != null) {
                             Log.d("DEBUG_LOG", "refreshComplaintsList");
