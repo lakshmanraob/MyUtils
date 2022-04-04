@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-02T11:08:45.702Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="ux_rkpwA0wxUx0aXb3aR" version="17.2.1" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-04-04T04:15:34.866Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="_-5X7eu6o0f8RHTXsJXb" version="17.2.1" type="github" pages="3">
   <diagram id="2f404044-711c-603c-8f00-f6bb4c023d3c" name="Architecture">
     <mxGraphModel dx="2255" dy="1196" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" background="none" math="0" shadow="0">
       <root>
@@ -2478,7 +2478,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="OdUhwosjNsDlsK6vMDtc" name="Page-3">
-    <mxGraphModel dx="2480" dy="1316" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
+    <mxGraphModel dx="1653" dy="877" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -3022,34 +3022,6 @@
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-24" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontSize=18;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="916.71" y="2490" width="10" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-34" value="EPIC: getPatientByFHIRID" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;lifelineDashed=0;fontSize=12;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1460" y="2428.5" width="235" height="490" as="geometry" />
-        </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-48" value="Patient FHIR ID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-34">
-          <mxGeometry x="90" y="171.5" width="100" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-41" value="Insert patient details" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-34">
-          <mxGeometry x="77" y="105" width="120" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-42" value="fetch Patient details" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-34">
-          <mxGeometry x="-70" y="48.5" width="120" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-59" value="Insert patient details + FHIR ID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-34">
-          <mxGeometry x="-50.000000000000085" y="221.5" width="180" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-74" value="Publish Patient Enrolled" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-34">
-          <mxGeometry x="95" y="361.5" width="140" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-75" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=blockThin;endFill=1;rounded=0;" edge="1" parent="6Cq46FQTmzuGVLx_RUJn-34">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="-160" y="384.5" as="sourcePoint" />
-            <mxPoint x="704.5" y="384.5" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="-111.94999999999982" y="384.5" />
-              <mxPoint x="-141.94999999999982" y="384.5" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-39" value="GCP:FHIR Store" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;lifelineDashed=0;fontSize=12;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="1705" y="2428.5" width="110" height="490" as="geometry" />
         </mxCell>
@@ -3062,9 +3034,6 @@
               <mxPoint x="1320" y="2555" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-51" value="GCP: Cloud SQL" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;lifelineDashed=0;fontSize=12;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1839" y="2430" width="110" height="488.5" as="geometry" />
         </mxCell>
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-47" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;fontSize=18;entryX=0.816;entryY=0.394;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="6Cq46FQTmzuGVLx_RUJn-39" target="6Cq46FQTmzuGVLx_RUJn-77">
           <mxGeometry relative="1" as="geometry">
@@ -3079,7 +3048,7 @@
           <mxGeometry x="160" y="83" width="90" height="20" as="geometry" />
         </mxCell>
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-77" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontSize=18;strokeColor=#333333;fillColor=none;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-55">
-          <mxGeometry x="122.90000000000009" y="71" width="10" height="309" as="geometry" />
+          <mxGeometry x="122.9" y="71" width="10" height="309" as="geometry" />
         </mxCell>
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-38" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=blockThin;endFill=1;rounded=0;" edge="1" parent="1">
           <mxGeometry width="160" relative="1" as="geometry">
@@ -3087,9 +3056,9 @@
             <mxPoint x="1570" y="2497" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-43" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;fontSize=18;" edge="1" parent="1" source="6Cq46FQTmzuGVLx_RUJn-34">
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-43" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;fontSize=18;" edge="1" parent="1" source="6Cq46FQTmzuGVLx_RUJn-80">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1254.5" y="2532.02" as="sourcePoint" />
+            <mxPoint x="1577" y="2530" as="sourcePoint" />
             <mxPoint x="1310" y="2530" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -3105,9 +3074,6 @@
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-64" value="CP:getUserProfile" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;lifelineDashed=0;fontSize=12;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="1980" y="2430" width="110" height="488.5" as="geometry" />
         </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-68" value="get User Profile" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1590" y="2700" width="100" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-69" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;fontSize=18;" edge="1" parent="1" source="6Cq46FQTmzuGVLx_RUJn-64">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="2031.6" y="2770.0000000000005" as="sourcePoint" />
@@ -3115,15 +3081,15 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-70" value="RefreshToken" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1619" y="2750" width="90" height="20" as="geometry" />
+          <mxGeometry x="1630" y="2770" width="90" height="20" as="geometry" />
         </mxCell>
         <mxCell id="6Cq46FQTmzuGVLx_RUJn-71" value="GCP:Pub/Sub" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;lifelineDashed=0;fontSize=12;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="2110" y="2430" width="110" height="488.5" as="geometry" />
         </mxCell>
-        <mxCell id="6Cq46FQTmzuGVLx_RUJn-62" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=blockThin;endFill=1;rounded=0;" edge="1" parent="1" target="6Cq46FQTmzuGVLx_RUJn-51">
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-62" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=blockThin;endFill=1;rounded=0;" edge="1" parent="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="1310" y="2672" as="sourcePoint" />
-            <mxPoint x="1759.15" y="2673.06" as="targetPoint" />
+            <mxPoint x="1893.5" y="2673.06" as="targetPoint" />
             <Array as="points">
               <mxPoint x="1349.65" y="2673.06" />
               <mxPoint x="1319.65" y="2673.06" />
@@ -3139,6 +3105,52 @@
               <mxPoint x="1318.0500000000002" y="2724.5" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-75" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=blockThin;endFill=1;rounded=0;entryX=0.48;entryY=0.772;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.093;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="6Cq46FQTmzuGVLx_RUJn-77" target="6Cq46FQTmzuGVLx_RUJn-71">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1310" y="2810" as="sourcePoint" />
+            <mxPoint x="2164.5" y="2813" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1348.0500000000002" y="2813" />
+              <mxPoint x="1318.0500000000002" y="2813" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-78" value="" style="shape=umlLifeline;participant=umlBoundary;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fontSize=12;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1880" y="2428.5" width="50" height="491.5" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-79" value="Publish Patient data to subscribers" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1555" y="2810" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-80" value="" style="shape=umlLifeline;participant=umlEntity;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fontSize=12;strokeColor=#333333;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1550" y="2427" width="105" height="493" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-85" value="Insert Patient Data to DB + FHIR ID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-80">
+          <mxGeometry x="-105" y="253" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-68" value="get User Profile" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="6Cq46FQTmzuGVLx_RUJn-80">
+          <mxGeometry x="-10" y="303" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-81" value="EMR" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1550" y="2400" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-82" value="Insert Patient Data" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="2560" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-83" value="Search for Patient details in EMR" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1338.95" y="2470" width="190" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-84" value="Inserted Patient FHIR Id" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1470" y="2620" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-86" value="CarePackage" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1990" y="2400" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-87" value="GCP: CloudSQL" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="2400" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="6Cq46FQTmzuGVLx_RUJn-88" value="For getting the practitioner details + &lt;br&gt;Appointment details + &lt;br&gt;refershToken" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1940" y="2935" width="200" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
